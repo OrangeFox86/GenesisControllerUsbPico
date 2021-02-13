@@ -1,7 +1,7 @@
 The code here is meant for the Raspberry Pi Pico microcontroller. It allows for 2 Sega Genesis controllers to be plugged in and interface with any USB host device.
 
 Known issues:
-- A HID Keyboard only supports 6 keys at a time, and one keyboard is shared with two players - I'm considering on creating an HID keyboard for each player
+- An HID Keyboard only supports 6 keys at a time, and one keyboard is shared with two players - I'm considering on creating an HID keyboard for each player
 
 Things left to do:
 - Figure out a good way to remap keys without reprogramming
