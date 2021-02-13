@@ -1,0 +1,11 @@
+Known issues:
+- A HID Keyboard only supports 6 keys at a time, and one keyboard is shared with two players - I'm considering on creating an HID keyboard for each player
+
+Things left to do:
+- Figure out a good way to remap keys without reprogramming
+- Add HID gamepad interface (loose coupling between controller and keyboard objects was intentional to allow for this)
+- Add more documentation & YouTube video
+
+Great resources on the Sega Genesis controller:
+https://www.raspberryfield.life/2019/03/25/sega-mega-drive-genesis-6-button-xyz-controller/
+https://jonthysell.com/2014/07/26/reading-sega-genesis-controllers-with-arduino/
