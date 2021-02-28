@@ -59,10 +59,13 @@ uint8_t keyLookup[2][IGenesisControllerObserver::KEY_COUNT] =
   }
 };
 
+// The observers send the keys pressed on the controllers to USB keyboards.
+// Connecting each controller to its own keyboard allows each controller to independently send up to
+// 6 keys.
 UsbKeyboardGenesisControllerObserver observers[2] =
 {
   UsbKeyboardGenesisControllerObserver(gKeyboards[0], keyLookup[0]),
-  UsbKeyboardGenesisControllerObserver(gKeyboards[0], keyLookup[1])
+  UsbKeyboardGenesisControllerObserver(gKeyboards[1], keyLookup[1])
 };
 
 GenesisController gControllers[2] =

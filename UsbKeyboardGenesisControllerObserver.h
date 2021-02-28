@@ -7,6 +7,9 @@
 class UsbKeyboardGenesisControllerObserver : public IGenesisControllerObserver
 {
   public:
+    //! Constructor for UsbKeyboardGenesisControllerObserver
+    //! @param[in] usbKeyboard  The USB keyboard to update when keys are pressed or released
+    //! @param[in] keyLookup  The mapping of genesis keys to USB keyboard keys
     UsbKeyboardGenesisControllerObserver(UsbKeyboard& usbKeyboard,
                                          const uint8_t *keyLookup);
     //! Called when key pressed/released
@@ -26,9 +29,12 @@ class UsbKeyboardGenesisControllerObserver : public IGenesisControllerObserver
     //! @returns true if keys sent or false if there was an eror
     virtual bool sendKeys();
   protected:
+    //! Releases all keys on the USB keyboard
     void releaseAllKeys();
   private:
+    //! The USB keyboard I update
     UsbKeyboard& usbKeyboard;
+    //! My mapping of genesis keys to USB keyboard keys
     const uint8_t* const keyLookup;
 };
 

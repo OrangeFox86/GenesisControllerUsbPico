@@ -16,15 +16,15 @@ class GenesisController
       STATE_CONNECTED
     };
   protected:
-    //!
+    //! All of the available input pins
     enum InputPinSelect
     {
-      INPUT_PIN_UP_Z = 0,
-      INPUT_PIN_DN_Y,
-      INPUT_PIN_LE_X,
-      INPUT_PIN_RI_MO,
-      INPUT_PIN_A_B,
-      INPUT_PIN_ST_C,
+      INPUT_PIN_UP_Z = 0, // Pin 1
+      INPUT_PIN_DN_Y,     // Pin 2
+      INPUT_PIN_LE_X,     // Pin 3
+      INPUT_PIN_RI_MO,    // Pin 4
+      INPUT_PIN_A_B,      // Pin 6
+      INPUT_PIN_ST_C,     // Pin 9
       INPUT_PIN_COUNT
     };
   public:
@@ -35,8 +35,9 @@ class GenesisController
     //! @param[in] pin3  GPIO index for Genesis pin 3
     //! @param[in] pin4  GPIO index for Genesis pin 4
     //! @param[in] pin6  GPIO index for Genesis pin 6
-    //! @param[in] pin7  GPIO index for Genesis pin 7
+    //! @param[in] pin7  GPIO index for Genesis pin 7 (select)
     //! @param[in] pin9  GPIO index for Genesis pin 9
+    //! @param[in] pObserver  The observer to update whenever keys are pressed and released
     GenesisController(uint8_t id,
                       uint8_t pin1,
                       uint8_t pin2,
@@ -48,19 +49,32 @@ class GenesisController
                       IGenesisControllerObserver *pObserver);
     //! Initializes all of my pins
     void pinInit();
-    //! Called externally to flush all pressed keys to my observer
+    //! Called externally to flush all pressed/released keys to my observer
     void commitSignals();
     //! Called externally to transition signal to the next phase
     //! Note: First call will be 0
     //! @param[in] count  The current count [0,7]
     void nextSignal(uint8_t count, uint32_t inputs);
   protected:
+    //! Processes signals saved to savedInputs
     void processSignals();
+    //! Determines if the controller is connected based on values in savedInputs
     void checkConnection();
+    //! Updates state due to controller just becoming connected
     void controllerConnected();
+    //! Updates state due to controller just becoming disconnected
     void controllerDisconnected();
+    //! Updates the state of a single key
+    //! @param[in] key  The key to update
+    //! @param[in] state  The state of the key
     void updateKey(IGenesisControllerObserver::Key key, bool state);
+    //! Get the state of a single saved input
+    //! @param[in] count  The count (time) value
+    //! @param[in] pin  The pin to check
+    //! @returns the state of the selected pin at the selected time
     bool getInput(uint8_t count, InputPinSelect pin);
+    //! Sets the select (output) pin
+    //! @param[in] state  The state to set the pin
     void setSelect(bool state);
   private:
     //! Default constructor not defined or used

@@ -9,8 +9,8 @@ UsbKeyboardGenesisControllerObserver::UsbKeyboardGenesisControllerObserver(
 
 bool UsbKeyboardGenesisControllerObserver::keyStateChanged(uint8_t id, Key key, bool down)
 {
-  // Key is unneeded
-  (void)key;
+  // ID is unneeded
+  (void)id;
 
   uint8_t keycode = keyLookup[key];
   if (down)
@@ -25,11 +25,7 @@ bool UsbKeyboardGenesisControllerObserver::keyStateChanged(uint8_t id, Key key, 
 
 void UsbKeyboardGenesisControllerObserver::releaseAllKeys()
 {
-  const uint8_t *keys = keyLookup;
-  for (uint32_t i = 0; i < IGenesisControllerObserver::KEY_COUNT; ++i, ++keys)
-  {
-    usbKeyboard.updateReleased(*keys);
-  }
+  usbKeyboard.updateAllReleased();
 }
 
 void UsbKeyboardGenesisControllerObserver::controllerConnected(uint8_t id)

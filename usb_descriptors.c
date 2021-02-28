@@ -1,4 +1,4 @@
-/* 
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Ha Thach (tinyusb.org)
@@ -24,6 +24,7 @@
  */
 
 #include "tusb.h"
+#include "usb_descriptors.h"
 
 /* A combination of interfaces must have a unique product id, since PC will save device driver after the first plug.
  * Same VID/PID with different interface e.g MSC (first), then CDC (later) will possibly cause system error on PC.
@@ -39,25 +40,25 @@
 // Device Descriptors
 //--------------------------------------------------------------------+
 tusb_desc_device_t const desc_device =
-        {
-                .bLength            = sizeof(tusb_desc_device_t),
-                .bDescriptorType    = TUSB_DESC_DEVICE,
-                .bcdUSB             = 0x0200,
-                .bDeviceClass       = 0x00,
-                .bDeviceSubClass    = 0x00,
-                .bDeviceProtocol    = 0x00,
-                .bMaxPacketSize0    = CFG_TUD_ENDPOINT0_SIZE,
+{
+    .bLength            = sizeof(tusb_desc_device_t),
+    .bDescriptorType    = TUSB_DESC_DEVICE,
+    .bcdUSB             = 0x0200,
+    .bDeviceClass       = 0x00,
+    .bDeviceSubClass    = 0x00,
+    .bDeviceProtocol    = 0x00,
+    .bMaxPacketSize0    = CFG_TUD_ENDPOINT0_SIZE,
 
-                .idVendor           = 0xCafe,
-                .idProduct          = USB_PID,
-                .bcdDevice          = 0x0100,
+    .idVendor           = 0xCafe,
+    .idProduct          = USB_PID,
+    .bcdDevice          = 0x0100,
 
-                .iManufacturer      = 0x01,
-                .iProduct           = 0x02,
-                .iSerialNumber      = 0x03,
+    .iManufacturer      = 0x01,
+    .iProduct           = 0x02,
+    .iSerialNumber      = 0x03,
 
-                .bNumConfigurations = 0x01
-        };
+    .bNumConfigurations = 0x01
+};
 
 // Invoked when received GET DEVICE DESCRIPTOR
 // Application return pointer to descriptor
@@ -70,9 +71,10 @@ uint8_t const *tud_descriptor_device_cb(void) {
 //--------------------------------------------------------------------+
 
 uint8_t const desc_hid_report[] =
-        {
-                TUD_HID_REPORT_DESC_KEYBOARD()
-        };
+{
+    TUD_HID_REPORT_DESC_KEYBOARD(HID_REPORT_ID(REPORT_ID_KEYBOARD1)),
+    TUD_HID_REPORT_DESC_KEYBOARD(HID_REPORT_ID(REPORT_ID_KEYBOARD2))
+};
 
 // Invoked when received GET HID REPORT DESCRIPTOR
 // Application return pointer to descriptor
@@ -95,14 +97,14 @@ enum {
 #define EPNUM_HID   0x01
 
 uint8_t const desc_configuration[] =
-        {
-                // Config number, interface count, string index, total length, attribute, power in mA
-                TUD_CONFIG_DESCRIPTOR(1, ITF_NUM_TOTAL, 0, CONFIG_TOTAL_LEN, TUSB_DESC_CONFIG_ATT_REMOTE_WAKEUP, 100),
+{
+    // Config number, interface count, string index, total length, attribute, power in mA
+    TUD_CONFIG_DESCRIPTOR(1, ITF_NUM_TOTAL, 0, CONFIG_TOTAL_LEN, TUSB_DESC_CONFIG_ATT_REMOTE_WAKEUP, 100),
 
-                // Interface number, string index, protocol, report descriptor len, EP In & Out address, size & polling interval
-                TUD_HID_INOUT_DESCRIPTOR(ITF_NUM_HID, 0, HID_PROTOCOL_NONE, sizeof(desc_hid_report), EPNUM_HID,
-                                         0x80 | EPNUM_HID, sizeof(hid_keyboard_report_t), 10)
-        };
+    // Interface number, string index, protocol, report descriptor len, EP In & Out address, size & polling interval
+    TUD_HID_INOUT_DESCRIPTOR(ITF_NUM_HID, 0, HID_PROTOCOL_NONE, sizeof(desc_hid_report), EPNUM_HID,
+                                0x80 | EPNUM_HID, 1 + sizeof(hid_keyboard_report_t), 10)
+};
 
 // Invoked when received GET CONFIGURATION DESCRIPTOR
 // Application return pointer to descriptor
@@ -118,11 +120,12 @@ uint8_t const *tud_descriptor_configuration_cb(uint8_t index) {
 
 // array of pointer to string descriptors
 char const *string_desc_arr[] =
-        {
-                (const char[]) {0x09, 0x04}, // 0: is supported language is English (0x0409)
-                "DIY"  ,                     // 1: Manufacturer
-                "Genesis Controller USB",    // 2: Product
-        };
+{
+    (const char[]) {0x09, 0x04}, // 0: is supported language is English (0x0409)
+    "DIY"  ,                     // 1: Manufacturer
+    "Genesis Controller USB",    // 2: Product
+    // 3: Serial (none - send NULL)
+};
 
 static uint16_t _desc_str[32];
 

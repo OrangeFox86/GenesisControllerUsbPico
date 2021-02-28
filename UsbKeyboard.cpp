@@ -5,8 +5,26 @@
 
 #include "bsp/board.h"
 #include "tusb.h"
+#include "usb_descriptors.h"
 
-UsbKeyboard gKeyboards[] = { UsbKeyboard(0) };
+static bool gIsConnected = false;
+
+UsbKeyboard gKeyboards[] = { UsbKeyboard(REPORT_ID_KEYBOARD1), UsbKeyboard(REPORT_ID_KEYBOARD2) };
+
+static const int16_t INVALID_INDEX = -1;
+
+inline int16_t report_id_to_index( uint8_t report_id )
+{
+  if (report_id < REPORT_ID_KEYBOARD1 ||
+      report_id >= (sizeof(gKeyboards) / sizeof(gKeyboards[0]) + REPORT_ID_KEYBOARD1))
+  {
+    return INVALID_INDEX;
+  }
+  else
+  {
+    return report_id - REPORT_ID_KEYBOARD1;
+  }
+}
 
 UsbKeyboard::UsbKeyboard(uint8_t reportId) :
   reportId(reportId),
@@ -25,8 +43,8 @@ bool UsbKeyboard::isKeyPressed()
 //--------------------------------------------------------------------+
 void UsbKeyboard::ledTask()
 {
+  static bool ledOn = false;
   bool keyPressed = false;
-  bool isConnected = false;
   UsbKeyboard *pKeyboard = gKeyboards;
   for (uint32_t i = sizeof(gKeyboards) / sizeof(gKeyboards[0]); i > 0; --i, ++pKeyboard)
   {
@@ -34,12 +52,26 @@ void UsbKeyboard::ledTask()
     {
       keyPressed = true;
     }
-    if (pKeyboard->isConnected())
-    {
-      isConnected = true;
-    }
   }
-  board_led_write(isConnected && !keyPressed);
+  if (gIsConnected)
+  {
+    // When connected, LED is ON only when no key is pressed
+    ledOn = !keyPressed;
+  }
+  else
+  {
+    // When not connected, LED blinks when key is pressed
+    static uint32_t startMs = 0;
+    static const uint32_t KEY_PRESS_BLINK_TIME_MS = 100;
+    uint32_t t = board_millis() - startMs;
+    if (t >= KEY_PRESS_BLINK_TIME_MS)
+    {
+      startMs += KEY_PRESS_BLINK_TIME_MS;
+      ledOn = !ledOn;
+    }
+    ledOn = ledOn && keyPressed;
+  }
+  board_led_write(ledOn);
 }
 
 //--------------------------------------------------------------------+
@@ -73,7 +105,7 @@ bool UsbKeyboard::updatePressed(uint8_t keycode)
 bool UsbKeyboard::updateReleased(uint8_t keycode)
 {
   bool found = false;
-  uint8_t modifier = 0;
+  uint8_t modifier = 0; // This class doesn't allow modifier keys
   for (uint32_t i = 0; i < sizeof(currentKeycodes) / sizeof(currentKeycodes[0]); ++i)
   {
     if (found)
@@ -100,14 +132,16 @@ bool UsbKeyboard::updateReleased(uint8_t keycode)
 
 void UsbKeyboard::updateAllReleased()
 {
-  uint8_t modifier = 0;
+  uint8_t modifier = 0; // This class doesn't allow modifier keys
   memset(currentKeycodes, 0, sizeof(currentKeycodes));
+  keyPressed = false;
+  keycodesUpdated = true;
 }
 
 bool UsbKeyboard::sendKeys(bool force)
 {
   if (!mIsConnected) return false;
-  uint8_t modifier = 0;
+  uint8_t modifier = 0; // This class doesn't allow modifier keys
   if (keycodesUpdated || force)
   {
     bool sent = tud_hid_keyboard_report(reportId, modifier, currentKeycodes);
@@ -127,7 +161,7 @@ void UsbKeyboard::getReport(uint8_t *buffer, uint16_t reqlen)
 {
   // Build the report
   hid_keyboard_report_t report;
-  report.modifier = 0;
+  report.modifier = 0; // This class doesn't allow modifier keys
   report.reserved = 0;
   memcpy(report.keycode, currentKeycodes, sizeof(report.keycode));
   // Copy report into buffer
@@ -154,33 +188,6 @@ void UsbKeyboard::task()
 {
   tud_task(); // tinyusb device task
   ledTask();
-
-  static uint32_t start_ms = 0;
-  static bool key_down = false;
-  static uint32_t key_count = 0;
-
-#if 0
-  // TEST CODE
-  // Blink every interval ms
-  uint32_t t = board_millis() - start_ms;
-  if (key_down && t >= 100)
-  {
-    gKeyboards[0].updateReleased(HID_KEY_A);
-    gKeyboards[0].sendKeys();
-    key_down = false;
-  }
-  else if (t >= 1000)
-  {
-    start_ms += 1000;
-    if (key_count < 5)
-    {
-      gKeyboards[0].updatePressed(HID_KEY_A);
-      gKeyboards[0].sendKeys();
-      key_down = true;
-      key_count++;
-    }
-  }
-#endif
 }
 
 //--------------------------------------------------------------------+
@@ -195,6 +202,7 @@ void tud_mount_cb(void)
   {
     pKeyboard->updateConnected(true);
   }
+  gIsConnected = true;
 }
 
 // Invoked when device is unmounted
@@ -205,6 +213,7 @@ void tud_umount_cb(void)
   {
     pKeyboard->updateConnected(false);
   }
+  gIsConnected = false;
 }
 
 // Invoked when usb bus is suspended
@@ -218,6 +227,7 @@ void tud_suspend_cb(bool remote_wakeup_en)
   {
     pKeyboard->updateConnected(false);
   }
+  gIsConnected = false;
 }
 
 // Invoked when usb bus is resumed
@@ -228,6 +238,7 @@ void tud_resume_cb(void)
   {
     pKeyboard->updateConnected(true);
   }
+  gIsConnected = true;
 }
 
 //--------------------------------------------------------------------+
@@ -240,12 +251,19 @@ void tud_resume_cb(void)
 uint16_t tud_hid_get_report_cb(uint8_t report_id, hid_report_type_t report_type, uint8_t *buffer, uint16_t reqlen)
 {
   (void) report_type;
-
-  // Build the report for the given report ID
-  UsbKeyboard &keyboard = gKeyboards[report_id];
-  keyboard.getReport(buffer, reqlen);
-  // Return the size of the report
-  return sizeof(hid_keyboard_report_t);
+  int16_t idx = report_id_to_index( report_id );
+  if (idx == INVALID_INDEX)
+  {
+    return 0;
+  }
+  else
+  {
+    // Build the report for the given report ID
+    UsbKeyboard &keyboard = gKeyboards[idx];
+    keyboard.getReport(buffer, reqlen);
+    // Return the size of the report
+    return sizeof(hid_keyboard_report_t);
+  }
 }
 
 // Invoked when received SET_REPORT control request or
@@ -255,10 +273,8 @@ void tud_hid_set_report_cb(uint8_t report_id,
                            uint8_t const *buffer,
                            uint16_t bufsize)
 {
-    // Only 1 report possible here
-    (void) report_id;
-    (void) report_type;
+  (void) report_type;
 
-    // echo back anything we received from host
-    tud_hid_report(0, buffer, bufsize);
+  // echo back anything we received from host
+  tud_hid_report(report_id, buffer, bufsize);
 }
