@@ -1,24 +1,40 @@
-#ifndef __USB_KEYBOARD_H__
-#define __USB_KEYBOARD_H__
+#ifndef __USB_CONTROLLER_H__
+#define __USB_CONTROLLER_H__
 
 #include <stdint.h>
 
 //! This class is designed to work with the setup code in usb_descriptors.c
-//! @note This class does not allow modifier keys such as shift
-class UsbKeyboard
+//! @note this doesn't support analog sticks
+class UsbController
 {
+  public:
+    enum button_e
+    {
+      BUTTON_UP = 0,
+      BUTTON_DOWN,
+      BUTTON_LEFT,
+      BUTTON_RIGHT,
+      DPAD_MAX = BUTTON_RIGHT,
+      BUTTON_A,
+      BUTTON_B,
+      BUTTON_C,
+      BUTTON_X,
+      BUTTON_Y,
+      BUTTON_Z,
+      BUTTON_START,
+      BUTTON_MODE,
+      BUTTON_COUNT
+    };
   public:
     //! UsbKeyboard constructor
     //! @param[in] reportId  The report ID to use for this USB keyboard
-    UsbKeyboard(uint8_t reportId = 0);
+    UsbController(uint8_t reportId = 0);
     //! @returns true iff any key is currently "pressed"
-    bool isKeyPressed();
-    //! Set a key to be pressed
-    //! @param[in] keycode  The keycode to update. This must be a HID_KEY_* value within hid.h.
-    bool updatePressed(uint8_t keycode);
-    //! Set a key to be released
-    //! @param[in] keycode  The keycode to update. This must be a HID_KEY_* value within hid.h.
-    bool updateReleased(uint8_t keycode);
+    bool isButtonPressed();
+    //! Set a button to be pressed
+    bool updatePressed(button_e button);
+    //! Set a button to be released
+    bool updateReleased(button_e button);
     //! Release all currently pressed keys
     void updateAllReleased();
     //! Updates the host with any newly pressed keys
@@ -39,8 +55,8 @@ class UsbKeyboard
     static void init();
     //! The USB task which must be periodically called by main()
     static void task();
-    //! @returns a reference to a keyboard, given an index
-    static UsbKeyboard& getKeyboard(uint8_t keyboardIndex);
+    //! @returns a reference to a controller, given an index
+    static UsbController& getController(uint8_t controllerIndex);
 
   protected:
     //! Controls the state of the LED based on connected and button states
@@ -48,18 +64,18 @@ class UsbKeyboard
 
   public:
     //! The number of static controllers created
-    static const uint8_t NUMBER_OF_KEYBOARDS = 2;
+    static const uint8_t NUMBER_OF_CONTROLLERS = 2;
   private:
     //! The report ID to use when sending keys to host
     const uint8_t reportId;
-    //! List of currently pressed keys
-    uint8_t currentKeycodes[6];
-    //! True when currentKeycodes has been updated since the last successful sendKeys call
-    bool keycodesUpdated;
-    //! True when at least 1 key is pressed
-    bool keyPressed;
+    //! Current d-pad state
+    uint8_t currentDpad;
+    //! Current button states
+    uint32_t currentButtons;
+    //! True when currentDpad or currentButtons have been updated since the last successful send
+    bool buttonsUpdated;
     //! True when this USB device is connected to a host
     bool mIsConnected;
 };
 
-#endif // __USB_KEYBOARD_H__
+#endif // __USB_CONTROLLER_H__

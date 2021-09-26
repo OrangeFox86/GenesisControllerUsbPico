@@ -7,16 +7,17 @@
 #include "tusb.h"
 #include "usb_descriptors.h"
 
-static bool gIsConnected = false;
+// Only use this code if keyboard descriptors are defined
+#ifdef USE_KEYBOARD
 
-UsbKeyboard gKeyboards[] = { UsbKeyboard(REPORT_ID_KEYBOARD1), UsbKeyboard(REPORT_ID_KEYBOARD2) };
+static bool gIsConnected = false;
 
 static const int16_t INVALID_INDEX = -1;
 
 inline int16_t report_id_to_index( uint8_t report_id )
 {
   if (report_id < REPORT_ID_KEYBOARD1 ||
-      report_id >= (sizeof(gKeyboards) / sizeof(gKeyboards[0]) + REPORT_ID_KEYBOARD1))
+      report_id >= UsbKeyboard::NUMBER_OF_KEYBOARDS + REPORT_ID_KEYBOARD1)
   {
     return INVALID_INDEX;
   }
@@ -30,12 +31,20 @@ UsbKeyboard::UsbKeyboard(uint8_t reportId) :
   reportId(reportId),
   currentKeycodes(),
   keycodesUpdated(false),
-  keyPressed(false)
+  keyPressed(false),
+  mIsConnected(false)
 {}
 
 bool UsbKeyboard::isKeyPressed()
 {
   return keyPressed;
+}
+
+UsbKeyboard& UsbKeyboard::getKeyboard(uint8_t keyboardIndex)
+{
+  static UsbKeyboard keyboards[NUMBER_OF_KEYBOARDS] =
+    { UsbKeyboard(REPORT_ID_KEYBOARD1), UsbKeyboard(REPORT_ID_KEYBOARD2) };
+  return keyboards[keyboardIndex % NUMBER_OF_KEYBOARDS];
 }
 
 //--------------------------------------------------------------------+
@@ -45,10 +54,9 @@ void UsbKeyboard::ledTask()
 {
   static bool ledOn = false;
   bool keyPressed = false;
-  UsbKeyboard *pKeyboard = gKeyboards;
-  for (uint32_t i = sizeof(gKeyboards) / sizeof(gKeyboards[0]); i > 0; --i, ++pKeyboard)
+  for (uint32_t i = 0; i < UsbKeyboard::NUMBER_OF_KEYBOARDS; ++i)
   {
-    if (pKeyboard->isKeyPressed())
+    if (UsbKeyboard::getKeyboard(i).isKeyPressed())
     {
       keyPressed = true;
     }
@@ -197,10 +205,9 @@ void UsbKeyboard::task()
 // Invoked when device is mounted
 void tud_mount_cb(void)
 {
-  UsbKeyboard *pKeyboard = gKeyboards;
-  for (uint32_t i = sizeof(gKeyboards) / sizeof(gKeyboards[0]); i > 0; --i, ++pKeyboard)
+  for (uint32_t i = 0; i < UsbKeyboard::NUMBER_OF_KEYBOARDS; ++i)
   {
-    pKeyboard->updateConnected(true);
+    UsbKeyboard::getKeyboard(i).updateConnected(true);
   }
   gIsConnected = true;
 }
@@ -208,10 +215,9 @@ void tud_mount_cb(void)
 // Invoked when device is unmounted
 void tud_umount_cb(void)
 {
-  UsbKeyboard *pKeyboard = gKeyboards;
-  for (uint32_t i = sizeof(gKeyboards) / sizeof(gKeyboards[0]); i > 0; --i, ++pKeyboard)
+  for (uint32_t i = 0; i < UsbKeyboard::NUMBER_OF_KEYBOARDS; ++i)
   {
-    pKeyboard->updateConnected(false);
+    UsbKeyboard::getKeyboard(i).updateConnected(false);
   }
   gIsConnected = false;
 }
@@ -222,10 +228,9 @@ void tud_umount_cb(void)
 void tud_suspend_cb(bool remote_wakeup_en)
 {
   (void) remote_wakeup_en;
-  UsbKeyboard *pKeyboard = gKeyboards;
-  for (uint32_t i = sizeof(gKeyboards) / sizeof(gKeyboards[0]); i > 0; --i, ++pKeyboard)
+  for (uint32_t i = 0; i < UsbKeyboard::NUMBER_OF_KEYBOARDS; ++i)
   {
-    pKeyboard->updateConnected(false);
+    UsbKeyboard::getKeyboard(i).updateConnected(false);
   }
   gIsConnected = false;
 }
@@ -233,10 +238,9 @@ void tud_suspend_cb(bool remote_wakeup_en)
 // Invoked when usb bus is resumed
 void tud_resume_cb(void)
 {
-  UsbKeyboard *pKeyboard = gKeyboards;
-  for (uint32_t i = sizeof(gKeyboards) / sizeof(gKeyboards[0]); i > 0; --i, ++pKeyboard)
+  for (uint32_t i = 0; i < UsbKeyboard::NUMBER_OF_KEYBOARDS; ++i)
   {
-    pKeyboard->updateConnected(true);
+    UsbKeyboard::getKeyboard(i).updateConnected(true);
   }
   gIsConnected = true;
 }
@@ -248,8 +252,9 @@ void tud_resume_cb(void)
 // Invoked when received GET_REPORT control request
 // Application must fill buffer report's content and return its length.
 // Return zero will cause the stack to STALL request
-uint16_t tud_hid_get_report_cb(uint8_t report_id, hid_report_type_t report_type, uint8_t *buffer, uint16_t reqlen)
+uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_t report_type, uint8_t *buffer, uint16_t reqlen)
 {
+  (void) instance;
   (void) report_type;
   int16_t idx = report_id_to_index( report_id );
   if (idx == INVALID_INDEX)
@@ -259,7 +264,7 @@ uint16_t tud_hid_get_report_cb(uint8_t report_id, hid_report_type_t report_type,
   else
   {
     // Build the report for the given report ID
-    UsbKeyboard &keyboard = gKeyboards[idx];
+    UsbKeyboard &keyboard = UsbKeyboard::getKeyboard(idx);
     keyboard.getReport(buffer, reqlen);
     // Return the size of the report
     return sizeof(hid_keyboard_report_t);
@@ -268,13 +273,17 @@ uint16_t tud_hid_get_report_cb(uint8_t report_id, hid_report_type_t report_type,
 
 // Invoked when received SET_REPORT control request or
 // received data on OUT endpoint ( Report ID = 0, Type = 0 )
-void tud_hid_set_report_cb(uint8_t report_id,
+void tud_hid_set_report_cb(uint8_t instance,
+                           uint8_t report_id,
                            hid_report_type_t report_type,
                            uint8_t const *buffer,
                            uint16_t bufsize)
 {
+  (void) instance;
   (void) report_type;
 
   // echo back anything we received from host
   tud_hid_report(report_id, buffer, bufsize);
 }
+
+#endif // USE_KEYBOARD

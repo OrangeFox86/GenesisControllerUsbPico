@@ -6,9 +6,12 @@
 #include "pico/stdlib.h"
 #include "pico/multicore.h"
 #include "UsbKeyboard.h"
+#include "UsbController.h"
 #include "GenesisController.h"
 #include "UsbKeyboardGenesisControllerObserver.h"
+#include "UsbControllerGenesisControllerObserver.h"
 #include "timers.h"
+#include "usb_descriptors.h"
 
 #define GPIO_PIN_9  9
 #define GPIO_PIN_10 10
@@ -24,6 +27,8 @@
 #define GPIO_PIN_20 20
 #define GPIO_PIN_21 21
 #define GPIO_PIN_22 22
+
+#ifdef USE_KEYBOARD
 
 uint8_t keyLookup[2][IGenesisControllerObserver::KEY_COUNT] =
 {
@@ -64,9 +69,22 @@ uint8_t keyLookup[2][IGenesisControllerObserver::KEY_COUNT] =
 // 6 keys.
 UsbKeyboardGenesisControllerObserver observers[2] =
 {
-  UsbKeyboardGenesisControllerObserver(gKeyboards[0], keyLookup[0]),
-  UsbKeyboardGenesisControllerObserver(gKeyboards[1], keyLookup[1])
+  UsbKeyboardGenesisControllerObserver(UsbKeyboard::getKeyboard(0), keyLookup[0]),
+  UsbKeyboardGenesisControllerObserver(UsbKeyboard::getKeyboard(1), keyLookup[1])
 };
+
+#endif // USE_KEYBOARD
+
+#ifdef USE_CONTROLLER
+
+// The observers send the keys pressed on the controllers to USB controller.
+UsbControllerGenesisControllerObserver observers[2] =
+{
+  UsbControllerGenesisControllerObserver(UsbController::getController(0)),
+  UsbControllerGenesisControllerObserver(UsbController::getController(1))
+};
+
+#endif // USE_CONTROLLER
 
 GenesisController gControllers[2] =
 {
@@ -95,7 +113,13 @@ int main(void)
 {
   board_init();
 
+#ifdef USE_KEYBOARD
   UsbKeyboard::init();
+#endif
+
+#ifdef USE_CONTROLLER
+  UsbController::init();
+#endif
 
   GenesisController* pController = gControllers;
   for (uint32_t i = sizeof(gControllers) / sizeof(gControllers[0]); i > 0; --i, ++pController)
@@ -109,7 +133,13 @@ int main(void)
 
   while (1)
   {
+#ifdef USE_KEYBOARD
     UsbKeyboard::task();
+#endif
+
+#ifdef USE_CONTROLLER
+    UsbController::task();
+#endif
   }
 
   return 0;

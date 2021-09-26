@@ -5,10 +5,12 @@ pico_sdk_init()
 add_executable(GenesisControllerPico
   main.cpp
   UsbKeyboard.cpp
+  UsbController.cpp
   usb_descriptors.c
   GenesisController.cpp
   timers.cpp
   UsbKeyboardGenesisControllerObserver.cpp
+  UsbControllerGenesisControllerObserver.cpp
 )
 pico_add_extra_outputs(GenesisControllerPico)
 target_link_libraries(GenesisControllerPico PRIVATE pico_stdlib tinyusb_device tinyusb_board pico_multicore)

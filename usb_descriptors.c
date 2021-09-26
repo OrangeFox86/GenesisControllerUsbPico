@@ -24,6 +24,7 @@
  */
 
 #include "tusb.h"
+//#include <hid.h>
 #include "usb_descriptors.h"
 
 /* A combination of interfaces must have a unique product id, since PC will save device driver after the first plug.
@@ -72,14 +73,19 @@ uint8_t const *tud_descriptor_device_cb(void) {
 
 uint8_t const desc_hid_report[] =
 {
+#if defined(USE_KEYBOARD)
     TUD_HID_REPORT_DESC_KEYBOARD(HID_REPORT_ID(REPORT_ID_KEYBOARD1)),
     TUD_HID_REPORT_DESC_KEYBOARD(HID_REPORT_ID(REPORT_ID_KEYBOARD2))
+#elif defined(USE_CONTROLLER)
+    TUD_HID_REPORT_DESC_GAMEPAD(HID_REPORT_ID(REPORT_ID_CONTROLLER1)),
+    TUD_HID_REPORT_DESC_GAMEPAD(HID_REPORT_ID(REPORT_ID_CONTROLLER2))
+#endif
 };
 
 // Invoked when received GET HID REPORT DESCRIPTOR
 // Application return pointer to descriptor
 // Descriptor contents must exist long enough for transfer to complete
-uint8_t const *tud_hid_descriptor_report_cb(void) {
+uint8_t const *tud_hid_descriptor_report_cb(uint8_t instance) {
     return desc_hid_report;
 }
 
@@ -96,14 +102,20 @@ enum {
 
 #define EPNUM_HID   0x01
 
+#if defined(USE_KEYBOARD)
+#define REPORT_SIZE sizeof(hid_keyboard_report_t)
+#elif defined(USE_CONTROLLER)
+#define REPORT_SIZE sizeof(hid_gamepad_report_t)
+#endif
+
 uint8_t const desc_configuration[] =
 {
     // Config number, interface count, string index, total length, attribute, power in mA
     TUD_CONFIG_DESCRIPTOR(1, ITF_NUM_TOTAL, 0, CONFIG_TOTAL_LEN, TUSB_DESC_CONFIG_ATT_REMOTE_WAKEUP, 100),
 
     // Interface number, string index, protocol, report descriptor len, EP In & Out address, size & polling interval
-    TUD_HID_INOUT_DESCRIPTOR(ITF_NUM_HID, 0, HID_PROTOCOL_NONE, sizeof(desc_hid_report), EPNUM_HID,
-                                0x80 | EPNUM_HID, 1 + sizeof(hid_keyboard_report_t), 10)
+    TUD_HID_INOUT_DESCRIPTOR(ITF_NUM_HID, 0, HID_ITF_PROTOCOL_NONE, sizeof(desc_hid_report), EPNUM_HID,
+                                0x80 | EPNUM_HID, 1 + REPORT_SIZE, 5)
 };
 
 // Invoked when received GET CONFIGURATION DESCRIPTOR
