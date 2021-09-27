@@ -76,7 +76,7 @@ uint8_t const desc_hid_report[] =
 #if defined(USE_KEYBOARD)
     TUD_HID_REPORT_DESC_KEYBOARD(HID_REPORT_ID(REPORT_ID_KEYBOARD1)),
     TUD_HID_REPORT_DESC_KEYBOARD(HID_REPORT_ID(REPORT_ID_KEYBOARD2))
-#elif defined(USE_CONTROLLER)
+#elif defined(USE_GAMEPAD)
     TUD_HID_REPORT_DESC_GAMEPAD(HID_REPORT_ID(REPORT_ID_CONTROLLER1)),
     TUD_HID_REPORT_DESC_GAMEPAD(HID_REPORT_ID(REPORT_ID_CONTROLLER2))
 #endif
@@ -104,7 +104,7 @@ enum {
 
 #if defined(USE_KEYBOARD)
 #define REPORT_SIZE sizeof(hid_keyboard_report_t)
-#elif defined(USE_CONTROLLER)
+#elif defined(USE_GAMEPAD)
 #define REPORT_SIZE sizeof(hid_gamepad_report_t)
 #endif
 

@@ -47,15 +47,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  21 .debug_ranges 00002d40  00000000  00000000  00090c58  2**3
                   CONTENTS, READONLY, DEBUGGING
- 22 .debug_line   000110d2  00000000  00000000  00093998  2**0
+ 22 .debug_line   000110c0  00000000  00000000  00093998  2**0
                   CONTENTS, READONLY, DEBUGGING
- 23 .debug_str    0000c9e3  00000000  00000000  000a4a6a  2**0
+ 23 .debug_str    0000c989  00000000  00000000  000a4a58  2**0
                   CONTENTS, READONLY, DEBUGGING
- 24 .debug_frame  00003810  00000000  00000000  000b1450  2**2
+ 24 .debug_frame  00003810  00000000  00000000  000b13e4  2**2
                   CONTENTS, READONLY, DEBUGGING
- 25 .stab         0000003c  00000000  00000000  000b4c60  2**2
+ 25 .stab         0000003c  00000000  00000000  000b4bf4  2**2
                   CONTENTS, READONLY, DEBUGGING
- 26 .stabstr      00000076  00000000  00000000  000b4c9c  2**0
+ 26 .stabstr      00000076  00000000  00000000  000b4c30  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 GenesisControllerPico.elf:     file format elf32-littlearm
@@ -390,18 +390,18 @@ Disassembly of section .text:
 1000036a:	4299      	cmp	r1, r3
 1000036c:	d1fa      	bne.n	10000364 <_Z41__static_initialization_and_destruction_0ii+0x8>
 1000036e:	2000      	movs	r0, #0
-10000370:	f000 f874 	bl	1000045c <_ZN13UsbController13getControllerEh>
+10000370:	f000 f874 	bl	1000045c <_ZN10UsbGamepad10getGamepadEh>
 10000374:	0001      	movs	r1, r0
 10000376:	4c19      	ldr	r4, [pc, #100]	; (100003dc <_Z41__static_initialization_and_destruction_0ii+0x80>)
 10000378:	0020      	movs	r0, r4
-1000037a:	f000 fcf1 	bl	10000d60 <_ZN38UsbControllerGenesisControllerObserverC1ER13UsbController>
+1000037a:	f000 fcf1 	bl	10000d60 <_ZN35UsbGamepadGenesisControllerObserverC1ER10UsbGamepad>
 1000037e:	2001      	movs	r0, #1
-10000380:	f000 f86c 	bl	1000045c <_ZN13UsbController13getControllerEh>
+10000380:	f000 f86c 	bl	1000045c <_ZN10UsbGamepad10getGamepadEh>
 10000384:	0001      	movs	r1, r0
 10000386:	0025      	movs	r5, r4
 10000388:	3508      	adds	r5, #8
 1000038a:	0028      	movs	r0, r5
-1000038c:	f000 fce8 	bl	10000d60 <_ZN38UsbControllerGenesisControllerObserverC1ER13UsbController>
+1000038c:	f000 fce8 	bl	10000d60 <_ZN35UsbGamepadGenesisControllerObserverC1ER10UsbGamepad>
 10000390:	9405      	str	r4, [sp, #20]
 10000392:	230f      	movs	r3, #15
 10000394:	9304      	str	r3, [sp, #16]
@@ -419,18 +419,18 @@ Disassembly of section .text:
 100003ac:	480c      	ldr	r0, [pc, #48]	; (100003e0 <_Z41__static_initialization_and_destruction_0ii+0x84>)
 100003ae:	f000 fa75 	bl	1000089c <_ZN17GenesisControllerC1EhhhhhhhhP26IGenesisControllerObserver>
 100003b2:	9505      	str	r5, [sp, #20]
-100003b4:	2310      	movs	r3, #16
+100003b4:	2316      	movs	r3, #22
 100003b6:	9304      	str	r3, [sp, #16]
-100003b8:	3301      	adds	r3, #1
+100003b8:	3b01      	subs	r3, #1
 100003ba:	9303      	str	r3, [sp, #12]
-100003bc:	3301      	adds	r3, #1
+100003bc:	3b01      	subs	r3, #1
 100003be:	9302      	str	r3, [sp, #8]
-100003c0:	3301      	adds	r3, #1
+100003c0:	3b01      	subs	r3, #1
 100003c2:	9301      	str	r3, [sp, #4]
-100003c4:	3301      	adds	r3, #1
+100003c4:	3b01      	subs	r3, #1
 100003c6:	9300      	str	r3, [sp, #0]
-100003c8:	3301      	adds	r3, #1
-100003ca:	2216      	movs	r2, #22
+100003c8:	3b01      	subs	r3, #1
+100003ca:	2210      	movs	r2, #16
 100003cc:	2101      	movs	r1, #1
 100003ce:	4805      	ldr	r0, [pc, #20]	; (100003e4 <_Z41__static_initialization_and_destruction_0ii+0x88>)
 100003d0:	f000 fa64 	bl	1000089c <_ZN17GenesisControllerC1EhhhhhhhhP26IGenesisControllerObserver>
@@ -444,7 +444,7 @@ Disassembly of section .text:
 100003e8 <main>:
 100003e8:	b570      	push	{r4, r5, r6, lr}
 100003ea:	f006 fd77 	bl	10006edc <board_init>
-100003ee:	f000 f9a6 	bl	1000073e <_ZN13UsbController4initEv>
+100003ee:	f000 f9a6 	bl	1000073e <_ZN10UsbGamepad4initEv>
 100003f2:	2502      	movs	r5, #2
 100003f4:	4c09      	ldr	r4, [pc, #36]	; (1000041c <main+0x34>)
 100003f6:	2d00      	cmp	r5, #0
@@ -459,7 +459,7 @@ Disassembly of section .text:
 1000040a:	f000 fc09 	bl	10000c20 <_Z10init_timerP17GenesisControllerm>
 1000040e:	4804      	ldr	r0, [pc, #16]	; (10000420 <main+0x38>)
 10000410:	f006 fe02 	bl	10007018 <multicore_launch_core1>
-10000414:	f000 f997 	bl	10000746 <_ZN13UsbController4taskEv>
+10000414:	f000 f997 	bl	10000746 <_ZN10UsbGamepad4taskEv>
 10000418:	e7fc      	b.n	10000414 <main+0x2c>
 1000041a:	46c0      	nop			; (mov r8, r8)
 1000041c:	20001f8c 	.word	0x20001f8c
@@ -473,7 +473,7 @@ Disassembly of section .text:
 1000042e:	bd10      	pop	{r4, pc}
 10000430:	0000ffff 	.word	0x0000ffff
 
-10000434 <_ZN13UsbControllerC1Eh>:
+10000434 <_ZN10UsbGamepadC1Eh>:
 10000434:	7001      	strb	r1, [r0, #0]
 10000436:	2300      	movs	r3, #0
 10000438:	7043      	strb	r3, [r0, #1]
@@ -482,123 +482,123 @@ Disassembly of section .text:
 1000043e:	7243      	strb	r3, [r0, #9]
 10000440:	4770      	bx	lr
 
-10000442 <_ZN13UsbController15isButtonPressedEv>:
+10000442 <_ZN10UsbGamepad15isButtonPressedEv>:
 10000442:	7843      	ldrb	r3, [r0, #1]
 10000444:	2b00      	cmp	r3, #0
-10000446:	d106      	bne.n	10000456 <_ZN13UsbController15isButtonPressedEv+0x14>
+10000446:	d106      	bne.n	10000456 <_ZN10UsbGamepad15isButtonPressedEv+0x14>
 10000448:	6843      	ldr	r3, [r0, #4]
 1000044a:	2b00      	cmp	r3, #0
-1000044c:	d101      	bne.n	10000452 <_ZN13UsbController15isButtonPressedEv+0x10>
+1000044c:	d101      	bne.n	10000452 <_ZN10UsbGamepad15isButtonPressedEv+0x10>
 1000044e:	2000      	movs	r0, #0
-10000450:	e002      	b.n	10000458 <_ZN13UsbController15isButtonPressedEv+0x16>
+10000450:	e002      	b.n	10000458 <_ZN10UsbGamepad15isButtonPressedEv+0x16>
 10000452:	2001      	movs	r0, #1
-10000454:	e000      	b.n	10000458 <_ZN13UsbController15isButtonPressedEv+0x16>
+10000454:	e000      	b.n	10000458 <_ZN10UsbGamepad15isButtonPressedEv+0x16>
 10000456:	2001      	movs	r0, #1
 10000458:	4770      	bx	lr
 	...
 
-1000045c <_ZN13UsbController13getControllerEh>:
+1000045c <_ZN10UsbGamepad10getGamepadEh>:
 1000045c:	b570      	push	{r4, r5, r6, lr}
 1000045e:	0004      	movs	r4, r0
-10000460:	4b10      	ldr	r3, [pc, #64]	; (100004a4 <_ZN13UsbController13getControllerEh+0x48>)
+10000460:	4b10      	ldr	r3, [pc, #64]	; (100004a4 <_ZN10UsbGamepad10getGamepadEh+0x48>)
 10000462:	781b      	ldrb	r3, [r3, #0]
 10000464:	f3bf 8f5b 	dmb	ish
 10000468:	07db      	lsls	r3, r3, #31
-1000046a:	d507      	bpl.n	1000047c <_ZN13UsbController13getControllerEh+0x20>
+1000046a:	d507      	bpl.n	1000047c <_ZN10UsbGamepad10getGamepadEh+0x20>
 1000046c:	2301      	movs	r3, #1
 1000046e:	401c      	ands	r4, r3
 10000470:	0063      	lsls	r3, r4, #1
 10000472:	191b      	adds	r3, r3, r4
 10000474:	009a      	lsls	r2, r3, #2
-10000476:	480c      	ldr	r0, [pc, #48]	; (100004a8 <_ZN13UsbController13getControllerEh+0x4c>)
+10000476:	480c      	ldr	r0, [pc, #48]	; (100004a8 <_ZN10UsbGamepad10getGamepadEh+0x4c>)
 10000478:	1880      	adds	r0, r0, r2
 1000047a:	bd70      	pop	{r4, r5, r6, pc}
-1000047c:	4809      	ldr	r0, [pc, #36]	; (100004a4 <_ZN13UsbController13getControllerEh+0x48>)
+1000047c:	4809      	ldr	r0, [pc, #36]	; (100004a4 <_ZN10UsbGamepad10getGamepadEh+0x48>)
 1000047e:	f006 fddd 	bl	1000703c <__cxa_guard_acquire>
 10000482:	2800      	cmp	r0, #0
-10000484:	d0f2      	beq.n	1000046c <_ZN13UsbController13getControllerEh+0x10>
-10000486:	4d08      	ldr	r5, [pc, #32]	; (100004a8 <_ZN13UsbController13getControllerEh+0x4c>)
+10000484:	d0f2      	beq.n	1000046c <_ZN10UsbGamepad10getGamepadEh+0x10>
+10000486:	4d08      	ldr	r5, [pc, #32]	; (100004a8 <_ZN10UsbGamepad10getGamepadEh+0x4c>)
 10000488:	2101      	movs	r1, #1
 1000048a:	0028      	movs	r0, r5
-1000048c:	f7ff ffd2 	bl	10000434 <_ZN13UsbControllerC1Eh>
+1000048c:	f7ff ffd2 	bl	10000434 <_ZN10UsbGamepadC1Eh>
 10000490:	0028      	movs	r0, r5
 10000492:	300c      	adds	r0, #12
 10000494:	2102      	movs	r1, #2
-10000496:	f7ff ffcd 	bl	10000434 <_ZN13UsbControllerC1Eh>
-1000049a:	4802      	ldr	r0, [pc, #8]	; (100004a4 <_ZN13UsbController13getControllerEh+0x48>)
+10000496:	f7ff ffcd 	bl	10000434 <_ZN10UsbGamepadC1Eh>
+1000049a:	4802      	ldr	r0, [pc, #8]	; (100004a4 <_ZN10UsbGamepad10getGamepadEh+0x48>)
 1000049c:	f006 fdea 	bl	10007074 <__cxa_guard_release>
-100004a0:	e7e4      	b.n	1000046c <_ZN13UsbController13getControllerEh+0x10>
+100004a0:	e7e4      	b.n	1000046c <_ZN10UsbGamepad10getGamepadEh+0x10>
 100004a2:	46c0      	nop			; (mov r8, r8)
 100004a4:	20001d58 	.word	0x20001d58
 100004a8:	20001d80 	.word	0x20001d80
 
-100004ac <_ZN13UsbController7ledTaskEv>:
+100004ac <_ZN10UsbGamepad7ledTaskEv>:
 100004ac:	b570      	push	{r4, r5, r6, lr}
 100004ae:	2400      	movs	r4, #0
 100004b0:	2500      	movs	r5, #0
-100004b2:	e000      	b.n	100004b6 <_ZN13UsbController7ledTaskEv+0xa>
+100004b2:	e000      	b.n	100004b6 <_ZN10UsbGamepad7ledTaskEv+0xa>
 100004b4:	3401      	adds	r4, #1
 100004b6:	2c01      	cmp	r4, #1
-100004b8:	d808      	bhi.n	100004cc <_ZN13UsbController7ledTaskEv+0x20>
+100004b8:	d808      	bhi.n	100004cc <_ZN10UsbGamepad7ledTaskEv+0x20>
 100004ba:	b2e0      	uxtb	r0, r4
-100004bc:	f7ff ffce 	bl	1000045c <_ZN13UsbController13getControllerEh>
-100004c0:	f7ff ffbf 	bl	10000442 <_ZN13UsbController15isButtonPressedEv>
+100004bc:	f7ff ffce 	bl	1000045c <_ZN10UsbGamepad10getGamepadEh>
+100004c0:	f7ff ffbf 	bl	10000442 <_ZN10UsbGamepad15isButtonPressedEv>
 100004c4:	2800      	cmp	r0, #0
-100004c6:	d0f5      	beq.n	100004b4 <_ZN13UsbController7ledTaskEv+0x8>
+100004c6:	d0f5      	beq.n	100004b4 <_ZN10UsbGamepad7ledTaskEv+0x8>
 100004c8:	0005      	movs	r5, r0
-100004ca:	e7f3      	b.n	100004b4 <_ZN13UsbController7ledTaskEv+0x8>
-100004cc:	4b1c      	ldr	r3, [pc, #112]	; (10000540 <_ZN13UsbController7ledTaskEv+0x94>)
+100004ca:	e7f3      	b.n	100004b4 <_ZN10UsbGamepad7ledTaskEv+0x8>
+100004cc:	4b1c      	ldr	r3, [pc, #112]	; (10000540 <_ZN10UsbGamepad7ledTaskEv+0x94>)
 100004ce:	781c      	ldrb	r4, [r3, #0]
 100004d0:	2c00      	cmp	r4, #0
-100004d2:	d008      	beq.n	100004e6 <_ZN13UsbController7ledTaskEv+0x3a>
+100004d2:	d008      	beq.n	100004e6 <_ZN10UsbGamepad7ledTaskEv+0x3a>
 100004d4:	2301      	movs	r3, #1
 100004d6:	405d      	eors	r5, r3
-100004d8:	4b1a      	ldr	r3, [pc, #104]	; (10000544 <_ZN13UsbController7ledTaskEv+0x98>)
+100004d8:	4b1a      	ldr	r3, [pc, #104]	; (10000544 <_ZN10UsbGamepad7ledTaskEv+0x98>)
 100004da:	701d      	strb	r5, [r3, #0]
-100004dc:	4b19      	ldr	r3, [pc, #100]	; (10000544 <_ZN13UsbController7ledTaskEv+0x98>)
+100004dc:	4b19      	ldr	r3, [pc, #100]	; (10000544 <_ZN10UsbGamepad7ledTaskEv+0x98>)
 100004de:	7818      	ldrb	r0, [r3, #0]
 100004e0:	f006 fd14 	bl	10006f0c <board_led_write>
 100004e4:	bd70      	pop	{r4, r5, r6, pc}
 100004e6:	f001 fae7 	bl	10001ab8 <time_us_64>
 100004ea:	2900      	cmp	r1, #0
-100004ec:	db1b      	blt.n	10000526 <_ZN13UsbController7ledTaskEv+0x7a>
-100004ee:	d120      	bne.n	10000532 <_ZN13UsbController7ledTaskEv+0x86>
+100004ec:	db1b      	blt.n	10000526 <_ZN10UsbGamepad7ledTaskEv+0x7a>
+100004ee:	d120      	bne.n	10000532 <_ZN10UsbGamepad7ledTaskEv+0x86>
 100004f0:	21fa      	movs	r1, #250	; 0xfa
 100004f2:	0089      	lsls	r1, r1, #2
 100004f4:	f003 fb90 	bl	10003c18 <__wrap___aeabi_uidiv>
-100004f8:	4b13      	ldr	r3, [pc, #76]	; (10000548 <_ZN13UsbController7ledTaskEv+0x9c>)
+100004f8:	4b13      	ldr	r3, [pc, #76]	; (10000548 <_ZN10UsbGamepad7ledTaskEv+0x9c>)
 100004fa:	681b      	ldr	r3, [r3, #0]
 100004fc:	1ac0      	subs	r0, r0, r3
 100004fe:	2863      	cmp	r0, #99	; 0x63
-10000500:	d907      	bls.n	10000512 <_ZN13UsbController7ledTaskEv+0x66>
+10000500:	d907      	bls.n	10000512 <_ZN10UsbGamepad7ledTaskEv+0x66>
 10000502:	3364      	adds	r3, #100	; 0x64
-10000504:	4a10      	ldr	r2, [pc, #64]	; (10000548 <_ZN13UsbController7ledTaskEv+0x9c>)
+10000504:	4a10      	ldr	r2, [pc, #64]	; (10000548 <_ZN10UsbGamepad7ledTaskEv+0x9c>)
 10000506:	6013      	str	r3, [r2, #0]
-10000508:	4a0e      	ldr	r2, [pc, #56]	; (10000544 <_ZN13UsbController7ledTaskEv+0x98>)
+10000508:	4a0e      	ldr	r2, [pc, #56]	; (10000544 <_ZN10UsbGamepad7ledTaskEv+0x98>)
 1000050a:	7813      	ldrb	r3, [r2, #0]
 1000050c:	2101      	movs	r1, #1
 1000050e:	404b      	eors	r3, r1
 10000510:	7013      	strb	r3, [r2, #0]
-10000512:	4b0c      	ldr	r3, [pc, #48]	; (10000544 <_ZN13UsbController7ledTaskEv+0x98>)
+10000512:	4b0c      	ldr	r3, [pc, #48]	; (10000544 <_ZN10UsbGamepad7ledTaskEv+0x98>)
 10000514:	781b      	ldrb	r3, [r3, #0]
 10000516:	2b00      	cmp	r3, #0
-10000518:	d002      	beq.n	10000520 <_ZN13UsbController7ledTaskEv+0x74>
+10000518:	d002      	beq.n	10000520 <_ZN10UsbGamepad7ledTaskEv+0x74>
 1000051a:	2d00      	cmp	r5, #0
-1000051c:	d000      	beq.n	10000520 <_ZN13UsbController7ledTaskEv+0x74>
+1000051c:	d000      	beq.n	10000520 <_ZN10UsbGamepad7ledTaskEv+0x74>
 1000051e:	002c      	movs	r4, r5
-10000520:	4b08      	ldr	r3, [pc, #32]	; (10000544 <_ZN13UsbController7ledTaskEv+0x98>)
+10000520:	4b08      	ldr	r3, [pc, #32]	; (10000544 <_ZN10UsbGamepad7ledTaskEv+0x98>)
 10000522:	701c      	strb	r4, [r3, #0]
-10000524:	e7da      	b.n	100004dc <_ZN13UsbController7ledTaskEv+0x30>
-10000526:	4b09      	ldr	r3, [pc, #36]	; (1000054c <_ZN13UsbController7ledTaskEv+0xa0>)
-10000528:	4a09      	ldr	r2, [pc, #36]	; (10000550 <_ZN13UsbController7ledTaskEv+0xa4>)
+10000524:	e7da      	b.n	100004dc <_ZN10UsbGamepad7ledTaskEv+0x30>
+10000526:	4b09      	ldr	r3, [pc, #36]	; (1000054c <_ZN10UsbGamepad7ledTaskEv+0xa0>)
+10000528:	4a09      	ldr	r2, [pc, #36]	; (10000550 <_ZN10UsbGamepad7ledTaskEv+0xa4>)
 1000052a:	213d      	movs	r1, #61	; 0x3d
-1000052c:	4809      	ldr	r0, [pc, #36]	; (10000554 <_ZN13UsbController7ledTaskEv+0xa8>)
+1000052c:	4809      	ldr	r0, [pc, #36]	; (10000554 <_ZN10UsbGamepad7ledTaskEv+0xa8>)
 1000052e:	f001 fe93 	bl	10002258 <__assert_func>
 10000532:	22fa      	movs	r2, #250	; 0xfa
 10000534:	0092      	lsls	r2, r2, #2
 10000536:	2300      	movs	r3, #0
 10000538:	f003 fbb0 	bl	10003c9c <__wrap___aeabi_uldivmod>
-1000053c:	e7dc      	b.n	100004f8 <_ZN13UsbController7ledTaskEv+0x4c>
+1000053c:	e7dc      	b.n	100004f8 <_ZN10UsbGamepad7ledTaskEv+0x4c>
 1000053e:	46c0      	nop			; (mov r8, r8)
 10000540:	20002498 	.word	0x20002498
 10000544:	20002499 	.word	0x20002499
@@ -607,14 +607,14 @@ Disassembly of section .text:
 10000550:	10008dd8 	.word	0x10008dd8
 10000554:	10008d94 	.word	0x10008d94
 
-10000558 <_ZN13UsbController13updatePressedENS_8button_eE>:
+10000558 <_ZN10UsbGamepad13updatePressedENS_8button_eE>:
 10000558:	b510      	push	{r4, lr}
 1000055a:	7843      	ldrb	r3, [r0, #1]
 1000055c:	6842      	ldr	r2, [r0, #4]
 1000055e:	290b      	cmp	r1, #11
-10000560:	d844      	bhi.n	100005ec <_ZN13UsbController13updatePressedENS_8button_eE+0x94>
+10000560:	d844      	bhi.n	100005ec <_ZN10UsbGamepad13updatePressedENS_8button_eE+0x94>
 10000562:	0089      	lsls	r1, r1, #2
-10000564:	4c22      	ldr	r4, [pc, #136]	; (100005f0 <_ZN13UsbController13updatePressedENS_8button_eE+0x98>)
+10000564:	4c22      	ldr	r4, [pc, #136]	; (100005f0 <_ZN10UsbGamepad13updatePressedENS_8button_eE+0x98>)
 10000566:	5861      	ldr	r1, [r4, r1]
 10000568:	468f      	mov	pc, r1
 1000056a:	2101      	movs	r1, #1
@@ -622,7 +622,7 @@ Disassembly of section .text:
 1000056e:	7041      	strb	r1, [r0, #1]
 10000570:	7841      	ldrb	r1, [r0, #1]
 10000572:	4299      	cmp	r1, r3
-10000574:	d033      	beq.n	100005de <_ZN13UsbController13updatePressedENS_8button_eE+0x86>
+10000574:	d033      	beq.n	100005de <_ZN10UsbGamepad13updatePressedENS_8button_eE+0x86>
 10000576:	2301      	movs	r3, #1
 10000578:	7203      	strb	r3, [r0, #8]
 1000057a:	2000      	movs	r0, #0
@@ -632,68 +632,68 @@ Disassembly of section .text:
 10000582:	2105      	movs	r1, #5
 10000584:	4319      	orrs	r1, r3
 10000586:	7041      	strb	r1, [r0, #1]
-10000588:	e7f2      	b.n	10000570 <_ZN13UsbController13updatePressedENS_8button_eE+0x18>
+10000588:	e7f2      	b.n	10000570 <_ZN10UsbGamepad13updatePressedENS_8button_eE+0x18>
 1000058a:	2107      	movs	r1, #7
 1000058c:	4319      	orrs	r1, r3
 1000058e:	7041      	strb	r1, [r0, #1]
-10000590:	e7ee      	b.n	10000570 <_ZN13UsbController13updatePressedENS_8button_eE+0x18>
+10000590:	e7ee      	b.n	10000570 <_ZN10UsbGamepad13updatePressedENS_8button_eE+0x18>
 10000592:	2103      	movs	r1, #3
 10000594:	4319      	orrs	r1, r3
 10000596:	7041      	strb	r1, [r0, #1]
-10000598:	e7ea      	b.n	10000570 <_ZN13UsbController13updatePressedENS_8button_eE+0x18>
+10000598:	e7ea      	b.n	10000570 <_ZN10UsbGamepad13updatePressedENS_8button_eE+0x18>
 1000059a:	2101      	movs	r1, #1
 1000059c:	4311      	orrs	r1, r2
 1000059e:	6041      	str	r1, [r0, #4]
-100005a0:	e7e6      	b.n	10000570 <_ZN13UsbController13updatePressedENS_8button_eE+0x18>
+100005a0:	e7e6      	b.n	10000570 <_ZN10UsbGamepad13updatePressedENS_8button_eE+0x18>
 100005a2:	2102      	movs	r1, #2
 100005a4:	4311      	orrs	r1, r2
 100005a6:	6041      	str	r1, [r0, #4]
-100005a8:	e7e2      	b.n	10000570 <_ZN13UsbController13updatePressedENS_8button_eE+0x18>
+100005a8:	e7e2      	b.n	10000570 <_ZN10UsbGamepad13updatePressedENS_8button_eE+0x18>
 100005aa:	2104      	movs	r1, #4
 100005ac:	4311      	orrs	r1, r2
 100005ae:	6041      	str	r1, [r0, #4]
-100005b0:	e7de      	b.n	10000570 <_ZN13UsbController13updatePressedENS_8button_eE+0x18>
+100005b0:	e7de      	b.n	10000570 <_ZN10UsbGamepad13updatePressedENS_8button_eE+0x18>
 100005b2:	2108      	movs	r1, #8
 100005b4:	4311      	orrs	r1, r2
 100005b6:	6041      	str	r1, [r0, #4]
-100005b8:	e7da      	b.n	10000570 <_ZN13UsbController13updatePressedENS_8button_eE+0x18>
+100005b8:	e7da      	b.n	10000570 <_ZN10UsbGamepad13updatePressedENS_8button_eE+0x18>
 100005ba:	2110      	movs	r1, #16
 100005bc:	4311      	orrs	r1, r2
 100005be:	6041      	str	r1, [r0, #4]
-100005c0:	e7d6      	b.n	10000570 <_ZN13UsbController13updatePressedENS_8button_eE+0x18>
+100005c0:	e7d6      	b.n	10000570 <_ZN10UsbGamepad13updatePressedENS_8button_eE+0x18>
 100005c2:	2120      	movs	r1, #32
 100005c4:	4311      	orrs	r1, r2
 100005c6:	6041      	str	r1, [r0, #4]
-100005c8:	e7d2      	b.n	10000570 <_ZN13UsbController13updatePressedENS_8button_eE+0x18>
+100005c8:	e7d2      	b.n	10000570 <_ZN10UsbGamepad13updatePressedENS_8button_eE+0x18>
 100005ca:	2180      	movs	r1, #128	; 0x80
 100005cc:	0109      	lsls	r1, r1, #4
 100005ce:	4311      	orrs	r1, r2
 100005d0:	6041      	str	r1, [r0, #4]
-100005d2:	e7cd      	b.n	10000570 <_ZN13UsbController13updatePressedENS_8button_eE+0x18>
+100005d2:	e7cd      	b.n	10000570 <_ZN10UsbGamepad13updatePressedENS_8button_eE+0x18>
 100005d4:	2180      	movs	r1, #128	; 0x80
 100005d6:	0149      	lsls	r1, r1, #5
 100005d8:	4311      	orrs	r1, r2
 100005da:	6041      	str	r1, [r0, #4]
-100005dc:	e7c8      	b.n	10000570 <_ZN13UsbController13updatePressedENS_8button_eE+0x18>
+100005dc:	e7c8      	b.n	10000570 <_ZN10UsbGamepad13updatePressedENS_8button_eE+0x18>
 100005de:	6843      	ldr	r3, [r0, #4]
 100005e0:	4293      	cmp	r3, r2
-100005e2:	d001      	beq.n	100005e8 <_ZN13UsbController13updatePressedENS_8button_eE+0x90>
+100005e2:	d001      	beq.n	100005e8 <_ZN10UsbGamepad13updatePressedENS_8button_eE+0x90>
 100005e4:	2301      	movs	r3, #1
-100005e6:	e7c7      	b.n	10000578 <_ZN13UsbController13updatePressedENS_8button_eE+0x20>
+100005e6:	e7c7      	b.n	10000578 <_ZN10UsbGamepad13updatePressedENS_8button_eE+0x20>
 100005e8:	2300      	movs	r3, #0
-100005ea:	e7c5      	b.n	10000578 <_ZN13UsbController13updatePressedENS_8button_eE+0x20>
+100005ea:	e7c5      	b.n	10000578 <_ZN10UsbGamepad13updatePressedENS_8button_eE+0x20>
 100005ec:	2001      	movs	r0, #1
-100005ee:	e7c5      	b.n	1000057c <_ZN13UsbController13updatePressedENS_8button_eE+0x24>
+100005ee:	e7c5      	b.n	1000057c <_ZN10UsbGamepad13updatePressedENS_8button_eE+0x24>
 100005f0:	10008d18 	.word	0x10008d18
 
-100005f4 <_ZN13UsbController14updateReleasedENS_8button_eE>:
+100005f4 <_ZN10UsbGamepad14updateReleasedENS_8button_eE>:
 100005f4:	b510      	push	{r4, lr}
 100005f6:	7843      	ldrb	r3, [r0, #1]
 100005f8:	6842      	ldr	r2, [r0, #4]
 100005fa:	290b      	cmp	r1, #11
-100005fc:	d84c      	bhi.n	10000698 <_ZN13UsbController14updateReleasedENS_8button_eE+0xa4>
+100005fc:	d84c      	bhi.n	10000698 <_ZN10UsbGamepad14updateReleasedENS_8button_eE+0xa4>
 100005fe:	0089      	lsls	r1, r1, #2
-10000600:	4c26      	ldr	r4, [pc, #152]	; (1000069c <_ZN13UsbController14updateReleasedENS_8button_eE+0xa8>)
+10000600:	4c26      	ldr	r4, [pc, #152]	; (1000069c <_ZN10UsbGamepad14updateReleasedENS_8button_eE+0xa8>)
 10000602:	5861      	ldr	r1, [r4, r1]
 10000604:	468f      	mov	pc, r1
 10000606:	2101      	movs	r1, #1
@@ -702,7 +702,7 @@ Disassembly of section .text:
 1000060c:	7044      	strb	r4, [r0, #1]
 1000060e:	7841      	ldrb	r1, [r0, #1]
 10000610:	4299      	cmp	r1, r3
-10000612:	d03a      	beq.n	1000068a <_ZN13UsbController14updateReleasedENS_8button_eE+0x96>
+10000612:	d03a      	beq.n	1000068a <_ZN10UsbGamepad14updateReleasedENS_8button_eE+0x96>
 10000614:	2301      	movs	r3, #1
 10000616:	7203      	strb	r3, [r0, #8]
 10000618:	2000      	movs	r0, #0
@@ -713,74 +713,74 @@ Disassembly of section .text:
 10000622:	001c      	movs	r4, r3
 10000624:	438c      	bics	r4, r1
 10000626:	7044      	strb	r4, [r0, #1]
-10000628:	e7f1      	b.n	1000060e <_ZN13UsbController14updateReleasedENS_8button_eE+0x1a>
+10000628:	e7f1      	b.n	1000060e <_ZN10UsbGamepad14updateReleasedENS_8button_eE+0x1a>
 1000062a:	2107      	movs	r1, #7
 1000062c:	001c      	movs	r4, r3
 1000062e:	438c      	bics	r4, r1
 10000630:	7044      	strb	r4, [r0, #1]
-10000632:	e7ec      	b.n	1000060e <_ZN13UsbController14updateReleasedENS_8button_eE+0x1a>
+10000632:	e7ec      	b.n	1000060e <_ZN10UsbGamepad14updateReleasedENS_8button_eE+0x1a>
 10000634:	2103      	movs	r1, #3
 10000636:	001c      	movs	r4, r3
 10000638:	438c      	bics	r4, r1
 1000063a:	7044      	strb	r4, [r0, #1]
-1000063c:	e7e7      	b.n	1000060e <_ZN13UsbController14updateReleasedENS_8button_eE+0x1a>
+1000063c:	e7e7      	b.n	1000060e <_ZN10UsbGamepad14updateReleasedENS_8button_eE+0x1a>
 1000063e:	2101      	movs	r1, #1
 10000640:	0014      	movs	r4, r2
 10000642:	438c      	bics	r4, r1
 10000644:	6044      	str	r4, [r0, #4]
-10000646:	e7e2      	b.n	1000060e <_ZN13UsbController14updateReleasedENS_8button_eE+0x1a>
+10000646:	e7e2      	b.n	1000060e <_ZN10UsbGamepad14updateReleasedENS_8button_eE+0x1a>
 10000648:	2102      	movs	r1, #2
 1000064a:	0014      	movs	r4, r2
 1000064c:	438c      	bics	r4, r1
 1000064e:	6044      	str	r4, [r0, #4]
-10000650:	e7dd      	b.n	1000060e <_ZN13UsbController14updateReleasedENS_8button_eE+0x1a>
+10000650:	e7dd      	b.n	1000060e <_ZN10UsbGamepad14updateReleasedENS_8button_eE+0x1a>
 10000652:	2104      	movs	r1, #4
 10000654:	0014      	movs	r4, r2
 10000656:	438c      	bics	r4, r1
 10000658:	6044      	str	r4, [r0, #4]
-1000065a:	e7d8      	b.n	1000060e <_ZN13UsbController14updateReleasedENS_8button_eE+0x1a>
+1000065a:	e7d8      	b.n	1000060e <_ZN10UsbGamepad14updateReleasedENS_8button_eE+0x1a>
 1000065c:	2108      	movs	r1, #8
 1000065e:	0014      	movs	r4, r2
 10000660:	438c      	bics	r4, r1
 10000662:	6044      	str	r4, [r0, #4]
-10000664:	e7d3      	b.n	1000060e <_ZN13UsbController14updateReleasedENS_8button_eE+0x1a>
+10000664:	e7d3      	b.n	1000060e <_ZN10UsbGamepad14updateReleasedENS_8button_eE+0x1a>
 10000666:	2110      	movs	r1, #16
 10000668:	0014      	movs	r4, r2
 1000066a:	438c      	bics	r4, r1
 1000066c:	6044      	str	r4, [r0, #4]
-1000066e:	e7ce      	b.n	1000060e <_ZN13UsbController14updateReleasedENS_8button_eE+0x1a>
+1000066e:	e7ce      	b.n	1000060e <_ZN10UsbGamepad14updateReleasedENS_8button_eE+0x1a>
 10000670:	2120      	movs	r1, #32
 10000672:	0014      	movs	r4, r2
 10000674:	438c      	bics	r4, r1
 10000676:	6044      	str	r4, [r0, #4]
-10000678:	e7c9      	b.n	1000060e <_ZN13UsbController14updateReleasedENS_8button_eE+0x1a>
-1000067a:	4909      	ldr	r1, [pc, #36]	; (100006a0 <_ZN13UsbController14updateReleasedENS_8button_eE+0xac>)
+10000678:	e7c9      	b.n	1000060e <_ZN10UsbGamepad14updateReleasedENS_8button_eE+0x1a>
+1000067a:	4909      	ldr	r1, [pc, #36]	; (100006a0 <_ZN10UsbGamepad14updateReleasedENS_8button_eE+0xac>)
 1000067c:	4011      	ands	r1, r2
 1000067e:	6041      	str	r1, [r0, #4]
-10000680:	e7c5      	b.n	1000060e <_ZN13UsbController14updateReleasedENS_8button_eE+0x1a>
-10000682:	4908      	ldr	r1, [pc, #32]	; (100006a4 <_ZN13UsbController14updateReleasedENS_8button_eE+0xb0>)
+10000680:	e7c5      	b.n	1000060e <_ZN10UsbGamepad14updateReleasedENS_8button_eE+0x1a>
+10000682:	4908      	ldr	r1, [pc, #32]	; (100006a4 <_ZN10UsbGamepad14updateReleasedENS_8button_eE+0xb0>)
 10000684:	4011      	ands	r1, r2
 10000686:	6041      	str	r1, [r0, #4]
-10000688:	e7c1      	b.n	1000060e <_ZN13UsbController14updateReleasedENS_8button_eE+0x1a>
+10000688:	e7c1      	b.n	1000060e <_ZN10UsbGamepad14updateReleasedENS_8button_eE+0x1a>
 1000068a:	6843      	ldr	r3, [r0, #4]
 1000068c:	4293      	cmp	r3, r2
-1000068e:	d001      	beq.n	10000694 <_ZN13UsbController14updateReleasedENS_8button_eE+0xa0>
+1000068e:	d001      	beq.n	10000694 <_ZN10UsbGamepad14updateReleasedENS_8button_eE+0xa0>
 10000690:	2301      	movs	r3, #1
-10000692:	e7c0      	b.n	10000616 <_ZN13UsbController14updateReleasedENS_8button_eE+0x22>
+10000692:	e7c0      	b.n	10000616 <_ZN10UsbGamepad14updateReleasedENS_8button_eE+0x22>
 10000694:	2300      	movs	r3, #0
-10000696:	e7be      	b.n	10000616 <_ZN13UsbController14updateReleasedENS_8button_eE+0x22>
+10000696:	e7be      	b.n	10000616 <_ZN10UsbGamepad14updateReleasedENS_8button_eE+0x22>
 10000698:	2001      	movs	r0, #1
-1000069a:	e7be      	b.n	1000061a <_ZN13UsbController14updateReleasedENS_8button_eE+0x26>
+1000069a:	e7be      	b.n	1000061a <_ZN10UsbGamepad14updateReleasedENS_8button_eE+0x26>
 1000069c:	10008d48 	.word	0x10008d48
 100006a0:	fffff7ff 	.word	0xfffff7ff
 100006a4:	ffffefff 	.word	0xffffefff
 
-100006a8 <_ZN13UsbController17updateAllReleasedEv>:
+100006a8 <_ZN10UsbGamepad17updateAllReleasedEv>:
 100006a8:	b510      	push	{r4, lr}
 100006aa:	0004      	movs	r4, r0
-100006ac:	f7ff fec9 	bl	10000442 <_ZN13UsbController15isButtonPressedEv>
+100006ac:	f7ff fec9 	bl	10000442 <_ZN10UsbGamepad15isButtonPressedEv>
 100006b0:	2800      	cmp	r0, #0
-100006b2:	d004      	beq.n	100006be <_ZN13UsbController17updateAllReleasedEv+0x16>
+100006b2:	d004      	beq.n	100006be <_ZN10UsbGamepad17updateAllReleasedEv+0x16>
 100006b4:	2300      	movs	r3, #0
 100006b6:	7063      	strb	r3, [r4, #1]
 100006b8:	6063      	str	r3, [r4, #4]
@@ -788,18 +788,18 @@ Disassembly of section .text:
 100006bc:	7223      	strb	r3, [r4, #8]
 100006be:	bd10      	pop	{r4, pc}
 
-100006c0 <_ZN13UsbController8sendKeysEb>:
+100006c0 <_ZN10UsbGamepad8sendKeysEb>:
 100006c0:	b510      	push	{r4, lr}
 100006c2:	b086      	sub	sp, #24
 100006c4:	0004      	movs	r4, r0
 100006c6:	7a40      	ldrb	r0, [r0, #9]
 100006c8:	2800      	cmp	r0, #0
-100006ca:	d016      	beq.n	100006fa <_ZN13UsbController8sendKeysEb+0x3a>
+100006ca:	d016      	beq.n	100006fa <_ZN10UsbGamepad8sendKeysEb+0x3a>
 100006cc:	7a23      	ldrb	r3, [r4, #8]
 100006ce:	2b00      	cmp	r3, #0
-100006d0:	d101      	bne.n	100006d6 <_ZN13UsbController8sendKeysEb+0x16>
+100006d0:	d101      	bne.n	100006d6 <_ZN10UsbGamepad8sendKeysEb+0x16>
 100006d2:	2900      	cmp	r1, #0
-100006d4:	d011      	beq.n	100006fa <_ZN13UsbController8sendKeysEb+0x3a>
+100006d4:	d011      	beq.n	100006fa <_ZN10UsbGamepad8sendKeysEb+0x3a>
 100006d6:	7821      	ldrb	r1, [r4, #0]
 100006d8:	7863      	ldrb	r3, [r4, #1]
 100006da:	88a2      	ldrh	r2, [r4, #4]
@@ -814,13 +814,13 @@ Disassembly of section .text:
 100006ec:	2000      	movs	r0, #0
 100006ee:	f006 f8dd 	bl	100068ac <tud_hid_n_gamepad_report>
 100006f2:	2800      	cmp	r0, #0
-100006f4:	d001      	beq.n	100006fa <_ZN13UsbController8sendKeysEb+0x3a>
+100006f4:	d001      	beq.n	100006fa <_ZN10UsbGamepad8sendKeysEb+0x3a>
 100006f6:	2300      	movs	r3, #0
 100006f8:	7223      	strb	r3, [r4, #8]
 100006fa:	b006      	add	sp, #24
 100006fc:	bd10      	pop	{r4, pc}
 
-100006fe <_ZN13UsbController9getReportEPht>:
+100006fe <_ZN10UsbGamepad9getReportEPht>:
 100006fe:	b510      	push	{r4, lr}
 10000700:	b084      	sub	sp, #16
 10000702:	000c      	movs	r4, r1
@@ -842,7 +842,7 @@ Disassembly of section .text:
 10000722:	704b      	strb	r3, [r1, #1]
 10000724:	1c13      	adds	r3, r2, #0
 10000726:	2a09      	cmp	r2, #9
-10000728:	d900      	bls.n	1000072c <_ZN13UsbController9getReportEPht+0x2e>
+10000728:	d900      	bls.n	1000072c <_ZN10UsbGamepad9getReportEPht+0x2e>
 1000072a:	2309      	movs	r3, #9
 1000072c:	b29a      	uxth	r2, r3
 1000072e:	a901      	add	r1, sp, #4
@@ -851,19 +851,19 @@ Disassembly of section .text:
 10000736:	b004      	add	sp, #16
 10000738:	bd10      	pop	{r4, pc}
 
-1000073a <_ZN13UsbController15updateConnectedEb>:
+1000073a <_ZN10UsbGamepad15updateConnectedEb>:
 1000073a:	7241      	strb	r1, [r0, #9]
 1000073c:	4770      	bx	lr
 
-1000073e <_ZN13UsbController4initEv>:
+1000073e <_ZN10UsbGamepad4initEv>:
 1000073e:	b510      	push	{r4, lr}
 10000740:	f006 fae8 	bl	10006d14 <tusb_init>
 10000744:	bd10      	pop	{r4, pc}
 
-10000746 <_ZN13UsbController4taskEv>:
+10000746 <_ZN10UsbGamepad4taskEv>:
 10000746:	b510      	push	{r4, lr}
 10000748:	f005 fe30 	bl	100063ac <tud_task>
-1000074c:	f7ff feae 	bl	100004ac <_ZN13UsbController7ledTaskEv>
+1000074c:	f7ff feae 	bl	100004ac <_ZN10UsbGamepad7ledTaskEv>
 10000750:	bd10      	pop	{r4, pc}
 	...
 
@@ -873,9 +873,9 @@ Disassembly of section .text:
 10000758:	2c01      	cmp	r4, #1
 1000075a:	d807      	bhi.n	1000076c <tud_mount_cb+0x18>
 1000075c:	b2e0      	uxtb	r0, r4
-1000075e:	f7ff fe7d 	bl	1000045c <_ZN13UsbController13getControllerEh>
+1000075e:	f7ff fe7d 	bl	1000045c <_ZN10UsbGamepad10getGamepadEh>
 10000762:	2101      	movs	r1, #1
-10000764:	f7ff ffe9 	bl	1000073a <_ZN13UsbController15updateConnectedEb>
+10000764:	f7ff ffe9 	bl	1000073a <_ZN10UsbGamepad15updateConnectedEb>
 10000768:	3401      	adds	r4, #1
 1000076a:	e7f5      	b.n	10000758 <tud_mount_cb+0x4>
 1000076c:	4b01      	ldr	r3, [pc, #4]	; (10000774 <tud_mount_cb+0x20>)
@@ -890,9 +890,9 @@ Disassembly of section .text:
 1000077c:	2c01      	cmp	r4, #1
 1000077e:	d807      	bhi.n	10000790 <tud_umount_cb+0x18>
 10000780:	b2e0      	uxtb	r0, r4
-10000782:	f7ff fe6b 	bl	1000045c <_ZN13UsbController13getControllerEh>
+10000782:	f7ff fe6b 	bl	1000045c <_ZN10UsbGamepad10getGamepadEh>
 10000786:	2100      	movs	r1, #0
-10000788:	f7ff ffd7 	bl	1000073a <_ZN13UsbController15updateConnectedEb>
+10000788:	f7ff ffd7 	bl	1000073a <_ZN10UsbGamepad15updateConnectedEb>
 1000078c:	3401      	adds	r4, #1
 1000078e:	e7f5      	b.n	1000077c <tud_umount_cb+0x4>
 10000790:	4b01      	ldr	r3, [pc, #4]	; (10000798 <tud_umount_cb+0x20>)
@@ -907,9 +907,9 @@ Disassembly of section .text:
 100007a0:	2c01      	cmp	r4, #1
 100007a2:	d807      	bhi.n	100007b4 <tud_suspend_cb+0x18>
 100007a4:	b2e0      	uxtb	r0, r4
-100007a6:	f7ff fe59 	bl	1000045c <_ZN13UsbController13getControllerEh>
+100007a6:	f7ff fe59 	bl	1000045c <_ZN10UsbGamepad10getGamepadEh>
 100007aa:	2100      	movs	r1, #0
-100007ac:	f7ff ffc5 	bl	1000073a <_ZN13UsbController15updateConnectedEb>
+100007ac:	f7ff ffc5 	bl	1000073a <_ZN10UsbGamepad15updateConnectedEb>
 100007b0:	3401      	adds	r4, #1
 100007b2:	e7f5      	b.n	100007a0 <tud_suspend_cb+0x4>
 100007b4:	4b01      	ldr	r3, [pc, #4]	; (100007bc <tud_suspend_cb+0x20>)
@@ -924,9 +924,9 @@ Disassembly of section .text:
 100007c4:	2c01      	cmp	r4, #1
 100007c6:	d807      	bhi.n	100007d8 <tud_resume_cb+0x18>
 100007c8:	b2e0      	uxtb	r0, r4
-100007ca:	f7ff fe47 	bl	1000045c <_ZN13UsbController13getControllerEh>
+100007ca:	f7ff fe47 	bl	1000045c <_ZN10UsbGamepad10getGamepadEh>
 100007ce:	2101      	movs	r1, #1
-100007d0:	f7ff ffb3 	bl	1000073a <_ZN13UsbController15updateConnectedEb>
+100007d0:	f7ff ffb3 	bl	1000073a <_ZN10UsbGamepad15updateConnectedEb>
 100007d4:	3401      	adds	r4, #1
 100007d6:	e7f5      	b.n	100007c4 <tud_resume_cb+0x4>
 100007d8:	4b01      	ldr	r3, [pc, #4]	; (100007e0 <tud_resume_cb+0x20>)
@@ -950,10 +950,10 @@ Disassembly of section .text:
 100007fa:	d101      	bne.n	10000800 <tud_hid_get_report_cb+0x1c>
 100007fc:	2000      	movs	r0, #0
 100007fe:	e7fa      	b.n	100007f6 <tud_hid_get_report_cb+0x12>
-10000800:	f7ff fe2c 	bl	1000045c <_ZN13UsbController13getControllerEh>
+10000800:	f7ff fe2c 	bl	1000045c <_ZN10UsbGamepad10getGamepadEh>
 10000804:	002a      	movs	r2, r5
 10000806:	0021      	movs	r1, r4
-10000808:	f7ff ff79 	bl	100006fe <_ZN13UsbController9getReportEPht>
+10000808:	f7ff ff79 	bl	100006fe <_ZN10UsbGamepad9getReportEPht>
 1000080c:	2009      	movs	r0, #9
 1000080e:	e7f2      	b.n	100007f6 <tud_hid_get_report_cb+0x12>
 
@@ -1563,58 +1563,58 @@ Disassembly of section .text:
 10000cf4:	20001d6c 	.word	0x20001d6c
 10000cf8:	00004e20 	.word	0x00004e20
 
-10000cfc <_ZN38UsbControllerGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb>:
+10000cfc <_ZN35UsbGamepadGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb>:
 10000cfc:	b510      	push	{r4, lr}
 10000cfe:	2a0b      	cmp	r2, #11
-10000d00:	d824      	bhi.n	10000d4c <_ZN38UsbControllerGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x50>
+10000d00:	d824      	bhi.n	10000d4c <_ZN35UsbGamepadGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x50>
 10000d02:	0092      	lsls	r2, r2, #2
-10000d04:	4912      	ldr	r1, [pc, #72]	; (10000d50 <_ZN38UsbControllerGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x54>)
+10000d04:	4912      	ldr	r1, [pc, #72]	; (10000d50 <_ZN35UsbGamepadGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x54>)
 10000d06:	588a      	ldr	r2, [r1, r2]
 10000d08:	4697      	mov	pc, r2
 10000d0a:	210b      	movs	r1, #11
-10000d0c:	e014      	b.n	10000d38 <_ZN38UsbControllerGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x3c>
+10000d0c:	e014      	b.n	10000d38 <_ZN35UsbGamepadGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x3c>
 10000d0e:	2108      	movs	r1, #8
-10000d10:	e012      	b.n	10000d38 <_ZN38UsbControllerGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x3c>
+10000d10:	e012      	b.n	10000d38 <_ZN35UsbGamepadGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x3c>
 10000d12:	2107      	movs	r1, #7
-10000d14:	e010      	b.n	10000d38 <_ZN38UsbControllerGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x3c>
+10000d14:	e010      	b.n	10000d38 <_ZN35UsbGamepadGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x3c>
 10000d16:	2106      	movs	r1, #6
-10000d18:	e00e      	b.n	10000d38 <_ZN38UsbControllerGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x3c>
+10000d18:	e00e      	b.n	10000d38 <_ZN35UsbGamepadGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x3c>
 10000d1a:	2105      	movs	r1, #5
-10000d1c:	e00c      	b.n	10000d38 <_ZN38UsbControllerGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x3c>
+10000d1c:	e00c      	b.n	10000d38 <_ZN35UsbGamepadGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x3c>
 10000d1e:	2104      	movs	r1, #4
-10000d20:	e00a      	b.n	10000d38 <_ZN38UsbControllerGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x3c>
+10000d20:	e00a      	b.n	10000d38 <_ZN35UsbGamepadGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x3c>
 10000d22:	2103      	movs	r1, #3
-10000d24:	e008      	b.n	10000d38 <_ZN38UsbControllerGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x3c>
+10000d24:	e008      	b.n	10000d38 <_ZN35UsbGamepadGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x3c>
 10000d26:	2102      	movs	r1, #2
-10000d28:	e006      	b.n	10000d38 <_ZN38UsbControllerGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x3c>
+10000d28:	e006      	b.n	10000d38 <_ZN35UsbGamepadGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x3c>
 10000d2a:	2101      	movs	r1, #1
-10000d2c:	e004      	b.n	10000d38 <_ZN38UsbControllerGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x3c>
+10000d2c:	e004      	b.n	10000d38 <_ZN35UsbGamepadGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x3c>
 10000d2e:	2100      	movs	r1, #0
-10000d30:	e002      	b.n	10000d38 <_ZN38UsbControllerGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x3c>
+10000d30:	e002      	b.n	10000d38 <_ZN35UsbGamepadGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x3c>
 10000d32:	210a      	movs	r1, #10
-10000d34:	e000      	b.n	10000d38 <_ZN38UsbControllerGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x3c>
+10000d34:	e000      	b.n	10000d38 <_ZN35UsbGamepadGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x3c>
 10000d36:	2109      	movs	r1, #9
 10000d38:	2b00      	cmp	r3, #0
-10000d3a:	d103      	bne.n	10000d44 <_ZN38UsbControllerGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x48>
+10000d3a:	d103      	bne.n	10000d44 <_ZN35UsbGamepadGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x48>
 10000d3c:	6840      	ldr	r0, [r0, #4]
-10000d3e:	f7ff fc59 	bl	100005f4 <_ZN13UsbController14updateReleasedENS_8button_eE>
+10000d3e:	f7ff fc59 	bl	100005f4 <_ZN10UsbGamepad14updateReleasedENS_8button_eE>
 10000d42:	bd10      	pop	{r4, pc}
 10000d44:	6840      	ldr	r0, [r0, #4]
-10000d46:	f7ff fc07 	bl	10000558 <_ZN13UsbController13updatePressedENS_8button_eE>
-10000d4a:	e7fa      	b.n	10000d42 <_ZN38UsbControllerGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x46>
+10000d46:	f7ff fc07 	bl	10000558 <_ZN10UsbGamepad13updatePressedENS_8button_eE>
+10000d4a:	e7fa      	b.n	10000d42 <_ZN35UsbGamepadGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x46>
 10000d4c:	2000      	movs	r0, #0
-10000d4e:	e7f8      	b.n	10000d42 <_ZN38UsbControllerGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x46>
+10000d4e:	e7f8      	b.n	10000d42 <_ZN35UsbGamepadGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb+0x46>
 10000d50:	10008f30 	.word	0x10008f30
 
-10000d54 <_ZN38UsbControllerGenesisControllerObserver8sendKeysEv>:
+10000d54 <_ZN35UsbGamepadGenesisControllerObserver8sendKeysEv>:
 10000d54:	b510      	push	{r4, lr}
 10000d56:	6840      	ldr	r0, [r0, #4]
 10000d58:	2100      	movs	r1, #0
-10000d5a:	f7ff fcb1 	bl	100006c0 <_ZN13UsbController8sendKeysEb>
+10000d5a:	f7ff fcb1 	bl	100006c0 <_ZN10UsbGamepad8sendKeysEb>
 10000d5e:	bd10      	pop	{r4, pc}
 
-10000d60 <_ZN38UsbControllerGenesisControllerObserverC1ER13UsbController>:
-10000d60:	4b02      	ldr	r3, [pc, #8]	; (10000d6c <_ZN38UsbControllerGenesisControllerObserverC1ER13UsbController+0xc>)
+10000d60 <_ZN35UsbGamepadGenesisControllerObserverC1ER10UsbGamepad>:
+10000d60:	4b02      	ldr	r3, [pc, #8]	; (10000d6c <_ZN35UsbGamepadGenesisControllerObserverC1ER10UsbGamepad+0xc>)
 10000d62:	3308      	adds	r3, #8
 10000d64:	6003      	str	r3, [r0, #0]
 10000d66:	6041      	str	r1, [r0, #4]
@@ -1622,20 +1622,20 @@ Disassembly of section .text:
 10000d6a:	46c0      	nop			; (mov r8, r8)
 10000d6c:	10008f60 	.word	0x10008f60
 
-10000d70 <_ZN38UsbControllerGenesisControllerObserver14releaseAllKeysEv>:
+10000d70 <_ZN35UsbGamepadGenesisControllerObserver14releaseAllKeysEv>:
 10000d70:	b510      	push	{r4, lr}
 10000d72:	6840      	ldr	r0, [r0, #4]
-10000d74:	f7ff fc98 	bl	100006a8 <_ZN13UsbController17updateAllReleasedEv>
+10000d74:	f7ff fc98 	bl	100006a8 <_ZN10UsbGamepad17updateAllReleasedEv>
 10000d78:	bd10      	pop	{r4, pc}
 
-10000d7a <_ZN38UsbControllerGenesisControllerObserver19controllerConnectedEh>:
+10000d7a <_ZN35UsbGamepadGenesisControllerObserver19controllerConnectedEh>:
 10000d7a:	b510      	push	{r4, lr}
-10000d7c:	f7ff fff8 	bl	10000d70 <_ZN38UsbControllerGenesisControllerObserver14releaseAllKeysEv>
+10000d7c:	f7ff fff8 	bl	10000d70 <_ZN35UsbGamepadGenesisControllerObserver14releaseAllKeysEv>
 10000d80:	bd10      	pop	{r4, pc}
 
-10000d82 <_ZN38UsbControllerGenesisControllerObserver22controllerDisconnectedEh>:
+10000d82 <_ZN35UsbGamepadGenesisControllerObserver22controllerDisconnectedEh>:
 10000d82:	b510      	push	{r4, lr}
-10000d84:	f7ff fff4 	bl	10000d70 <_ZN38UsbControllerGenesisControllerObserver14releaseAllKeysEv>
+10000d84:	f7ff fff4 	bl	10000d70 <_ZN35UsbGamepadGenesisControllerObserver14releaseAllKeysEv>
 10000d88:	bd10      	pop	{r4, pc}
 	...
 

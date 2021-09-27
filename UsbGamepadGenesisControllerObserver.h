@@ -2,14 +2,14 @@
 #define __USB_CONTROLLER_GENESIS_CONTROLLER_OBSERVER_H__
 
 #include "IGenesisControllerObserver.h"
-#include "UsbController.h"
+#include "UsbGamepad.h"
 
-class UsbControllerGenesisControllerObserver : public IGenesisControllerObserver
+class UsbGamepadGenesisControllerObserver : public IGenesisControllerObserver
 {
   public:
     //! Constructor for UsbKeyboardGenesisControllerObserver
     //! @param[in] usbController  The USB controller to update when keys are pressed or released
-    UsbControllerGenesisControllerObserver(UsbController& usbController);
+    UsbGamepadGenesisControllerObserver(UsbGamepad& usbController);
     //! Called when key pressed/released
     //! @param[in] id  The controller ID where this originated
     //! @param[in] key  The key that has been pressed or released
@@ -31,7 +31,7 @@ class UsbControllerGenesisControllerObserver : public IGenesisControllerObserver
     void releaseAllKeys();
   private:
     //! The USB controller I update
-    UsbController& usbController;
+    UsbGamepad& usbController;
 };
 
 #endif // __USB_CONTROLLER_GENESIS_CONTROLLER_OBSERVER_H__

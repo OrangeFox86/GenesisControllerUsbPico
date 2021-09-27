@@ -5,7 +5,7 @@
 
 //! This class is designed to work with the setup code in usb_descriptors.c
 //! @note this doesn't support analog sticks
-class UsbController
+class UsbGamepad
 {
   public:
     enum button_e
@@ -28,7 +28,7 @@ class UsbController
   public:
     //! UsbKeyboard constructor
     //! @param[in] reportId  The report ID to use for this USB keyboard
-    UsbController(uint8_t reportId = 0);
+    UsbGamepad(uint8_t reportId = 0);
     //! @returns true iff any key is currently "pressed"
     bool isButtonPressed();
     //! Set a button to be pressed
@@ -56,7 +56,7 @@ class UsbController
     //! The USB task which must be periodically called by main()
     static void task();
     //! @returns a reference to a controller, given an index
-    static UsbController& getController(uint8_t controllerIndex);
+    static UsbGamepad& getGamepad(uint8_t controllerIndex);
 
   protected:
     //! Controls the state of the LED based on connected and button states

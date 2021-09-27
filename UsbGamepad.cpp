@@ -1,4 +1,4 @@
-#include "UsbController.h"
+#include "UsbGamepad.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -8,7 +8,7 @@
 #include "usb_descriptors.h"
 
 // Only use this code if Controller descriptors are defined
-#ifdef USE_CONTROLLER
+#ifdef USE_GAMEPAD
 
 static bool gIsConnected = false;
 
@@ -17,7 +17,7 @@ static const int16_t INVALID_INDEX = -1;
 inline int16_t report_id_to_index( uint8_t report_id )
 {
   if (report_id < REPORT_ID_CONTROLLER1 ||
-      report_id >= UsbController::NUMBER_OF_CONTROLLERS + REPORT_ID_CONTROLLER1)
+      report_id >= UsbGamepad::NUMBER_OF_CONTROLLERS + REPORT_ID_CONTROLLER1)
   {
     return INVALID_INDEX;
   }
@@ -27,7 +27,7 @@ inline int16_t report_id_to_index( uint8_t report_id )
   }
 }
 
-UsbController::UsbController(uint8_t reportId) :
+UsbGamepad::UsbGamepad(uint8_t reportId) :
   reportId(reportId),
   currentDpad(0),
   currentButtons(0),
@@ -35,28 +35,28 @@ UsbController::UsbController(uint8_t reportId) :
   mIsConnected(false)
 {}
 
-bool UsbController::isButtonPressed()
+bool UsbGamepad::isButtonPressed()
 {
   return (currentDpad != 0 || currentButtons != 0);
 }
 
-UsbController& UsbController::getController(uint8_t controllerIndex)
+UsbGamepad& UsbGamepad::getGamepad(uint8_t controllerIndex)
 {
-  static UsbController controllers[NUMBER_OF_CONTROLLERS] =
-    { UsbController(REPORT_ID_CONTROLLER1), UsbController(REPORT_ID_CONTROLLER2) };
+  static UsbGamepad controllers[NUMBER_OF_CONTROLLERS] =
+    { UsbGamepad(REPORT_ID_CONTROLLER1), UsbGamepad(REPORT_ID_CONTROLLER2) };
   return controllers[controllerIndex % NUMBER_OF_CONTROLLERS];
 }
 
 //--------------------------------------------------------------------+
 // BLINKING TASK
 //--------------------------------------------------------------------+
-void UsbController::ledTask()
+void UsbGamepad::ledTask()
 {
   static bool ledOn = false;
   bool somethingPressed = false;
-  for (uint32_t i = 0; i < UsbController::NUMBER_OF_CONTROLLERS; ++i)
+  for (uint32_t i = 0; i < UsbGamepad::NUMBER_OF_CONTROLLERS; ++i)
   {
-    if (UsbController::getController(i).isButtonPressed())
+    if (UsbGamepad::getGamepad(i).isButtonPressed())
     {
       somethingPressed = true;
     }
@@ -85,7 +85,7 @@ void UsbController::ledTask()
 //--------------------------------------------------------------------+
 // EXTERNAL API
 //--------------------------------------------------------------------+
-bool UsbController::updatePressed(button_e button)
+bool UsbGamepad::updatePressed(button_e button)
 {
   uint8_t lastDpad = currentDpad;
   uint32_t lastButtons = currentButtons;
@@ -141,7 +141,7 @@ bool UsbController::updatePressed(button_e button)
   return !invalid;
 }
 
-bool UsbController::updateReleased(button_e button)
+bool UsbGamepad::updateReleased(button_e button)
 {
   uint8_t lastDpad = currentDpad;
   uint32_t lastButtons = currentButtons;
@@ -197,7 +197,7 @@ bool UsbController::updateReleased(button_e button)
   return !invalid;
 }
 
-void UsbController::updateAllReleased()
+void UsbGamepad::updateAllReleased()
 {
   if (isButtonPressed())
   {
@@ -207,7 +207,7 @@ void UsbController::updateAllReleased()
   }
 }
 
-bool UsbController::sendKeys(bool force)
+bool UsbGamepad::sendKeys(bool force)
 {
   if (!mIsConnected) return false;
   uint8_t modifier = 0; // This class doesn't allow modifier keys
@@ -226,7 +226,7 @@ bool UsbController::sendKeys(bool force)
   }
 }
 
-void UsbController::getReport(uint8_t *buffer, uint16_t reqlen)
+void UsbGamepad::getReport(uint8_t *buffer, uint16_t reqlen)
 {
   // Build the report
   hid_gamepad_report_t report;
@@ -243,22 +243,22 @@ void UsbController::getReport(uint8_t *buffer, uint16_t reqlen)
   memcpy(buffer, &report, setLen);
 }
 
-void UsbController::updateConnected(bool connected)
+void UsbGamepad::updateConnected(bool connected)
 {
   mIsConnected = connected;
 }
 
-bool UsbController::isConnected()
+bool UsbGamepad::isConnected()
 {
   return mIsConnected;
 }
 
-void UsbController::init()
+void UsbGamepad::init()
 {
     tusb_init();
 }
 
-void UsbController::task()
+void UsbGamepad::task()
 {
   tud_task(); // tinyusb device task
   ledTask();
@@ -271,9 +271,9 @@ void UsbController::task()
 // Invoked when device is mounted
 void tud_mount_cb(void)
 {
-  for (uint32_t i = 0; i < UsbController::NUMBER_OF_CONTROLLERS; ++i)
+  for (uint32_t i = 0; i < UsbGamepad::NUMBER_OF_CONTROLLERS; ++i)
   {
-    UsbController::getController(i).updateConnected(true);
+    UsbGamepad::getGamepad(i).updateConnected(true);
   }
   gIsConnected = true;
 }
@@ -281,9 +281,9 @@ void tud_mount_cb(void)
 // Invoked when device is unmounted
 void tud_umount_cb(void)
 {
-  for (uint32_t i = 0; i < UsbController::NUMBER_OF_CONTROLLERS; ++i)
+  for (uint32_t i = 0; i < UsbGamepad::NUMBER_OF_CONTROLLERS; ++i)
   {
-    UsbController::getController(i).updateConnected(false);
+    UsbGamepad::getGamepad(i).updateConnected(false);
   }
   gIsConnected = false;
 }
@@ -294,9 +294,9 @@ void tud_umount_cb(void)
 void tud_suspend_cb(bool remote_wakeup_en)
 {
   (void) remote_wakeup_en;
-  for (uint32_t i = 0; i < UsbController::NUMBER_OF_CONTROLLERS; ++i)
+  for (uint32_t i = 0; i < UsbGamepad::NUMBER_OF_CONTROLLERS; ++i)
   {
-    UsbController::getController(i).updateConnected(false);
+    UsbGamepad::getGamepad(i).updateConnected(false);
   }
   gIsConnected = false;
 }
@@ -304,9 +304,9 @@ void tud_suspend_cb(bool remote_wakeup_en)
 // Invoked when usb bus is resumed
 void tud_resume_cb(void)
 {
-  for (uint32_t i = 0; i < UsbController::NUMBER_OF_CONTROLLERS; ++i)
+  for (uint32_t i = 0; i < UsbGamepad::NUMBER_OF_CONTROLLERS; ++i)
   {
-    UsbController::getController(i).updateConnected(true);
+    UsbGamepad::getGamepad(i).updateConnected(true);
   }
   gIsConnected = true;
 }
@@ -330,7 +330,7 @@ uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id, hid_report_t
   else
   {
     // Build the report for the given report ID
-    UsbController &controller = UsbController::getController(idx);
+    UsbGamepad &controller = UsbGamepad::getGamepad(idx);
     controller.getReport(buffer, reqlen);
     // Return the size of the report
     return sizeof(hid_gamepad_report_t);
@@ -352,4 +352,4 @@ void tud_hid_set_report_cb(uint8_t instance,
   tud_hid_report(report_id, buffer, bufsize);
 }
 
-#endif // USE_CONTROLLER
+#endif // USE_GAMEPAD

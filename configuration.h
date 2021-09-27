@@ -3,7 +3,7 @@
 
 // Define only one of the following
 //#define USE_KEYBOARD
-#define USE_CONTROLLER
+#define USE_GAMEPAD
 
 // Genesis controller 1 Pico pin definitions
 #define GENESIS_CONTROLLER_1_PIN_1 9

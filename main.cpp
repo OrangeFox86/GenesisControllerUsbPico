@@ -6,10 +6,10 @@
 #include "pico/stdlib.h"
 #include "pico/multicore.h"
 #include "UsbKeyboard.h"
-#include "UsbController.h"
+#include "UsbGamepad.h"
 #include "GenesisController.h"
 #include "UsbKeyboardGenesisControllerObserver.h"
-#include "UsbControllerGenesisControllerObserver.h"
+#include "UsbGamepadGenesisControllerObserver.h"
 #include "timers.h"
 #include "usb_descriptors.h"
 #include "configuration.h"
@@ -29,16 +29,16 @@ UsbKeyboardGenesisControllerObserver observers[2] =
 
 #endif // USE_KEYBOARD
 
-#ifdef USE_CONTROLLER
+#ifdef USE_GAMEPAD
 
 // The observers send the keys pressed on the controllers to USB controller.
-UsbControllerGenesisControllerObserver observers[2] =
+UsbGamepadGenesisControllerObserver observers[2] =
 {
-  UsbControllerGenesisControllerObserver(UsbController::getController(0)),
-  UsbControllerGenesisControllerObserver(UsbController::getController(1))
+  UsbGamepadGenesisControllerObserver(UsbGamepad::getGamepad(0)),
+  UsbGamepadGenesisControllerObserver(UsbGamepad::getGamepad(1))
 };
 
-#endif // USE_CONTROLLER
+#endif // USE_GAMEPAD
 
 GenesisController gControllers[2] =
 {
@@ -71,8 +71,8 @@ int main(void)
   UsbKeyboard::init();
 #endif
 
-#ifdef USE_CONTROLLER
-  UsbController::init();
+#ifdef USE_GAMEPAD
+  UsbGamepad::init();
 #endif
 
   GenesisController* pController = gControllers;
@@ -91,8 +91,8 @@ int main(void)
     UsbKeyboard::task();
 #endif
 
-#ifdef USE_CONTROLLER
-    UsbController::task();
+#ifdef USE_GAMEPAD
+    UsbGamepad::task();
 #endif
   }
 

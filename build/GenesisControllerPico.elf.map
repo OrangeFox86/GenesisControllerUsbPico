@@ -1,7 +1,7 @@
 Archive member included to satisfy reference by file (symbol)
 
 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(guard.o)
-                              CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj (__cxa_guard_acquire)
+                              CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj (__cxa_guard_acquire)
 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(guard_error.o)
                               /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(guard.o) (__gnu_cxx::recursive_init_error::~recursive_init_error())
 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_throw.o)
@@ -131,11 +131,11 @@ Discarded input sections
  .comment       0x00000000       0x58 CMakeFiles/GenesisControllerPico.dir/UsbKeyboard.cpp.obj
  .ARM.attributes
                 0x00000000       0x32 CMakeFiles/GenesisControllerPico.dir/UsbKeyboard.cpp.obj
- .text          0x00000000        0x0 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
- .data          0x00000000        0x0 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
- .bss           0x00000000        0x0 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
- .text._ZN13UsbController11isConnectedEv
-                0x00000000        0x4 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
+ .text          0x00000000        0x0 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
+ .data          0x00000000        0x0 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
+ .bss           0x00000000        0x0 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
+ .text._ZN10UsbGamepad11isConnectedEv
+                0x00000000        0x4 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
  .text          0x00000000        0x0 CMakeFiles/GenesisControllerPico.dir/usb_descriptors.c.obj
  .data          0x00000000        0x0 CMakeFiles/GenesisControllerPico.dir/usb_descriptors.c.obj
  .bss           0x00000000        0x0 CMakeFiles/GenesisControllerPico.dir/usb_descriptors.c.obj
@@ -174,9 +174,9 @@ Discarded input sections
  .debug_frame   0x00000000       0x98 CMakeFiles/GenesisControllerPico.dir/UsbKeyboardGenesisControllerObserver.cpp.obj
  .ARM.attributes
                 0x00000000       0x32 CMakeFiles/GenesisControllerPico.dir/UsbKeyboardGenesisControllerObserver.cpp.obj
- .text          0x00000000        0x0 CMakeFiles/GenesisControllerPico.dir/UsbControllerGenesisControllerObserver.cpp.obj
- .data          0x00000000        0x0 CMakeFiles/GenesisControllerPico.dir/UsbControllerGenesisControllerObserver.cpp.obj
- .bss           0x00000000        0x0 CMakeFiles/GenesisControllerPico.dir/UsbControllerGenesisControllerObserver.cpp.obj
+ .text          0x00000000        0x0 CMakeFiles/GenesisControllerPico.dir/UsbGamepadGenesisControllerObserver.cpp.obj
+ .data          0x00000000        0x0 CMakeFiles/GenesisControllerPico.dir/UsbGamepadGenesisControllerObserver.cpp.obj
+ .bss           0x00000000        0x0 CMakeFiles/GenesisControllerPico.dir/UsbGamepadGenesisControllerObserver.cpp.obj
  .text          0x00000000        0x0 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
  .data          0x00000000        0x0 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
  .bss           0x00000000        0x0 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
@@ -1392,9 +1392,9 @@ Discarded input sections
                 0x00000000       0x5d CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
  .rodata.multicore_lockout_end_block_until.str1.4
                 0x00000000       0x38 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
- .text          0x00000000        0x0 /tmp/ccA8WMCc.o
- .data          0x00000000        0x0 /tmp/ccA8WMCc.o
- .bss           0x00000000        0x0 /tmp/ccA8WMCc.o
+ .text          0x00000000        0x0 /tmp/cc6ieFuy.o
+ .data          0x00000000        0x0 /tmp/cc6ieFuy.o
+ .bss           0x00000000        0x0 /tmp/cc6ieFuy.o
  .text          0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(guard.o)
  .data          0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(guard.o)
  .bss           0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(guard.o)
@@ -1864,7 +1864,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0
 .boot2          0x10000000      0x100
                 0x10000000                __boot2_start__ = .
  *(.boot2)
- .boot2         0x10000000      0x100 /tmp/ccA8WMCc.o
+ .boot2         0x10000000      0x100 /tmp/cc6ieFuy.o
                 0x10000100                __boot2_end__ = .
                 0x00000001                ASSERT (((__boot2_end__ - __boot2_start__) == 0x100), ERROR: Pico second stage bootloader must be 256 bytes in size)
 
@@ -1936,62 +1936,62 @@ LOAD /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0
                 0x100003e8                main
  .text._GLOBAL__sub_I_observers
                 0x10000424       0x10 CMakeFiles/GenesisControllerPico.dir/main.cpp.obj
- .text._ZN13UsbControllerC2Eh
-                0x10000434        0xe CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
-                0x10000434                UsbController::UsbController(unsigned char)
-                0x10000434                UsbController::UsbController(unsigned char)
- .text._ZN13UsbController15isButtonPressedEv
-                0x10000442       0x18 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
-                0x10000442                UsbController::isButtonPressed()
+ .text._ZN10UsbGamepadC2Eh
+                0x10000434        0xe CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
+                0x10000434                UsbGamepad::UsbGamepad(unsigned char)
+                0x10000434                UsbGamepad::UsbGamepad(unsigned char)
+ .text._ZN10UsbGamepad15isButtonPressedEv
+                0x10000442       0x18 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
+                0x10000442                UsbGamepad::isButtonPressed()
  *fill*         0x1000045a        0x2 
- .text._ZN13UsbController13getControllerEh
-                0x1000045c       0x50 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
-                0x1000045c                UsbController::getController(unsigned char)
- .text._ZN13UsbController7ledTaskEv
-                0x100004ac       0xac CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
-                0x100004ac                UsbController::ledTask()
- .text._ZN13UsbController13updatePressedENS_8button_eE
-                0x10000558       0x9c CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
-                0x10000558                UsbController::updatePressed(UsbController::button_e)
- .text._ZN13UsbController14updateReleasedENS_8button_eE
-                0x100005f4       0xb4 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
-                0x100005f4                UsbController::updateReleased(UsbController::button_e)
- .text._ZN13UsbController17updateAllReleasedEv
-                0x100006a8       0x18 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
-                0x100006a8                UsbController::updateAllReleased()
- .text._ZN13UsbController8sendKeysEb
-                0x100006c0       0x3e CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
-                0x100006c0                UsbController::sendKeys(bool)
- .text._ZN13UsbController9getReportEPht
-                0x100006fe       0x3c CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
-                0x100006fe                UsbController::getReport(unsigned char*, unsigned short)
- .text._ZN13UsbController15updateConnectedEb
-                0x1000073a        0x4 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
-                0x1000073a                UsbController::updateConnected(bool)
- .text._ZN13UsbController4initEv
-                0x1000073e        0x8 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
-                0x1000073e                UsbController::init()
- .text._ZN13UsbController4taskEv
-                0x10000746        0xc CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
-                0x10000746                UsbController::task()
+ .text._ZN10UsbGamepad10getGamepadEh
+                0x1000045c       0x50 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
+                0x1000045c                UsbGamepad::getGamepad(unsigned char)
+ .text._ZN10UsbGamepad7ledTaskEv
+                0x100004ac       0xac CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
+                0x100004ac                UsbGamepad::ledTask()
+ .text._ZN10UsbGamepad13updatePressedENS_8button_eE
+                0x10000558       0x9c CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
+                0x10000558                UsbGamepad::updatePressed(UsbGamepad::button_e)
+ .text._ZN10UsbGamepad14updateReleasedENS_8button_eE
+                0x100005f4       0xb4 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
+                0x100005f4                UsbGamepad::updateReleased(UsbGamepad::button_e)
+ .text._ZN10UsbGamepad17updateAllReleasedEv
+                0x100006a8       0x18 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
+                0x100006a8                UsbGamepad::updateAllReleased()
+ .text._ZN10UsbGamepad8sendKeysEb
+                0x100006c0       0x3e CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
+                0x100006c0                UsbGamepad::sendKeys(bool)
+ .text._ZN10UsbGamepad9getReportEPht
+                0x100006fe       0x3c CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
+                0x100006fe                UsbGamepad::getReport(unsigned char*, unsigned short)
+ .text._ZN10UsbGamepad15updateConnectedEb
+                0x1000073a        0x4 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
+                0x1000073a                UsbGamepad::updateConnected(bool)
+ .text._ZN10UsbGamepad4initEv
+                0x1000073e        0x8 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
+                0x1000073e                UsbGamepad::init()
+ .text._ZN10UsbGamepad4taskEv
+                0x10000746        0xc CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
+                0x10000746                UsbGamepad::task()
  *fill*         0x10000752        0x2 
  .text.tud_mount_cb
-                0x10000754       0x24 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
+                0x10000754       0x24 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
                 0x10000754                tud_mount_cb
  .text.tud_umount_cb
-                0x10000778       0x24 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
+                0x10000778       0x24 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
                 0x10000778                tud_umount_cb
  .text.tud_suspend_cb
-                0x1000079c       0x24 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
+                0x1000079c       0x24 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
                 0x1000079c                tud_suspend_cb
  .text.tud_resume_cb
-                0x100007c0       0x24 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
+                0x100007c0       0x24 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
                 0x100007c0                tud_resume_cb
  .text.tud_hid_get_report_cb
-                0x100007e4       0x2c CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
+                0x100007e4       0x2c CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
                 0x100007e4                tud_hid_get_report_cb
  .text.tud_hid_set_report_cb
-                0x10000810       0x10 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
+                0x10000810       0x10 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
                 0x10000810                tud_hid_set_report_cb
  .text.tud_descriptor_device_cb
                 0x10000820        0x8 CMakeFiles/GenesisControllerPico.dir/usb_descriptors.c.obj
@@ -2046,25 +2046,25 @@ LOAD /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0
  .text._Z13timer_processv
                 0x10000c34       0xc8 CMakeFiles/GenesisControllerPico.dir/timers.cpp.obj
                 0x10000c34                timer_process()
- .text._ZN38UsbControllerGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb
-                0x10000cfc       0x58 CMakeFiles/GenesisControllerPico.dir/UsbControllerGenesisControllerObserver.cpp.obj
-                0x10000cfc                UsbControllerGenesisControllerObserver::keyStateChanged(unsigned char, IGenesisControllerObserver::Key, bool)
- .text._ZN38UsbControllerGenesisControllerObserver8sendKeysEv
-                0x10000d54        0xc CMakeFiles/GenesisControllerPico.dir/UsbControllerGenesisControllerObserver.cpp.obj
-                0x10000d54                UsbControllerGenesisControllerObserver::sendKeys()
- .text._ZN38UsbControllerGenesisControllerObserverC2ER13UsbController
-                0x10000d60       0x10 CMakeFiles/GenesisControllerPico.dir/UsbControllerGenesisControllerObserver.cpp.obj
-                0x10000d60                UsbControllerGenesisControllerObserver::UsbControllerGenesisControllerObserver(UsbController&)
-                0x10000d60                UsbControllerGenesisControllerObserver::UsbControllerGenesisControllerObserver(UsbController&)
- .text._ZN38UsbControllerGenesisControllerObserver14releaseAllKeysEv
-                0x10000d70        0xa CMakeFiles/GenesisControllerPico.dir/UsbControllerGenesisControllerObserver.cpp.obj
-                0x10000d70                UsbControllerGenesisControllerObserver::releaseAllKeys()
- .text._ZN38UsbControllerGenesisControllerObserver19controllerConnectedEh
-                0x10000d7a        0x8 CMakeFiles/GenesisControllerPico.dir/UsbControllerGenesisControllerObserver.cpp.obj
-                0x10000d7a                UsbControllerGenesisControllerObserver::controllerConnected(unsigned char)
- .text._ZN38UsbControllerGenesisControllerObserver22controllerDisconnectedEh
-                0x10000d82        0x8 CMakeFiles/GenesisControllerPico.dir/UsbControllerGenesisControllerObserver.cpp.obj
-                0x10000d82                UsbControllerGenesisControllerObserver::controllerDisconnected(unsigned char)
+ .text._ZN35UsbGamepadGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb
+                0x10000cfc       0x58 CMakeFiles/GenesisControllerPico.dir/UsbGamepadGenesisControllerObserver.cpp.obj
+                0x10000cfc                UsbGamepadGenesisControllerObserver::keyStateChanged(unsigned char, IGenesisControllerObserver::Key, bool)
+ .text._ZN35UsbGamepadGenesisControllerObserver8sendKeysEv
+                0x10000d54        0xc CMakeFiles/GenesisControllerPico.dir/UsbGamepadGenesisControllerObserver.cpp.obj
+                0x10000d54                UsbGamepadGenesisControllerObserver::sendKeys()
+ .text._ZN35UsbGamepadGenesisControllerObserverC2ER10UsbGamepad
+                0x10000d60       0x10 CMakeFiles/GenesisControllerPico.dir/UsbGamepadGenesisControllerObserver.cpp.obj
+                0x10000d60                UsbGamepadGenesisControllerObserver::UsbGamepadGenesisControllerObserver(UsbGamepad&)
+                0x10000d60                UsbGamepadGenesisControllerObserver::UsbGamepadGenesisControllerObserver(UsbGamepad&)
+ .text._ZN35UsbGamepadGenesisControllerObserver14releaseAllKeysEv
+                0x10000d70        0xa CMakeFiles/GenesisControllerPico.dir/UsbGamepadGenesisControllerObserver.cpp.obj
+                0x10000d70                UsbGamepadGenesisControllerObserver::releaseAllKeys()
+ .text._ZN35UsbGamepadGenesisControllerObserver19controllerConnectedEh
+                0x10000d7a        0x8 CMakeFiles/GenesisControllerPico.dir/UsbGamepadGenesisControllerObserver.cpp.obj
+                0x10000d7a                UsbGamepadGenesisControllerObserver::controllerConnected(unsigned char)
+ .text._ZN35UsbGamepadGenesisControllerObserver22controllerDisconnectedEh
+                0x10000d82        0x8 CMakeFiles/GenesisControllerPico.dir/UsbGamepadGenesisControllerObserver.cpp.obj
+                0x10000d82                UsbGamepadGenesisControllerObserver::controllerDisconnected(unsigned char)
  *fill*         0x10000d8a        0x2 
  .text.gpio_set_function
                 0x10000d8c       0x30 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
@@ -2932,15 +2932,15 @@ LOAD /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0
 
 .rodata         0x10008d18     0x17f8
  *(EXCLUDE_FILE(*libm.a: *libc.a:*lib_a-mem*.o *libgcc.a:) .rodata*)
- .rodata._ZN13UsbController13updatePressedENS_8button_eE
-                0x10008d18       0x30 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
- .rodata._ZN13UsbController14updateReleasedENS_8button_eE
-                0x10008d48       0x30 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
- .rodata._ZN13UsbController7ledTaskEv.str1.4
-                0x10008d78       0x5d CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
+ .rodata._ZN10UsbGamepad13updatePressedENS_8button_eE
+                0x10008d18       0x30 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
+ .rodata._ZN10UsbGamepad14updateReleasedENS_8button_eE
+                0x10008d48       0x30 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
+ .rodata._ZN10UsbGamepad7ledTaskEv.str1.4
+                0x10008d78       0x5d CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
  *fill*         0x10008dd5        0x3 
  .rodata._ZZ20update_us_since_bootE19__PRETTY_FUNCTION__
-                0x10008dd8       0x36 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
+                0x10008dd8       0x36 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
  *fill*         0x10008e0e        0x2 
  .rodata.__compound_literal.0
                 0x10008e10        0x2 CMakeFiles/GenesisControllerPico.dir/usb_descriptors.c.obj
@@ -2964,11 +2964,11 @@ LOAD /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0
  .rodata._ZZL20update_us_since_bootP15absolute_time_tyE19__PRETTY_FUNCTION__
                 0x10008ef8       0x36 CMakeFiles/GenesisControllerPico.dir/timers.cpp.obj
  *fill*         0x10008f2e        0x2 
- .rodata._ZN38UsbControllerGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb
-                0x10008f30       0x30 CMakeFiles/GenesisControllerPico.dir/UsbControllerGenesisControllerObserver.cpp.obj
- .rodata._ZTV38UsbControllerGenesisControllerObserver
-                0x10008f60       0x18 CMakeFiles/GenesisControllerPico.dir/UsbControllerGenesisControllerObserver.cpp.obj
-                0x10008f60                vtable for UsbControllerGenesisControllerObserver
+ .rodata._ZN35UsbGamepadGenesisControllerObserver15keyStateChangedEhN26IGenesisControllerObserver3KeyEb
+                0x10008f30       0x30 CMakeFiles/GenesisControllerPico.dir/UsbGamepadGenesisControllerObserver.cpp.obj
+ .rodata._ZTV35UsbGamepadGenesisControllerObserver
+                0x10008f60       0x18 CMakeFiles/GenesisControllerPico.dir/UsbGamepadGenesisControllerObserver.cpp.obj
+                0x10008f60                vtable for UsbGamepadGenesisControllerObserver
  .rodata.spin_lock_claim_unused.str1.4
                 0x10008f78       0x1b CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
  *fill*         0x10008f93        0x1 
@@ -3767,8 +3767,8 @@ LOAD /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0
                 0x20001d28                __malloc_current_mallinfo
                 0x20001d50                __malloc_max_sbrked_mem
                 0x20001d54                __malloc_max_total_mem
- .bss._ZGVZN13UsbController13getControllerEhE11controllers
-                0x20001d58        0x4 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
+ .bss._ZGVZN10UsbGamepad10getGamepadEhE11controllers
+                0x20001d58        0x4 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
  .bss._ZL10eh_globals
                 0x20001d5c        0xc /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_globals.o)
  .bss._ZL17gTimerControllers
@@ -3777,10 +3777,10 @@ LOAD /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0
                 0x20001d6c        0x4 CMakeFiles/GenesisControllerPico.dir/timers.cpp.obj
  .bss._ZN12_GLOBAL__N_114emergency_poolE
                 0x20001d70       0x10 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_alloc.o)
- .bss._ZZN13UsbController13getControllerEhE11controllers
-                0x20001d80       0x18 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
- .bss._ZZN13UsbController7ledTaskEvE7startMs
-                0x20001d98        0x4 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
+ .bss._ZZN10UsbGamepad10getGamepadEhE11controllers
+                0x20001d80       0x18 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
+ .bss._ZZN10UsbGamepad7ledTaskEvE7startMs
+                0x20001d98        0x4 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
  .bss._app_driver
                 0x20001d9c        0x4 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj
  .bss._ctrl_xfer
@@ -3832,9 +3832,9 @@ LOAD /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0
  .bss.uart_instance
                 0x20002494        0x4 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
  .bss._ZL12gIsConnected
-                0x20002498        0x1 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
- .bss._ZZN13UsbController7ledTaskEvE5ledOn
-                0x20002499        0x1 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
+                0x20002498        0x1 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
+ .bss._ZZN10UsbGamepad7ledTaskEvE5ledOn
+                0x20002499        0x1 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
  .bss._app_driver_count
                 0x2000249a        0x1 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj
  .bss._usbd_initialized
@@ -3887,12 +3887,12 @@ LOAD /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0
                 0x00000001                ASSERT (((__binary_info_header_end - __logical_binary_start) <= 0x100), Binary info must be in first 256 bytes of the binary)
 LOAD CMakeFiles/GenesisControllerPico.dir/main.cpp.obj
 LOAD CMakeFiles/GenesisControllerPico.dir/UsbKeyboard.cpp.obj
-LOAD CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
+LOAD CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
 LOAD CMakeFiles/GenesisControllerPico.dir/usb_descriptors.c.obj
 LOAD CMakeFiles/GenesisControllerPico.dir/GenesisController.cpp.obj
 LOAD CMakeFiles/GenesisControllerPico.dir/timers.cpp.obj
 LOAD CMakeFiles/GenesisControllerPico.dir/UsbKeyboardGenesisControllerObserver.cpp.obj
-LOAD CMakeFiles/GenesisControllerPico.dir/UsbControllerGenesisControllerObserver.cpp.obj
+LOAD CMakeFiles/GenesisControllerPico.dir/UsbGamepadGenesisControllerObserver.cpp.obj
 LOAD CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
 LOAD CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
 LOAD CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
@@ -3957,7 +3957,7 @@ LOAD CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/
 LOAD CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj
 LOAD CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
 LOAD CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
-LOAD /tmp/ccA8WMCc.o
+LOAD /tmp/cc6ieFuy.o
 LOAD /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a
 LOAD /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libm.a
 START GROUP
@@ -3983,7 +3983,7 @@ OUTPUT(GenesisControllerPico.elf elf32-littlearm)
  .ARM.attributes
                 0x0000004a       0x32 CMakeFiles/GenesisControllerPico.dir/main.cpp.obj
  .ARM.attributes
-                0x0000007c       0x32 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
+                0x0000007c       0x32 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
  .ARM.attributes
                 0x000000ae       0x32 CMakeFiles/GenesisControllerPico.dir/usb_descriptors.c.obj
  .ARM.attributes
@@ -3991,7 +3991,7 @@ OUTPUT(GenesisControllerPico.elf elf32-littlearm)
  .ARM.attributes
                 0x00000112       0x32 CMakeFiles/GenesisControllerPico.dir/timers.cpp.obj
  .ARM.attributes
-                0x00000144       0x32 CMakeFiles/GenesisControllerPico.dir/UsbControllerGenesisControllerObserver.cpp.obj
+                0x00000144       0x32 CMakeFiles/GenesisControllerPico.dir/UsbGamepadGenesisControllerObserver.cpp.obj
  .ARM.attributes
                 0x00000176       0x32 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
  .ARM.attributes
@@ -4083,7 +4083,7 @@ OUTPUT(GenesisControllerPico.elf elf32-littlearm)
  .ARM.attributes
                 0x0000096e       0x32 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
  .ARM.attributes
-                0x000009a0       0x22 /tmp/ccA8WMCc.o
+                0x000009a0       0x22 /tmp/cc6ieFuy.o
  .ARM.attributes
                 0x000009c2       0x2c /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(guard.o)
  .ARM.attributes
@@ -4157,11 +4157,11 @@ OUTPUT(GenesisControllerPico.elf elf32-littlearm)
  .comment       0x00000000       0x57 /usr/lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/crtbegin.o
                                  0x58 (size before relaxing)
  .comment       0x00000057       0x58 CMakeFiles/GenesisControllerPico.dir/main.cpp.obj
- .comment       0x00000057       0x58 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
+ .comment       0x00000057       0x58 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
  .comment       0x00000057       0x58 CMakeFiles/GenesisControllerPico.dir/usb_descriptors.c.obj
  .comment       0x00000057       0x58 CMakeFiles/GenesisControllerPico.dir/GenesisController.cpp.obj
  .comment       0x00000057       0x58 CMakeFiles/GenesisControllerPico.dir/timers.cpp.obj
- .comment       0x00000057       0x58 CMakeFiles/GenesisControllerPico.dir/UsbControllerGenesisControllerObserver.cpp.obj
+ .comment       0x00000057       0x58 CMakeFiles/GenesisControllerPico.dir/UsbGamepadGenesisControllerObserver.cpp.obj
  .comment       0x00000057       0x58 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
  .comment       0x00000057       0x58 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
  .comment       0x00000057       0x58 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
@@ -4232,11 +4232,11 @@ OUTPUT(GenesisControllerPico.elf elf32-littlearm)
 
 .debug_info     0x00000000    0x45478
  .debug_info    0x00000000     0x187f CMakeFiles/GenesisControllerPico.dir/main.cpp.obj
- .debug_info    0x0000187f     0x1df1 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
+ .debug_info    0x0000187f     0x1df1 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
  .debug_info    0x00003670     0x119b CMakeFiles/GenesisControllerPico.dir/usb_descriptors.c.obj
  .debug_info    0x0000480b     0x1827 CMakeFiles/GenesisControllerPico.dir/GenesisController.cpp.obj
  .debug_info    0x00006032      0xaae CMakeFiles/GenesisControllerPico.dir/timers.cpp.obj
- .debug_info    0x00006ae0      0x819 CMakeFiles/GenesisControllerPico.dir/UsbControllerGenesisControllerObserver.cpp.obj
+ .debug_info    0x00006ae0      0x819 CMakeFiles/GenesisControllerPico.dir/UsbGamepadGenesisControllerObserver.cpp.obj
  .debug_info    0x000072f9     0x1169 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
  .debug_info    0x00008462      0x5d7 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
  .debug_info    0x00008a39      0x1c6 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
@@ -4318,11 +4318,11 @@ OUTPUT(GenesisControllerPico.elf elf32-littlearm)
 
 .debug_abbrev   0x00000000     0xe247
  .debug_abbrev  0x00000000      0x4cf CMakeFiles/GenesisControllerPico.dir/main.cpp.obj
- .debug_abbrev  0x000004cf      0x620 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
+ .debug_abbrev  0x000004cf      0x620 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
  .debug_abbrev  0x00000aef      0x29d CMakeFiles/GenesisControllerPico.dir/usb_descriptors.c.obj
  .debug_abbrev  0x00000d8c      0x4c5 CMakeFiles/GenesisControllerPico.dir/GenesisController.cpp.obj
  .debug_abbrev  0x00001251      0x31e CMakeFiles/GenesisControllerPico.dir/timers.cpp.obj
- .debug_abbrev  0x0000156f      0x2d4 CMakeFiles/GenesisControllerPico.dir/UsbControllerGenesisControllerObserver.cpp.obj
+ .debug_abbrev  0x0000156f      0x2d4 CMakeFiles/GenesisControllerPico.dir/UsbGamepadGenesisControllerObserver.cpp.obj
  .debug_abbrev  0x00001843      0x287 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
  .debug_abbrev  0x00001aca      0x254 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
  .debug_abbrev  0x00001d1e       0xde CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
@@ -4404,11 +4404,11 @@ OUTPUT(GenesisControllerPico.elf elf32-littlearm)
 
 .debug_loc      0x00000000    0x184f8
  .debug_loc     0x00000000       0xb6 CMakeFiles/GenesisControllerPico.dir/main.cpp.obj
- .debug_loc     0x000000b6      0x6bd CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
+ .debug_loc     0x000000b6      0x6bd CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
  .debug_loc     0x00000773      0x14c CMakeFiles/GenesisControllerPico.dir/usb_descriptors.c.obj
  .debug_loc     0x000008bf      0x5bd CMakeFiles/GenesisControllerPico.dir/GenesisController.cpp.obj
  .debug_loc     0x00000e7c      0x18c CMakeFiles/GenesisControllerPico.dir/timers.cpp.obj
- .debug_loc     0x00001008      0x25a CMakeFiles/GenesisControllerPico.dir/UsbControllerGenesisControllerObserver.cpp.obj
+ .debug_loc     0x00001008      0x25a CMakeFiles/GenesisControllerPico.dir/UsbGamepadGenesisControllerObserver.cpp.obj
  .debug_loc     0x00001262      0xd1a CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
  .debug_loc     0x00001f7c      0x371 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
  .debug_loc     0x000022ed       0xcf CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
@@ -4471,7 +4471,7 @@ OUTPUT(GenesisControllerPico.elf elf32-littlearm)
  .debug_aranges
                 0x00000000       0x30 CMakeFiles/GenesisControllerPico.dir/main.cpp.obj
  .debug_aranges
-                0x00000030       0xb0 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
+                0x00000030       0xb0 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
  .debug_aranges
                 0x000000e0       0x38 CMakeFiles/GenesisControllerPico.dir/usb_descriptors.c.obj
  .debug_aranges
@@ -4479,7 +4479,7 @@ OUTPUT(GenesisControllerPico.elf elf32-littlearm)
  .debug_aranges
                 0x00000188       0x28 CMakeFiles/GenesisControllerPico.dir/timers.cpp.obj
  .debug_aranges
-                0x000001b0       0x48 CMakeFiles/GenesisControllerPico.dir/UsbControllerGenesisControllerObserver.cpp.obj
+                0x000001b0       0x48 CMakeFiles/GenesisControllerPico.dir/UsbGamepadGenesisControllerObserver.cpp.obj
  .debug_aranges
                 0x000001f8       0xd8 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
  .debug_aranges
@@ -4639,11 +4639,11 @@ OUTPUT(GenesisControllerPico.elf elf32-littlearm)
 
 .debug_ranges   0x00000000     0x2d40
  .debug_ranges  0x00000000       0x38 CMakeFiles/GenesisControllerPico.dir/main.cpp.obj
- .debug_ranges  0x00000038      0x118 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
+ .debug_ranges  0x00000038      0x118 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
  .debug_ranges  0x00000150       0x60 CMakeFiles/GenesisControllerPico.dir/usb_descriptors.c.obj
  .debug_ranges  0x000001b0       0x78 CMakeFiles/GenesisControllerPico.dir/GenesisController.cpp.obj
  .debug_ranges  0x00000228       0x78 CMakeFiles/GenesisControllerPico.dir/timers.cpp.obj
- .debug_ranges  0x000002a0       0x38 CMakeFiles/GenesisControllerPico.dir/UsbControllerGenesisControllerObserver.cpp.obj
+ .debug_ranges  0x000002a0       0x38 CMakeFiles/GenesisControllerPico.dir/UsbGamepadGenesisControllerObserver.cpp.obj
  .debug_ranges  0x000002d8       0xe0 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
  .debug_ranges  0x000003b8       0x38 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
  .debug_ranges  0x000003f0       0x18 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
@@ -4704,269 +4704,269 @@ OUTPUT(GenesisControllerPico.elf elf32-littlearm)
  .debug_ranges  0x00002cd8       0x40 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-mallocr.o)
  .debug_ranges  0x00002d18       0x28 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-signal.o)
 
-.debug_line     0x00000000    0x110d2
- .debug_line    0x00000000      0x449 CMakeFiles/GenesisControllerPico.dir/main.cpp.obj
- .debug_line    0x00000449      0x65c CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
- .debug_line    0x00000aa5      0x2be CMakeFiles/GenesisControllerPico.dir/usb_descriptors.c.obj
- .debug_line    0x00000d63      0x538 CMakeFiles/GenesisControllerPico.dir/GenesisController.cpp.obj
- .debug_line    0x0000129b      0x45c CMakeFiles/GenesisControllerPico.dir/timers.cpp.obj
- .debug_line    0x000016f7      0x1aa CMakeFiles/GenesisControllerPico.dir/UsbControllerGenesisControllerObserver.cpp.obj
- .debug_line    0x000018a1      0x588 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
- .debug_line    0x00001e29      0x268 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
- .debug_line    0x00002091      0x1a2 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
- .debug_line    0x00002233      0x298 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
- .debug_line    0x000024cb      0x44b CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
- .debug_line    0x00002916      0xa5f CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/common/pico_time/time.c.obj
- .debug_line    0x00003375      0x533 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
- .debug_line    0x000038a8      0x1e5 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj
- .debug_line    0x00003a8d      0x470 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/common/pico_sync/mutex.c.obj
- .debug_line    0x00003efd      0x22e CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj
- .debug_line    0x0000412b      0x3e8 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/common/pico_util/pheap.c.obj
- .debug_line    0x00004513      0x5c9 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
- .debug_line    0x00004adc      0x5bb CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
- .debug_line    0x00005097      0x633 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
- .debug_line    0x000056ca       0x80 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj
- .debug_line    0x0000574a      0x358 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
- .debug_line    0x00005aa2      0x28a CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj
- .debug_line    0x00005d2c      0x1ae CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj
- .debug_line    0x00005eda      0x60f CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
- .debug_line    0x000064e9      0x143 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
- .debug_line    0x0000662c       0xf9 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
- .debug_line    0x00006725      0x2ca CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
- .debug_line    0x000069ef      0x421 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
- .debug_line    0x00006e10      0x26f CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
- .debug_line    0x0000707f      0x697 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
- .debug_line    0x00007716       0x93 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj
- .debug_line    0x000077a9      0x3d7 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj
- .debug_line    0x00007b80      0x275 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
- .debug_line    0x00007df5      0x1c3 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj
- .debug_line    0x00007fb8      0x2f8 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
- .debug_line    0x000082b0       0xbd CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
- .debug_line    0x0000836d       0xce CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
- .debug_line    0x0000843b      0x1da CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj
- .debug_line    0x00008615      0x15b CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
- .debug_line    0x00008770      0x763 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
- .debug_line    0x00008ed3      0x534 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
- .debug_line    0x00009407      0x738 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj
- .debug_line    0x00009b3f      0x481 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
- .debug_line    0x00009fc0      0xc23 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj
- .debug_line    0x0000abe3      0x369 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj
- .debug_line    0x0000af4c      0x4fe CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj
- .debug_line    0x0000b44a      0x30e CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
- .debug_line    0x0000b758      0x87f CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
- .debug_line    0x0000bfd7      0x613 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
- .debug_line    0x0000c5ea      0x82a CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
- .debug_line    0x0000ce14      0x289 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(guard.o)
- .debug_line    0x0000d09d      0x11f /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(guard_error.o)
- .debug_line    0x0000d1bc      0x339 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_throw.o)
- .debug_line    0x0000d4f5      0x368 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_terminate.o)
- .debug_line    0x0000d85d      0x407 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_alloc.o)
- .debug_line    0x0000dc64      0x35a /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_catch.o)
- .debug_line    0x0000dfbe      0x280 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_exception.o)
- .debug_line    0x0000e23e      0x200 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_unex_handler.o)
- .debug_line    0x0000e43e      0x22b /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(si_class_type_info.o)
- .debug_line    0x0000e669      0x36a /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_call.o)
- .debug_line    0x0000e9d3      0x264 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_term_handler.o)
- .debug_line    0x0000ec37      0x287 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_globals.o)
- .debug_line    0x0000eebe      0x2f6 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_arm.o)
- .debug_line    0x0000f1b4      0x205 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(tinfo.o)
- .debug_line    0x0000f3b9      0x256 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(class_type_info.o)
- .debug_line    0x0000f60f       0x5d /usr/lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
- .debug_line    0x0000f66c      0x4de /usr/lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(unwind-arm.o)
- .debug_line    0x0000fb4a       0x87 /usr/lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(libunwind.o)
- .debug_line    0x0000fbd1      0x1d7 /usr/lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(pr-support.o)
- .debug_line    0x0000fda8      0x133 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-abort.o)
- .debug_line    0x0000fedb       0xd4 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-impure.o)
- .debug_line    0x0000ffaf      0x130 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-malloc.o)
- .debug_line    0x000100df      0x36d /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-mallocr.o)
- .debug_line    0x0001044c      0x11a /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-mlock.o)
- .debug_line    0x00010566      0x132 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-sbrkr.o)
- .debug_line    0x00010698      0x1d7 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-signal.o)
- .debug_line    0x0001086f      0x145 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-signalr.o)
- .debug_line    0x000109b4       0xad /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-strcmp.o)
- .debug_line    0x00010a61      0x146 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-strlen-stub.o)
- .debug_line    0x00010ba7      0x200 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-freer.o)
- .debug_line    0x00010da7      0x14b /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-reent.o)
- .debug_line    0x00010ef2       0xf1 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(getpid.o)
- .debug_line    0x00010fe3       0xef /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(kill.o)
+.debug_line     0x00000000    0x110c0
+ .debug_line    0x00000000      0x446 CMakeFiles/GenesisControllerPico.dir/main.cpp.obj
+ .debug_line    0x00000446      0x656 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
+ .debug_line    0x00000a9c      0x2be CMakeFiles/GenesisControllerPico.dir/usb_descriptors.c.obj
+ .debug_line    0x00000d5a      0x538 CMakeFiles/GenesisControllerPico.dir/GenesisController.cpp.obj
+ .debug_line    0x00001292      0x45c CMakeFiles/GenesisControllerPico.dir/timers.cpp.obj
+ .debug_line    0x000016ee      0x1a1 CMakeFiles/GenesisControllerPico.dir/UsbGamepadGenesisControllerObserver.cpp.obj
+ .debug_line    0x0000188f      0x588 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
+ .debug_line    0x00001e17      0x268 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
+ .debug_line    0x0000207f      0x1a2 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
+ .debug_line    0x00002221      0x298 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
+ .debug_line    0x000024b9      0x44b CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
+ .debug_line    0x00002904      0xa5f CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/common/pico_time/time.c.obj
+ .debug_line    0x00003363      0x533 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+ .debug_line    0x00003896      0x1e5 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj
+ .debug_line    0x00003a7b      0x470 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/common/pico_sync/mutex.c.obj
+ .debug_line    0x00003eeb      0x22e CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj
+ .debug_line    0x00004119      0x3e8 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/common/pico_util/pheap.c.obj
+ .debug_line    0x00004501      0x5c9 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+ .debug_line    0x00004aca      0x5bb CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
+ .debug_line    0x00005085      0x633 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+ .debug_line    0x000056b8       0x80 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj
+ .debug_line    0x00005738      0x358 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
+ .debug_line    0x00005a90      0x28a CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj
+ .debug_line    0x00005d1a      0x1ae CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj
+ .debug_line    0x00005ec8      0x60f CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ .debug_line    0x000064d7      0x143 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
+ .debug_line    0x0000661a       0xf9 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
+ .debug_line    0x00006713      0x2ca CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
+ .debug_line    0x000069dd      0x421 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+ .debug_line    0x00006dfe      0x26f CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
+ .debug_line    0x0000706d      0x697 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
+ .debug_line    0x00007704       0x93 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj
+ .debug_line    0x00007797      0x3d7 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj
+ .debug_line    0x00007b6e      0x275 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
+ .debug_line    0x00007de3      0x1c3 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj
+ .debug_line    0x00007fa6      0x2f8 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
+ .debug_line    0x0000829e       0xbd CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
+ .debug_line    0x0000835b       0xce CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
+ .debug_line    0x00008429      0x1da CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj
+ .debug_line    0x00008603      0x15b CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+ .debug_line    0x0000875e      0x763 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+ .debug_line    0x00008ec1      0x534 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
+ .debug_line    0x000093f5      0x738 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj
+ .debug_line    0x00009b2d      0x481 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+ .debug_line    0x00009fae      0xc23 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj
+ .debug_line    0x0000abd1      0x369 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj
+ .debug_line    0x0000af3a      0x4fe CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj
+ .debug_line    0x0000b438      0x30e CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
+ .debug_line    0x0000b746      0x87f CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
+ .debug_line    0x0000bfc5      0x613 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+ .debug_line    0x0000c5d8      0x82a CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
+ .debug_line    0x0000ce02      0x289 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(guard.o)
+ .debug_line    0x0000d08b      0x11f /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(guard_error.o)
+ .debug_line    0x0000d1aa      0x339 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_throw.o)
+ .debug_line    0x0000d4e3      0x368 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_terminate.o)
+ .debug_line    0x0000d84b      0x407 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_alloc.o)
+ .debug_line    0x0000dc52      0x35a /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_catch.o)
+ .debug_line    0x0000dfac      0x280 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_exception.o)
+ .debug_line    0x0000e22c      0x200 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_unex_handler.o)
+ .debug_line    0x0000e42c      0x22b /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(si_class_type_info.o)
+ .debug_line    0x0000e657      0x36a /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_call.o)
+ .debug_line    0x0000e9c1      0x264 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_term_handler.o)
+ .debug_line    0x0000ec25      0x287 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_globals.o)
+ .debug_line    0x0000eeac      0x2f6 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_arm.o)
+ .debug_line    0x0000f1a2      0x205 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(tinfo.o)
+ .debug_line    0x0000f3a7      0x256 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(class_type_info.o)
+ .debug_line    0x0000f5fd       0x5d /usr/lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+ .debug_line    0x0000f65a      0x4de /usr/lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(unwind-arm.o)
+ .debug_line    0x0000fb38       0x87 /usr/lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(libunwind.o)
+ .debug_line    0x0000fbbf      0x1d7 /usr/lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(pr-support.o)
+ .debug_line    0x0000fd96      0x133 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-abort.o)
+ .debug_line    0x0000fec9       0xd4 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-impure.o)
+ .debug_line    0x0000ff9d      0x130 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-malloc.o)
+ .debug_line    0x000100cd      0x36d /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-mallocr.o)
+ .debug_line    0x0001043a      0x11a /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-mlock.o)
+ .debug_line    0x00010554      0x132 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-sbrkr.o)
+ .debug_line    0x00010686      0x1d7 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-signal.o)
+ .debug_line    0x0001085d      0x145 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-signalr.o)
+ .debug_line    0x000109a2       0xad /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-strcmp.o)
+ .debug_line    0x00010a4f      0x146 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-strlen-stub.o)
+ .debug_line    0x00010b95      0x200 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-freer.o)
+ .debug_line    0x00010d95      0x14b /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-reent.o)
+ .debug_line    0x00010ee0       0xf1 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(getpid.o)
+ .debug_line    0x00010fd1       0xef /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(kill.o)
 
-.debug_str      0x00000000     0xc9e3
- .debug_str     0x00000000     0x1112 CMakeFiles/GenesisControllerPico.dir/main.cpp.obj
-                               0x12ce (size before relaxing)
- .debug_str     0x00001112      0x756 CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
-                               0x12e0 (size before relaxing)
- .debug_str     0x00001868     0x1551 CMakeFiles/GenesisControllerPico.dir/usb_descriptors.c.obj
+.debug_str      0x00000000     0xc989
+ .debug_str     0x00000000     0x10e2 CMakeFiles/GenesisControllerPico.dir/main.cpp.obj
+                               0x129b (size before relaxing)
+ .debug_str     0x000010e2      0x750 CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
+                               0x12aa (size before relaxing)
+ .debug_str     0x00001832     0x1551 CMakeFiles/GenesisControllerPico.dir/usb_descriptors.c.obj
                                0x1c16 (size before relaxing)
- .debug_str     0x00002db9      0x2f5 CMakeFiles/GenesisControllerPico.dir/GenesisController.cpp.obj
+ .debug_str     0x00002d83      0x2f5 CMakeFiles/GenesisControllerPico.dir/GenesisController.cpp.obj
                                 0xe80 (size before relaxing)
- .debug_str     0x000030ae       0xa4 CMakeFiles/GenesisControllerPico.dir/timers.cpp.obj
+ .debug_str     0x00003078       0xa4 CMakeFiles/GenesisControllerPico.dir/timers.cpp.obj
                                 0xab1 (size before relaxing)
- .debug_str     0x00003152      0x2dd CMakeFiles/GenesisControllerPico.dir/UsbControllerGenesisControllerObserver.cpp.obj
-                                0xaa9 (size before relaxing)
- .debug_str     0x0000342f      0x4a6 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
+ .debug_str     0x0000311c      0x2b9 CMakeFiles/GenesisControllerPico.dir/UsbGamepadGenesisControllerObserver.cpp.obj
+                                0xa52 (size before relaxing)
+ .debug_str     0x000033d5      0x4a6 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
                                 0x882 (size before relaxing)
- .debug_str     0x000038d5      0x1b8 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
+ .debug_str     0x0000387b      0x1b8 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
                                 0x37d (size before relaxing)
- .debug_str     0x00003a8d       0x7d CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
+ .debug_str     0x00003a33       0x7d CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
                                 0x239 (size before relaxing)
- .debug_str     0x00003b0a       0xe8 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
+ .debug_str     0x00003ab0       0xe8 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
                                 0x364 (size before relaxing)
- .debug_str     0x00003bf2      0x2e3 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
+ .debug_str     0x00003b98      0x2e3 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
                                 0x543 (size before relaxing)
- .debug_str     0x00003ed5      0x679 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/common/pico_time/time.c.obj
+ .debug_str     0x00003e7b      0x679 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/common/pico_time/time.c.obj
                                 0xf8b (size before relaxing)
- .debug_str     0x0000454e      0x17e CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+ .debug_str     0x000044f4      0x17e CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
                                 0x6a5 (size before relaxing)
- .debug_str     0x000046cc       0x38 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj
+ .debug_str     0x00004672       0x38 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj
                                 0x271 (size before relaxing)
- .debug_str     0x00004704      0x125 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/common/pico_sync/mutex.c.obj
+ .debug_str     0x000046aa      0x125 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/common/pico_sync/mutex.c.obj
                                 0x53b (size before relaxing)
- .debug_str     0x00004829       0xd0 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj
+ .debug_str     0x000047cf       0xd0 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj
                                 0x331 (size before relaxing)
- .debug_str     0x000048f9       0xe8 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/common/pico_util/pheap.c.obj
+ .debug_str     0x0000489f       0xe8 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/common/pico_util/pheap.c.obj
                                 0x7ec (size before relaxing)
- .debug_str     0x000049e1      0x1ec CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+ .debug_str     0x00004987      0x1ec CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
                                 0xa3b (size before relaxing)
- .debug_str     0x00004bcd      0x235 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
+ .debug_str     0x00004b73      0x235 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
                                 0x660 (size before relaxing)
- .debug_str     0x00004e02      0x2c5 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+ .debug_str     0x00004da8      0x2c5 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
                                 0x728 (size before relaxing)
- .debug_str     0x000050c7       0x55 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj
+ .debug_str     0x0000506d       0x55 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj
                                  0x84 (size before relaxing)
- .debug_str     0x0000511c       0x8b CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
+ .debug_str     0x000050c2       0x8b CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
                                 0x2dd (size before relaxing)
- .debug_str     0x000051a7      0x104 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj
+ .debug_str     0x0000514d      0x104 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj
                                 0x6fc (size before relaxing)
- .debug_str     0x000052ab       0x71 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj
+ .debug_str     0x00005251       0x71 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj
                                 0x23c (size before relaxing)
- .debug_str     0x0000531c      0x18c CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ .debug_str     0x000052c2      0x18c CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
                                 0x778 (size before relaxing)
- .debug_str     0x000054a8       0x43 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
+ .debug_str     0x0000544e       0x43 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
                                  0x80 (size before relaxing)
- .debug_str     0x000054eb       0xa9 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
+ .debug_str     0x00005491       0xa9 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
                                 0x25c (size before relaxing)
- .debug_str     0x00005594       0x3d CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
+ .debug_str     0x0000553a       0x3d CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
                                  0x7a (size before relaxing)
- .debug_str     0x000055d1       0x41 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+ .debug_str     0x00005577       0x41 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
                                  0x7e (size before relaxing)
- .debug_str     0x00005612       0x8d CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
+ .debug_str     0x000055b8       0x8d CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
                                 0x675 (size before relaxing)
- .debug_str     0x0000569f       0x47 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
+ .debug_str     0x00005645       0x47 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
                                  0x84 (size before relaxing)
- .debug_str     0x000056e6       0x4c CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj
+ .debug_str     0x0000568c       0x4c CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj
                                  0x89 (size before relaxing)
- .debug_str     0x00005732       0x3f CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj
+ .debug_str     0x000056d8       0x3f CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj
                                  0x7c (size before relaxing)
- .debug_str     0x00005771       0x89 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
+ .debug_str     0x00005717       0x89 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
                                 0x6ad (size before relaxing)
- .debug_str     0x000057fa       0x45 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj
+ .debug_str     0x000057a0       0x45 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj
                                  0x82 (size before relaxing)
- .debug_str     0x0000583f       0xa9 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
+ .debug_str     0x000057e5       0xa9 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_malloc/pico_malloc.c.obj
                                 0x727 (size before relaxing)
- .debug_str     0x000058e8       0x43 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
+ .debug_str     0x0000588e       0x43 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
                                  0x80 (size before relaxing)
- .debug_str     0x0000592b       0x40 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
+ .debug_str     0x000058d1       0x40 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
                                  0x7d (size before relaxing)
- .debug_str     0x0000596b       0xb2 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj
+ .debug_str     0x00005911       0xb2 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj
                                 0x799 (size before relaxing)
- .debug_str     0x00005a1d      0x240 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+ .debug_str     0x000059c3      0x240 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
                                 0x3fb (size before relaxing)
- .debug_str     0x00005c5d      0x2a6 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+ .debug_str     0x00005c03      0x2a6 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
                                 0xb3c (size before relaxing)
- .debug_str     0x00005f03      0x2a7 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
+ .debug_str     0x00005ea9      0x2a7 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
                                 0x705 (size before relaxing)
- .debug_str     0x000061aa      0x9e4 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj
+ .debug_str     0x00006150      0x9e4 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj
                                0x12b2 (size before relaxing)
- .debug_str     0x00006b8e      0x143 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+ .debug_str     0x00006b34      0x143 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
                                 0xc45 (size before relaxing)
- .debug_str     0x00006cd1      0x9f1 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj
+ .debug_str     0x00006c77      0x9f1 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj
                                0x1c7b (size before relaxing)
- .debug_str     0x000076c2       0xe7 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj
+ .debug_str     0x00007668       0xe7 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj
                                 0xa83 (size before relaxing)
- .debug_str     0x000077a9      0x37d CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj
+ .debug_str     0x0000774f      0x37d CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj
                                0x1345 (size before relaxing)
- .debug_str     0x00007b26       0x80 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
+ .debug_str     0x00007acc       0x80 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
                                 0x815 (size before relaxing)
- .debug_str     0x00007ba6      0x3bf CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
+ .debug_str     0x00007b4c      0x3bf CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
                                 0xbf0 (size before relaxing)
- .debug_str     0x00007f65      0x1fc CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+ .debug_str     0x00007f0b      0x1fc CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
                                 0xe09 (size before relaxing)
- .debug_str     0x00008161      0x3e8 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
+ .debug_str     0x00008107      0x3e8 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
                                 0xae2 (size before relaxing)
- .debug_str     0x00008549      0x64d /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(guard.o)
+ .debug_str     0x000084ef      0x64d /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(guard.o)
                                 0x7a2 (size before relaxing)
- .debug_str     0x00008b96      0x1ac /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(guard_error.o)
+ .debug_str     0x00008b3c      0x1ac /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(guard_error.o)
                                 0x2bd (size before relaxing)
- .debug_str     0x00008d42      0x61b /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_throw.o)
+ .debug_str     0x00008ce8      0x61b /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_throw.o)
                                 0xc09 (size before relaxing)
- .debug_str     0x0000935d      0x451 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_terminate.o)
+ .debug_str     0x00009303      0x451 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_terminate.o)
                                0x1093 (size before relaxing)
- .debug_str     0x000097ae      0x25a /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_alloc.o)
+ .debug_str     0x00009754      0x25a /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_alloc.o)
                                0x12d8 (size before relaxing)
- .debug_str     0x00009a08      0x218 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_catch.o)
+ .debug_str     0x000099ae      0x218 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_catch.o)
                                 0xfe2 (size before relaxing)
- .debug_str     0x00009c20      0x3f5 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_exception.o)
+ .debug_str     0x00009bc6      0x3f5 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_exception.o)
                                 0x962 (size before relaxing)
- .debug_str     0x0000a015      0x11c /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_unex_handler.o)
+ .debug_str     0x00009fbb      0x11c /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_unex_handler.o)
                                 0x6d5 (size before relaxing)
- .debug_str     0x0000a131      0x711 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(si_class_type_info.o)
+ .debug_str     0x0000a0d7      0x711 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(si_class_type_info.o)
                                 0x87a (size before relaxing)
- .debug_str     0x0000a842      0x2c6 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_call.o)
+ .debug_str     0x0000a7e8      0x2c6 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_call.o)
                                0x126c (size before relaxing)
- .debug_str     0x0000ab08      0x11c /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_term_handler.o)
+ .debug_str     0x0000aaae      0x11c /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_term_handler.o)
                                 0xbe6 (size before relaxing)
- .debug_str     0x0000ac24      0x112 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_globals.o)
+ .debug_str     0x0000abca      0x112 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_globals.o)
                                 0xe8f (size before relaxing)
- .debug_str     0x0000ad36      0x1e4 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_arm.o)
+ .debug_str     0x0000acdc      0x1e4 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(eh_arm.o)
                                 0xbad (size before relaxing)
- .debug_str     0x0000af1a      0x318 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(tinfo.o)
+ .debug_str     0x0000aec0      0x318 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(tinfo.o)
                                 0x52d (size before relaxing)
- .debug_str     0x0000b232      0x541 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(class_type_info.o)
+ .debug_str     0x0000b1d8      0x541 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(class_type_info.o)
                                 0x9f4 (size before relaxing)
- .debug_str     0x0000b773       0x8f /usr/lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+ .debug_str     0x0000b719       0x8f /usr/lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
                                  0x9d (size before relaxing)
- .debug_str     0x0000b802      0x8b1 /usr/lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(unwind-arm.o)
+ .debug_str     0x0000b7a8      0x8b1 /usr/lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(unwind-arm.o)
                                 0xca0 (size before relaxing)
- .debug_str     0x0000c0b3       0x2d /usr/lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(libunwind.o)
+ .debug_str     0x0000c059       0x2d /usr/lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(libunwind.o)
                                  0x9d (size before relaxing)
- .debug_str     0x0000c0e0       0xd6 /usr/lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(pr-support.o)
+ .debug_str     0x0000c086       0xd6 /usr/lib/gcc/arm-none-eabi/7.3.1/thumb/v6-m/libgcc.a(pr-support.o)
                                 0x56a (size before relaxing)
- .debug_str     0x0000c1b6      0x131 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-abort.o)
+ .debug_str     0x0000c15c      0x131 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-abort.o)
                                 0x5c2 (size before relaxing)
- .debug_str     0x0000c2e7       0x83 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-impure.o)
+ .debug_str     0x0000c28d       0x83 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-impure.o)
                                 0x584 (size before relaxing)
- .debug_str     0x0000c36a       0x4f /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-malloc.o)
+ .debug_str     0x0000c310       0x4f /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-malloc.o)
                                 0x5b5 (size before relaxing)
- .debug_str     0x0000c3b9      0x21b /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-mallocr.o)
+ .debug_str     0x0000c35f      0x21b /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-mallocr.o)
                                 0x7ec (size before relaxing)
- .debug_str     0x0000c5d4       0x49 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-mlock.o)
+ .debug_str     0x0000c57a       0x49 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-mlock.o)
                                 0x5b0 (size before relaxing)
- .debug_str     0x0000c61d       0x2f /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-sbrkr.o)
+ .debug_str     0x0000c5c3       0x2f /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-sbrkr.o)
                                 0x5c7 (size before relaxing)
- .debug_str     0x0000c64c       0xdf /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-signal.o)
+ .debug_str     0x0000c5f2       0xdf /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-signal.o)
                                 0x627 (size before relaxing)
- .debug_str     0x0000c72b       0x3f /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-signalr.o)
+ .debug_str     0x0000c6d1       0x3f /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-signalr.o)
                                 0x5cc (size before relaxing)
- .debug_str     0x0000c76a       0x8d /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-strcmp.o)
+ .debug_str     0x0000c710       0x8d /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-strcmp.o)
                                  0x9b (size before relaxing)
- .debug_str     0x0000c7f7       0x4b /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-strlen-stub.o)
+ .debug_str     0x0000c79d       0x4b /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-strlen-stub.o)
                                 0x5ad (size before relaxing)
- .debug_str     0x0000c842       0x34 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-freer.o)
+ .debug_str     0x0000c7e8       0x34 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-freer.o)
                                 0x765 (size before relaxing)
- .debug_str     0x0000c876       0x5b /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-reent.o)
+ .debug_str     0x0000c81c       0x5b /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libg.a(lib_a-reent.o)
                                 0x5c0 (size before relaxing)
- .debug_str     0x0000c8d1       0xe7 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(getpid.o)
+ .debug_str     0x0000c877       0xe7 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(getpid.o)
                                 0x580 (size before relaxing)
- .debug_str     0x0000c9b8       0x2b /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(kill.o)
+ .debug_str     0x0000c95e       0x2b /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(kill.o)
                                 0x57c (size before relaxing)
 
 .debug_frame    0x00000000     0x3810
  .debug_frame   0x00000000       0x60 CMakeFiles/GenesisControllerPico.dir/main.cpp.obj
- .debug_frame   0x00000060      0x1cc CMakeFiles/GenesisControllerPico.dir/UsbController.cpp.obj
+ .debug_frame   0x00000060      0x1cc CMakeFiles/GenesisControllerPico.dir/UsbGamepad.cpp.obj
  .debug_frame   0x0000022c       0x5c CMakeFiles/GenesisControllerPico.dir/usb_descriptors.c.obj
  .debug_frame   0x00000288      0x128 CMakeFiles/GenesisControllerPico.dir/GenesisController.cpp.obj
  .debug_frame   0x000003b0       0x40 CMakeFiles/GenesisControllerPico.dir/timers.cpp.obj
- .debug_frame   0x000003f0       0x98 CMakeFiles/GenesisControllerPico.dir/UsbControllerGenesisControllerObserver.cpp.obj
+ .debug_frame   0x000003f0       0x98 CMakeFiles/GenesisControllerPico.dir/UsbGamepadGenesisControllerObserver.cpp.obj
  .debug_frame   0x00000488      0x1e8 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
  .debug_frame   0x00000670       0x98 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
  .debug_frame   0x00000708       0x38 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
