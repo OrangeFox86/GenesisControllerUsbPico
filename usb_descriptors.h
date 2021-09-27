@@ -1,9 +1,7 @@
 #ifndef __USB_DESCRITORS_H__
 #define __USB_DESCRITORS_H__
 
-// Define only one of the following
-//#define USE_KEYBOARD
-#define USE_CONTROLLER
+#include "configuration.h"
 
 #if defined(USE_KEYBOARD) && defined(USE_CONTROLLER)
 #error Must only define USE_KEYBOARD or USE_CONTROLLER, not both
