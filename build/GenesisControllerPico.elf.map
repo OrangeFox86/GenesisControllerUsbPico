@@ -1392,9 +1392,9 @@ Discarded input sections
                 0x00000000       0x5d CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
  .rodata.multicore_lockout_end_block_until.str1.4
                 0x00000000       0x38 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
- .text          0x00000000        0x0 /tmp/ccWBwwp2.o
- .data          0x00000000        0x0 /tmp/ccWBwwp2.o
- .bss           0x00000000        0x0 /tmp/ccWBwwp2.o
+ .text          0x00000000        0x0 /tmp/ccq9ZvER.o
+ .data          0x00000000        0x0 /tmp/ccq9ZvER.o
+ .bss           0x00000000        0x0 /tmp/ccq9ZvER.o
  .text          0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(guard.o)
  .data          0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(guard.o)
  .bss           0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(guard.o)
@@ -1864,7 +1864,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0
 .boot2          0x10000000      0x100
                 0x10000000                __boot2_start__ = .
  *(.boot2)
- .boot2         0x10000000      0x100 /tmp/ccWBwwp2.o
+ .boot2         0x10000000      0x100 /tmp/ccq9ZvER.o
                 0x10000100                __boot2_end__ = .
                 0x00000001                ASSERT (((__boot2_end__ - __boot2_start__) == 0x100), ERROR: Pico second stage bootloader must be 256 bytes in size)
 
@@ -3980,7 +3980,7 @@ LOAD CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/src/
 LOAD CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj
 LOAD CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
 LOAD CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
-LOAD /tmp/ccWBwwp2.o
+LOAD /tmp/ccq9ZvER.o
 LOAD /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a
 LOAD /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libm.a
 START GROUP
@@ -4106,7 +4106,7 @@ OUTPUT(GenesisControllerPico.elf elf32-littlearm)
  .ARM.attributes
                 0x0000096e       0x32 CMakeFiles/GenesisControllerPico.dir/home/pi/pico/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
  .ARM.attributes
-                0x000009a0       0x22 /tmp/ccWBwwp2.o
+                0x000009a0       0x22 /tmp/ccq9ZvER.o
  .ARM.attributes
                 0x000009c2       0x2c /usr/lib/gcc/arm-none-eabi/7.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libstdc++.a(guard.o)
  .ARM.attributes

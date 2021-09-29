@@ -422,18 +422,18 @@ Disassembly of section .text:
 100003b2:	480d      	ldr	r0, [pc, #52]	; (100003e8 <_Z41__static_initialization_and_destruction_0ii+0x8c>)
 100003b4:	f000 fac6 	bl	10000944 <_ZN17GenesisControllerC1EhhhhhhhhP26IGenesisControllerObserver>
 100003b8:	9505      	str	r5, [sp, #20]
-100003ba:	2316      	movs	r3, #22
+100003ba:	2310      	movs	r3, #16
 100003bc:	9304      	str	r3, [sp, #16]
-100003be:	3b01      	subs	r3, #1
+100003be:	3301      	adds	r3, #1
 100003c0:	9303      	str	r3, [sp, #12]
-100003c2:	3b01      	subs	r3, #1
+100003c2:	3301      	adds	r3, #1
 100003c4:	9302      	str	r3, [sp, #8]
-100003c6:	3b01      	subs	r3, #1
+100003c6:	3301      	adds	r3, #1
 100003c8:	9301      	str	r3, [sp, #4]
-100003ca:	3b01      	subs	r3, #1
+100003ca:	3301      	adds	r3, #1
 100003cc:	9300      	str	r3, [sp, #0]
-100003ce:	3b01      	subs	r3, #1
-100003d0:	2210      	movs	r2, #16
+100003ce:	3301      	adds	r3, #1
+100003d0:	2216      	movs	r2, #22
 100003d2:	2101      	movs	r1, #1
 100003d4:	4805      	ldr	r0, [pc, #20]	; (100003ec <_Z41__static_initialization_and_destruction_0ii+0x90>)
 100003d6:	f000 fab5 	bl	10000944 <_ZN17GenesisControllerC1EhhhhhhhhP26IGenesisControllerObserver>
