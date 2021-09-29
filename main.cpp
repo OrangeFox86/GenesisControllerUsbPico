@@ -31,11 +31,13 @@ UsbKeyboardGenesisControllerObserver observers[2] =
 
 #ifdef USE_GAMEPAD
 
+UsbGamepadGenesisControllerObserver::ButtonMap buttonLookup[IGenesisControllerObserver::KEY_COUNT] = GAMEPAD_MAPPING;
+
 // The observers send the keys pressed on the controllers to USB controller.
 UsbGamepadGenesisControllerObserver observers[2] =
 {
-  UsbGamepadGenesisControllerObserver(UsbGamepad::getGamepad(0)),
-  UsbGamepadGenesisControllerObserver(UsbGamepad::getGamepad(1))
+  UsbGamepadGenesisControllerObserver(UsbGamepad::getGamepad(0), buttonLookup),
+  UsbGamepadGenesisControllerObserver(UsbGamepad::getGamepad(1), buttonLookup)
 };
 
 #endif // USE_GAMEPAD

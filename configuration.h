@@ -57,4 +57,20 @@
   } \
 }
 
+#define GAMEPAD_MAPPING \
+{ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON11,       /* START */ \
+  UsbGamepadGenesisControllerObserver::MAP_DPAD_UP,        /* UP */ \
+  UsbGamepadGenesisControllerObserver::MAP_DPAD_DOWN,      /* DOWN */ \
+  UsbGamepadGenesisControllerObserver::MAP_DPAD_LEFT,      /* LEFT */ \
+  UsbGamepadGenesisControllerObserver::MAP_DPAD_RIGHT,     /* RIGHT */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON0,        /* A */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON1,        /* B */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON2,        /* C */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON3,        /* X */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON4,        /* Y */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON5,        /* Z */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON12        /* MODE */ \
+}
+
 #endif // __CONFIGURATION_H__

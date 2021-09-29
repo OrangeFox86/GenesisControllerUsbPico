@@ -29,7 +29,7 @@ inline int16_t report_id_to_index( uint8_t report_id )
 
 UsbGamepad::UsbGamepad(uint8_t reportId) :
   reportId(reportId),
-  currentDpad(0),
+  currentDpad(),
   currentButtons(0),
   buttonsUpdated(false),
   mIsConnected(false)
@@ -37,7 +37,10 @@ UsbGamepad::UsbGamepad(uint8_t reportId) :
 
 bool UsbGamepad::isButtonPressed()
 {
-  return (currentDpad != 0 || currentButtons != 0);
+  return (currentDpad[DPAD_UP] || currentDpad[DPAD_DOWN] || currentDpad[DPAD_LEFT]
+    || currentDpad[DPAD_RIGHT] || currentButtons != 0
+    || currentLeftAnalog[0] != 0 || currentLeftAnalog[1] != 0 || currentLeftAnalog[2] != 0
+    || currentRightAnalog[0] != 0 || currentRightAnalog[1] != 0 || currentRightAnalog[2] != 0);
 }
 
 UsbGamepad& UsbGamepad::getGamepad(uint8_t controllerIndex)
@@ -85,125 +88,178 @@ void UsbGamepad::ledTask()
 //--------------------------------------------------------------------+
 // EXTERNAL API
 //--------------------------------------------------------------------+
-bool UsbGamepad::updatePressed(button_e button)
+void UsbGamepad::setAnalogThumbX(bool isLeft, int8_t x)
 {
-  uint8_t lastDpad = currentDpad;
-  uint32_t lastButtons = currentButtons;
-  bool invalid = false;
-  switch(button)
+  int8_t lastX = 0;
+  if (isLeft)
   {
-    case BUTTON_UP:
-      currentDpad |= GAMEPAD_HAT_UP;
-      break;
-    case BUTTON_DOWN:
-      currentDpad |= GAMEPAD_HAT_DOWN;
-      break;
-    case BUTTON_LEFT:
-      currentDpad |= GAMEPAD_HAT_LEFT;
-      break;
-    case BUTTON_RIGHT:
-      currentDpad |= GAMEPAD_HAT_RIGHT;
-      break;
-
-    case BUTTON_A:
-      currentButtons |= GAMEPAD_BUTTON_A;
-      break;
-    case BUTTON_B:
-      currentButtons |= GAMEPAD_BUTTON_B;
-      break;
-    case BUTTON_C:
-      currentButtons |= GAMEPAD_BUTTON_C;
-      break;
-    case BUTTON_X:
-      currentButtons |= GAMEPAD_BUTTON_X;
-      break;
-    case BUTTON_Y:
-      currentButtons |= GAMEPAD_BUTTON_Y;
-      break;
-    case BUTTON_Z:
-      currentButtons |= GAMEPAD_BUTTON_Z;
-      break;
-    case BUTTON_START:
-      currentButtons |= GAMEPAD_BUTTON_START;
-      break;
-    case BUTTON_MODE:
-      currentButtons |= GAMEPAD_BUTTON_MODE;
-      break;
-
-    default:
-      invalid = true;
-      break;
+    lastX = currentLeftAnalog[0];
+    currentLeftAnalog[0] = x;
   }
-  if (!invalid)
+  else
   {
-    buttonsUpdated = (lastDpad != currentDpad || lastButtons != currentButtons);
+    lastX = currentRightAnalog[0];
+    currentRightAnalog[0] = x;
   }
-  return !invalid;
+  buttonsUpdated = buttonsUpdated || (x != lastX);
 }
 
-bool UsbGamepad::updateReleased(button_e button)
+void UsbGamepad::setAnalogThumbY(bool isLeft, int8_t y)
 {
-  uint8_t lastDpad = currentDpad;
-  uint32_t lastButtons = currentButtons;
-  bool invalid = false;
-  switch(button)
+  int8_t lastY = 0;
+  if (isLeft)
   {
-    case BUTTON_UP:
-      currentDpad &= ~GAMEPAD_HAT_UP;
-      break;
-    case BUTTON_DOWN:
-      currentDpad &= ~GAMEPAD_HAT_DOWN;
-      break;
-    case BUTTON_LEFT:
-      currentDpad &= ~GAMEPAD_HAT_LEFT;
-      break;
-    case BUTTON_RIGHT:
-      currentDpad &= ~GAMEPAD_HAT_RIGHT;
-      break;
-
-    case BUTTON_A:
-      currentButtons &= ~GAMEPAD_BUTTON_A;
-      break;
-    case BUTTON_B:
-      currentButtons &= ~GAMEPAD_BUTTON_B;
-      break;
-    case BUTTON_C:
-      currentButtons &= ~GAMEPAD_BUTTON_C;
-      break;
-    case BUTTON_X:
-      currentButtons &= ~GAMEPAD_BUTTON_X;
-      break;
-    case BUTTON_Y:
-      currentButtons &= ~GAMEPAD_BUTTON_Y;
-      break;
-    case BUTTON_Z:
-      currentButtons &= ~GAMEPAD_BUTTON_Z;
-      break;
-    case BUTTON_START:
-      currentButtons &= ~GAMEPAD_BUTTON_START;
-      break;
-    case BUTTON_MODE:
-      currentButtons &= ~GAMEPAD_BUTTON_MODE;
-      break;
-
-    default:
-      invalid = true;
-      break;
+    lastY = currentLeftAnalog[1];
+    currentLeftAnalog[1] = y;
   }
-  if (!invalid)
+  else
   {
-    buttonsUpdated = (lastDpad != currentDpad || lastButtons != currentButtons);
+    lastY = currentRightAnalog[1];
+    currentRightAnalog[1] = y;
   }
-  return !invalid;
+  buttonsUpdated = buttonsUpdated || (y != lastY);
+}
+
+void UsbGamepad::setAnalogTrigger(bool isLeft, int8_t z)
+{
+  int8_t lastZ = 0;
+  if (isLeft)
+  {
+    lastZ = currentLeftAnalog[2];
+    currentLeftAnalog[2] = z;
+  }
+  else
+  {
+    lastZ = currentRightAnalog[2];
+    currentRightAnalog[2] = z;
+  }
+  buttonsUpdated = buttonsUpdated || (z != lastZ);
+}
+
+int8_t UsbGamepad::getAnalogThumbX(bool isLeft)
+{
+  if (isLeft)
+  {
+    return currentLeftAnalog[0];
+  }
+  else
+  {
+    return currentRightAnalog[0];
+  }
+}
+
+int8_t UsbGamepad::getAnalogThumbY(bool isLeft)
+{
+  if (isLeft)
+  {
+    return currentLeftAnalog[1];
+  }
+  else
+  {
+    return currentRightAnalog[1];
+  }
+}
+
+int8_t UsbGamepad::getAnalogTrigger(bool isLeft)
+{
+  if (isLeft)
+  {
+    return currentLeftAnalog[2];
+  }
+  else
+  {
+    return currentRightAnalog[2];
+  }
+}
+
+void UsbGamepad::setDigitalPad(UsbGamepad::DpadButtons button, bool isPressed)
+{
+  bool oldValue = currentDpad[button];
+  currentDpad[button] = isPressed;
+  buttonsUpdated = buttonsUpdated || (oldValue != currentDpad[button]);
+}
+
+void UsbGamepad::setButtonMask(uint16_t mask, bool isPressed)
+{
+  uint16_t lastButtons = currentButtons;
+  if (isPressed)
+  {
+    currentButtons |= mask;
+  }
+  else
+  {
+    currentButtons &= ~mask;
+  }
+  buttonsUpdated = buttonsUpdated || (lastButtons != currentButtons);
+}
+
+void UsbGamepad::setButton(uint8_t button, bool isPressed)
+{
+  setButtonMask(1 << button, isPressed);
 }
 
 void UsbGamepad::updateAllReleased()
 {
   if (isButtonPressed())
   {
-    currentDpad = 0;
+    currentLeftAnalog[0] = 0;
+    currentLeftAnalog[1] = 0;
+    currentLeftAnalog[2] = 0;
+    currentRightAnalog[0] = 0;
+    currentRightAnalog[1] = 0;
+    currentRightAnalog[2] = 0;
+    currentDpad[DPAD_UP] = false;
+    currentDpad[DPAD_DOWN] = false;
+    currentDpad[DPAD_LEFT] = false;
+    currentDpad[DPAD_RIGHT] = false;
     currentButtons = 0;
     buttonsUpdated = true;
+  }
+}
+
+uint8_t UsbGamepad::getHatValue()
+{
+  if (currentDpad[DPAD_UP])
+  {
+    if (currentDpad[DPAD_LEFT])
+    {
+      return GAMEPAD_HAT_UP_LEFT;
+    }
+    else if (currentDpad[DPAD_RIGHT])
+    {
+      return GAMEPAD_HAT_UP_RIGHT;
+    }
+    else
+    {
+      return GAMEPAD_HAT_UP;
+    }
+  }
+  else if (currentDpad[DPAD_DOWN])
+  {
+    if (currentDpad[DPAD_LEFT])
+    {
+      return GAMEPAD_HAT_DOWN_LEFT;
+    }
+    else if (currentDpad[DPAD_RIGHT])
+    {
+      return GAMEPAD_HAT_DOWN_RIGHT;
+    }
+    else
+    {
+      return GAMEPAD_HAT_DOWN;
+    }
+  }
+  else if (currentDpad[DPAD_LEFT])
+  {
+    return GAMEPAD_HAT_LEFT;
+  }
+  else if (currentDpad[DPAD_RIGHT])
+  {
+    return GAMEPAD_HAT_RIGHT;
+  }
+  else
+  {
+    return GAMEPAD_HAT_CENTERED;
   }
 }
 
@@ -213,7 +269,15 @@ bool UsbGamepad::sendKeys(bool force)
   uint8_t modifier = 0; // This class doesn't allow modifier keys
   if (buttonsUpdated || force)
   {
-    bool sent = tud_hid_gamepad_report(reportId, 0, 0, 0, 0, 0, 0, currentDpad, currentButtons);
+    bool sent = tud_hid_gamepad_report(reportId,
+                                       currentLeftAnalog[0],
+                                       currentLeftAnalog[1],
+                                       currentLeftAnalog[2],
+                                       currentRightAnalog[2],
+                                       currentRightAnalog[0],
+                                       currentRightAnalog[1],
+                                       getHatValue(),
+                                       currentButtons);
     if (sent)
     {
       buttonsUpdated = false;
@@ -230,13 +294,13 @@ void UsbGamepad::getReport(uint8_t *buffer, uint16_t reqlen)
 {
   // Build the report
   hid_gamepad_report_t report;
-  report.x = 0;
-  report.y = 0;
-  report.z = 0;
-  report.rz = 0;
-  report.rx = 0;
-  report.ry = 0;
-  report.hat = currentDpad;
+  report.x = currentLeftAnalog[0];
+  report.y = currentLeftAnalog[1];
+  report.z = currentLeftAnalog[2];
+  report.rz = currentRightAnalog[0];
+  report.rx = currentRightAnalog[1];
+  report.ry = currentRightAnalog[2];
+  report.hat = getHatValue();
   report.buttons = currentButtons;
   // Copy report into buffer
   uint16_t setLen = (sizeof(report) <= reqlen) ? sizeof(report) : reqlen;

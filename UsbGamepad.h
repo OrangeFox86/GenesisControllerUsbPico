@@ -4,37 +4,35 @@
 #include <stdint.h>
 
 //! This class is designed to work with the setup code in usb_descriptors.c
-//! @note this doesn't support analog sticks
 class UsbGamepad
 {
   public:
-    enum button_e
-    {
-      BUTTON_UP = 0,
-      BUTTON_DOWN,
-      BUTTON_LEFT,
-      BUTTON_RIGHT,
-      DPAD_MAX = BUTTON_RIGHT,
-      BUTTON_A,
-      BUTTON_B,
-      BUTTON_C,
-      BUTTON_X,
-      BUTTON_Y,
-      BUTTON_Z,
-      BUTTON_START,
-      BUTTON_MODE,
-      BUTTON_COUNT
-    };
+  enum DpadButtons
+  {
+    DPAD_UP = 0,
+    DPAD_DOWN,
+    DPAD_LEFT,
+    DPAD_RIGHT,
+    DPAD_COUNT
+  };
+
   public:
     //! UsbKeyboard constructor
     //! @param[in] reportId  The report ID to use for this USB keyboard
     UsbGamepad(uint8_t reportId = 0);
-    //! @returns true iff any key is currently "pressed"
+    //! @returns true iff any button is currently "pressed"
     bool isButtonPressed();
-    //! Set a button to be pressed
-    bool updatePressed(button_e button);
-    //! Set a button to be released
-    bool updateReleased(button_e button);
+
+    void setAnalogThumbX(bool isLeft, int8_t x);
+    void setAnalogThumbY(bool isLeft, int8_t y);
+    void setAnalogTrigger(bool isLeft, int8_t z);
+    int8_t getAnalogThumbX(bool isLeft);
+    int8_t getAnalogThumbY(bool isLeft);
+    int8_t getAnalogTrigger(bool isLeft);
+    void setDigitalPad(DpadButtons button, bool isPressed);
+    void setButtonMask(uint16_t mask, bool isPressed);
+    void setButton(uint8_t button, bool isPressed);
+
     //! Release all currently pressed keys
     void updateAllReleased();
     //! Updates the host with any newly pressed keys
@@ -61,6 +59,7 @@ class UsbGamepad
   protected:
     //! Controls the state of the LED based on connected and button states
     static void ledTask();
+    uint8_t getHatValue();
 
   public:
     //! The number of static controllers created
@@ -68,11 +67,15 @@ class UsbGamepad
   private:
     //! The report ID to use when sending keys to host
     const uint8_t reportId;
-    //! Current d-pad state
-    uint8_t currentDpad;
+    //! Current left analog states (x,y,z)
+    int8_t currentLeftAnalog[3];
+    //! Current right analog states (x,y,z)
+    int8_t currentRightAnalog[3];
+    //! Current d-pad buttons
+    bool currentDpad[DPAD_COUNT];
     //! Current button states
-    uint32_t currentButtons;
-    //! True when currentDpad or currentButtons have been updated since the last successful send
+    uint16_t currentButtons;
+    //! True when something has been updated since the last successful send
     bool buttonsUpdated;
     //! True when this USB device is connected to a host
     bool mIsConnected;

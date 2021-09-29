@@ -7,9 +7,48 @@
 class UsbGamepadGenesisControllerObserver : public IGenesisControllerObserver
 {
   public:
+    //! Enumerates all available options to map a button to a USB gamepad
+    enum ButtonMap
+    {
+      MAP_LANALOG_UP = 0,
+      MAP_LANALOG_DOWN,
+      MAP_LANALOG_LEFT,
+      MAP_LANALOG_RIGHT,
+      MAP_RANALOG_UP,
+      MAP_RANALOG_DOWN,
+      MAP_RANALOG_LEFT,
+      MAP_RANALOG_RIGHT,
+      MAP_LTRIGGER_UP,
+      MAP_LTRIGGER_DOWN,
+      MAP_RTRIGGER_UP,
+      MAP_RTRIGGER_DOWN,
+      MAP_DPAD_UP,
+      MAP_DPAD_DOWN,
+      MAP_DPAD_LEFT,
+      MAP_DPAD_RIGHT,
+      MAP_BUTTON0,
+      MAP_BUTTON1,
+      MAP_BUTTON2,
+      MAP_BUTTON3,
+      MAP_BUTTON4,
+      MAP_BUTTON5,
+      MAP_BUTTON6,
+      MAP_BUTTON7,
+      MAP_BUTTON8,
+      MAP_BUTTON9,
+      MAP_BUTTON10,
+      MAP_BUTTON11,
+      MAP_BUTTON12,
+      MAP_BUTTON13,
+      MAP_BUTTON14,
+      MAP_BUTTON15,
+      MAP_COUNT
+    };
+  public:
     //! Constructor for UsbKeyboardGenesisControllerObserver
     //! @param[in] usbController  The USB controller to update when keys are pressed or released
-    UsbGamepadGenesisControllerObserver(UsbGamepad& usbController);
+    UsbGamepadGenesisControllerObserver(UsbGamepad& usbController,
+                                        const ButtonMap *buttonLookup);
     //! Called when key pressed/released
     //! @param[in] id  The controller ID where this originated
     //! @param[in] key  The key that has been pressed or released
@@ -32,6 +71,8 @@ class UsbGamepadGenesisControllerObserver : public IGenesisControllerObserver
   private:
     //! The USB controller I update
     UsbGamepad& usbController;
+    //! My mapping of genesis buttons to USB gamepad buttons
+    const ButtonMap* const buttonLookup;
 };
 
 #endif // __USB_CONTROLLER_GENESIS_CONTROLLER_OBSERVER_H__

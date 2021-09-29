@@ -1,7 +1,9 @@
 The code here is meant for the Raspberry Pi Pico microcontroller. It allows for 2 Sega Genesis controllers to be plugged in and interface with any USB host device.
 
 Things left to do:
-- Refactoring
+- Get it working for retropie
+- Use completely different instances for gamepad setup
+- Refactoring & cleanup
 
 Youtube video:
 https://www.youtube.com/watch?v=Fbt-3-cg1RE&t=95s
