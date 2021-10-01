@@ -64,7 +64,7 @@ class UsbGamepadGenesisControllerObserver : public IGenesisControllerObserver
     void controllerDisconnected(uint8_t id);
     //! Called periodically to send the key states
     //! @returns true if keys sent or false if there was an eror
-    virtual bool sendKeys();
+    virtual bool send();
   protected:
     //! Releases all keys on the USB controller
     void releaseAllKeys();

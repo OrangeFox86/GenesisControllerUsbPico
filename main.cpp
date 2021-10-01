@@ -12,19 +12,20 @@
 #include "UsbGamepadGenesisControllerObserver.h"
 #include "timers.h"
 #include "usb_descriptors.h"
+#include "usb_execution.h"
 #include "configuration.h"
 
 #ifdef USE_KEYBOARD
 
-uint8_t keyLookup[2][IGenesisControllerObserver::KEY_COUNT] = KEYBOARD_MAPPING;
+uint8_t keyLookup[NUMBER_OF_DEVICES][IGenesisControllerObserver::KEY_COUNT] = KEYBOARD_MAPPING;
 
 // The observers send the keys pressed on the controllers to USB keyboards.
 // Connecting each controller to its own keyboard allows each controller to independently send up to
 // 6 keys.
-UsbKeyboardGenesisControllerObserver observers[2] =
+UsbKeyboardGenesisControllerObserver observers[NUMBER_OF_DEVICES] =
 {
-  UsbKeyboardGenesisControllerObserver(UsbKeyboard::getKeyboard(0), keyLookup[0]),
-  UsbKeyboardGenesisControllerObserver(UsbKeyboard::getKeyboard(1), keyLookup[1])
+  UsbKeyboardGenesisControllerObserver(getDevice(0), keyLookup[0]),
+  UsbKeyboardGenesisControllerObserver(getDevice(1), keyLookup[1])
 };
 
 #endif // USE_KEYBOARD
@@ -34,15 +35,15 @@ UsbKeyboardGenesisControllerObserver observers[2] =
 UsbGamepadGenesisControllerObserver::ButtonMap buttonLookup[IGenesisControllerObserver::KEY_COUNT] = GAMEPAD_MAPPING;
 
 // The observers send the keys pressed on the controllers to USB controller.
-UsbGamepadGenesisControllerObserver observers[2] =
+UsbGamepadGenesisControllerObserver observers[NUMBER_OF_DEVICES] =
 {
-  UsbGamepadGenesisControllerObserver(UsbGamepad::getGamepad(0), buttonLookup),
-  UsbGamepadGenesisControllerObserver(UsbGamepad::getGamepad(1), buttonLookup)
+  UsbGamepadGenesisControllerObserver(getDevice(0), buttonLookup),
+  UsbGamepadGenesisControllerObserver(getDevice(1), buttonLookup)
 };
 
 #endif // USE_GAMEPAD
 
-GenesisController gControllers[2] =
+GenesisController gControllers[NUMBER_OF_DEVICES] =
 {
   GenesisController(0,
                     GENESIS_CONTROLLER_1_PIN_1,
@@ -69,13 +70,7 @@ int main(void)
 {
   board_init();
 
-#ifdef USE_KEYBOARD
-  UsbKeyboard::init();
-#endif
-
-#ifdef USE_GAMEPAD
-  UsbGamepad::init();
-#endif
+  usb_init();
 
   GenesisController* pController = gControllers;
   for (uint32_t i = sizeof(gControllers) / sizeof(gControllers[0]); i > 0; --i, ++pController)
@@ -89,13 +84,7 @@ int main(void)
 
   while (1)
   {
-#ifdef USE_KEYBOARD
-    UsbKeyboard::task();
-#endif
-
-#ifdef USE_GAMEPAD
-    UsbGamepad::task();
-#endif
+    usb_task();
   }
 
   return 0;

@@ -1,10 +1,11 @@
-#ifndef __USB_CONTROLLER_H__
-#define __USB_CONTROLLER_H__
+#ifndef __USB_GAMEPAD_H__
+#define __USB_GAMEPAD_H__
 
 #include <stdint.h>
+#include "UsbControllerDevice.h"
 
 //! This class is designed to work with the setup code in usb_descriptors.c
-class UsbGamepad
+class UsbGamepad : public UsbControllerDevice
 {
   public:
   enum DpadButtons
@@ -21,7 +22,7 @@ class UsbGamepad
     //! @param[in] reportId  The report ID to use for this USB keyboard
     UsbGamepad(uint8_t reportId = 0);
     //! @returns true iff any button is currently "pressed"
-    bool isButtonPressed();
+    bool isButtonPressed() final;
 
     void setAnalogThumbX(bool isLeft, int8_t x);
     void setAnalogThumbY(bool isLeft, int8_t y);
@@ -34,36 +35,25 @@ class UsbGamepad
     void setButton(uint8_t button, bool isPressed);
 
     //! Release all currently pressed keys
-    void updateAllReleased();
+    void updateAllReleased() final;
     //! Updates the host with any newly pressed keys
     //! @param[in] force  Set to true to update host regardless if key state has changed since last
     //!                   update
     //! @returns true if data has been successfully sent or if keys didn't need to be updated
-    bool sendKeys(bool force = false);
+    bool send(bool force = false) final;
     //! Gets the report for the currently pressed keys
     //! @param[out] buffer  Where the report is written
     //! @param[in] reqlen  The length of buffer
-    void getReport(uint8_t *buffer, uint16_t reqlen);
+    void getReport(uint8_t *buffer, uint16_t reqlen) final;
     //! Called only from callbacks to update connected state
     //! @param[in] connected  true iff connected
-    void updateConnected(bool connected);
+    void updateConnected(bool connected) final;
     //! @returns the current connected state
-    bool isConnected();
-    //! Initializes USB
-    static void init();
-    //! The USB task which must be periodically called by main()
-    static void task();
-    //! @returns a reference to a controller, given an index
-    static UsbGamepad& getGamepad(uint8_t controllerIndex);
+    bool isConnected() final;
 
   protected:
-    //! Controls the state of the LED based on connected and button states
-    static void ledTask();
     uint8_t getHatValue();
 
-  public:
-    //! The number of static controllers created
-    static const uint8_t NUMBER_OF_CONTROLLERS = 2;
   private:
     //! The report ID to use when sending keys to host
     const uint8_t reportId;

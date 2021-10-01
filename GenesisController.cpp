@@ -65,7 +65,7 @@ void GenesisController::commitSignals()
   if (pObserver != nullptr)
   {
     // Time to commit all key changes
-    pObserver->sendKeys();
+    pObserver->send();
   }
 }
 

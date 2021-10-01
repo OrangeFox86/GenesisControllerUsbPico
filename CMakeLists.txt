@@ -7,6 +7,7 @@ add_executable(GenesisControllerPico
   UsbKeyboard.cpp
   UsbGamepad.cpp
   usb_descriptors.c
+  usb_execution.cpp
   GenesisController.cpp
   timers.cpp
   UsbKeyboardGenesisControllerObserver.cpp

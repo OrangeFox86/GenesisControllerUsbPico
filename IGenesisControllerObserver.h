@@ -38,7 +38,7 @@ class IGenesisControllerObserver
     virtual void controllerDisconnected(uint8_t id) = 0;
     //! Called periodically to send the key states
     //! @returns true if keys sent or false if there was an eror
-    virtual bool sendKeys() = 0;
+    virtual bool send() = 0;
 };
 
 #endif // __I_GENESIS_CONTROLLER_OBSERVER_H__

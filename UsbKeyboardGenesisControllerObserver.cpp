@@ -38,7 +38,7 @@ void UsbKeyboardGenesisControllerObserver::controllerDisconnected(uint8_t id)
   releaseAllKeys();
 }
 
-bool UsbKeyboardGenesisControllerObserver::sendKeys()
+bool UsbKeyboardGenesisControllerObserver::send()
 {
-  return usbKeyboard.sendKeys();
+  return usbKeyboard.send();
 }

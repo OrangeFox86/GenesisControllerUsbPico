@@ -139,7 +139,7 @@ void UsbGamepadGenesisControllerObserver::controllerDisconnected(uint8_t id)
   releaseAllKeys();
 }
 
-bool UsbGamepadGenesisControllerObserver::sendKeys()
+bool UsbGamepadGenesisControllerObserver::send()
 {
-  return usbController.sendKeys();
+  return usbController.send();
 }
