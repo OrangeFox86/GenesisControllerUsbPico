@@ -15,39 +15,41 @@
 #include "usb_execution.h"
 #include "configuration.h"
 
-#ifdef USE_KEYBOARD
+// Definitions for player 1
+#ifdef PLAYER1_USB_KEYBOARD
 
 UsbKeyboard player1UsbDevice(REPORT_ID_DEVICE1);
-UsbKeyboard player2UsbDevice(REPORT_ID_DEVICE2);
-
-uint8_t keyLookup[NUMBER_OF_DEVICES][IGenesisControllerObserver::KEY_COUNT] = KEYBOARD_MAPPING;
-
+uint8_t player1KeyMap[IGenesisControllerObserver::KEY_COUNT] = PLAYER1_KEYBOARD_MAPPING;
 // The observers send the keys pressed on the controllers to USB keyboards.
 // Connecting each controller to its own keyboard allows each controller to independently send up to
 // 6 keys.
-UsbKeyboardGenesisControllerObserver observers[NUMBER_OF_DEVICES] =
-{
-  UsbKeyboardGenesisControllerObserver(player1UsbDevice, keyLookup[0]),
-  UsbKeyboardGenesisControllerObserver(player2UsbDevice, keyLookup[1])
-};
+UsbKeyboardGenesisControllerObserver player1Observer(player1UsbDevice, player1KeyMap);
 
-#endif // USE_KEYBOARD
-
-#ifdef USE_GAMEPAD
+#endif
+#ifdef PLAYER1_USB_GAMEPAD
 
 UsbGamepad player1UsbDevice(REPORT_ID_DEVICE1);
+UsbGamepadGenesisControllerObserver::ButtonMap player1ButtonMap[IGenesisControllerObserver::KEY_COUNT] = GAMEPAD_MAPPING;
+UsbGamepadGenesisControllerObserver player1Observer(player1UsbDevice, player1ButtonMap);
+
+#endif
+
+
+// Definitions for player 2
+#ifdef PLAYER2_USB_KEYBOARD
+
+UsbKeyboard player2UsbDevice(REPORT_ID_DEVICE2);
+uint8_t player2KeyMap[IGenesisControllerObserver::KEY_COUNT] = PLAYER2_KEYBOARD_MAPPING;
+UsbKeyboardGenesisControllerObserver player2Observer(player2UsbDevice, player2KeyMap);
+
+#endif
+#ifdef PLAYER2_USB_GAMEPAD
+
 UsbGamepad player2UsbDevice(REPORT_ID_DEVICE2);
+UsbGamepadGenesisControllerObserver::ButtonMap player2ButtonMap[IGenesisControllerObserver::KEY_COUNT] = GAMEPAD_MAPPING;
+UsbGamepadGenesisControllerObserver player2Observer(player2UsbDevice, player2ButtonMap);
 
-UsbGamepadGenesisControllerObserver::ButtonMap buttonLookup[IGenesisControllerObserver::KEY_COUNT] = GAMEPAD_MAPPING;
-
-// The observers send the keys pressed on the controllers to USB controller.
-UsbGamepadGenesisControllerObserver observers[NUMBER_OF_DEVICES] =
-{
-  UsbGamepadGenesisControllerObserver(player1UsbDevice, buttonLookup),
-  UsbGamepadGenesisControllerObserver(player2UsbDevice, buttonLookup)
-};
-
-#endif // USE_GAMEPAD
+#endif
 
 IUsbControllerDevice* pDevices[NUMBER_OF_DEVICES] = {&player1UsbDevice, &player2UsbDevice};
 
@@ -61,7 +63,7 @@ GenesisController gControllers[NUMBER_OF_DEVICES] =
                     GENESIS_CONTROLLER_1_PIN_6,
                     GENESIS_CONTROLLER_1_PIN_7,
                     GENESIS_CONTROLLER_1_PIN_9,
-                    &observers[0]),
+                    &player1Observer),
   GenesisController(1,
                     GENESIS_CONTROLLER_2_PIN_1,
                     GENESIS_CONTROLLER_2_PIN_2,
@@ -70,7 +72,7 @@ GenesisController gControllers[NUMBER_OF_DEVICES] =
                     GENESIS_CONTROLLER_2_PIN_6,
                     GENESIS_CONTROLLER_2_PIN_7,
                     GENESIS_CONTROLLER_2_PIN_9,
-                    &observers[1])
+                    &player2Observer)
 };
 
 /*------------- MAIN -------------*/

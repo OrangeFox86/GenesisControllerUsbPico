@@ -73,13 +73,21 @@ uint8_t const *tud_descriptor_device_cb(void) {
 
 uint8_t const desc_hid_report[] =
 {
-#if defined(USE_KEYBOARD)
+
+#ifdef PLAYER1_USB_KEYBOARD
     TUD_HID_REPORT_DESC_KEYBOARD(HID_REPORT_ID(REPORT_ID_DEVICE1)),
-    TUD_HID_REPORT_DESC_KEYBOARD(HID_REPORT_ID(REPORT_ID_DEVICE2))
-#elif defined(USE_GAMEPAD)
+#endif
+#ifdef PLAYER1_USB_GAMEPAD
     TUD_HID_REPORT_DESC_GAMEPAD(HID_REPORT_ID(REPORT_ID_DEVICE1)),
+#endif
+
+#ifdef PLAYER2_USB_KEYBOARD
+    TUD_HID_REPORT_DESC_KEYBOARD(HID_REPORT_ID(REPORT_ID_DEVICE2))
+#endif
+#ifdef PLAYER2_USB_GAMEPAD
     TUD_HID_REPORT_DESC_GAMEPAD(HID_REPORT_ID(REPORT_ID_DEVICE2))
 #endif
+
 };
 
 // Invoked when received GET HID REPORT DESCRIPTOR
@@ -102,11 +110,8 @@ enum {
 
 #define EPNUM_HID   0x01
 
-#if defined(USE_KEYBOARD)
-#define REPORT_SIZE sizeof(hid_keyboard_report_t)
-#elif defined(USE_GAMEPAD)
-#define REPORT_SIZE sizeof(hid_gamepad_report_t)
-#endif
+// Just make the report size the max of the two supported types
+#define REPORT_SIZE (sizeof(hid_keyboard_report_t) > sizeof(hid_gamepad_report_t) ? sizeof(hid_keyboard_report_t) : sizeof(hid_gamepad_report_t))
 
 uint8_t const desc_configuration[] =
 {

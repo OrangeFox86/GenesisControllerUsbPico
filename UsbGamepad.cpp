@@ -8,7 +8,7 @@
 #include "usb_descriptors.h"
 
 // Only use this code if Controller descriptors are defined
-#ifdef USE_GAMEPAD
+#if (defined(PLAYER1_USB_GAMEPAD) || defined(PLAYER2_USB_GAMEPAD))
 
 UsbGamepad::UsbGamepad(uint8_t reportId) :
   reportId(reportId),
@@ -258,4 +258,4 @@ bool UsbGamepad::isConnected()
   return mIsConnected;
 }
 
-#endif // USE_GAMEPAD
+#endif // (defined(PLAYER1_USB_GAMEPAD) || defined(PLAYER2_USB_GAMEPAD))

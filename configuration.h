@@ -2,8 +2,12 @@
 #define __CONFIGURATION_H__
 
 // Define only one of the following
-//#define USE_KEYBOARD
-#define USE_GAMEPAD
+//#define PLAYER1_USB_KEYBOARD
+#define PLAYER1_USB_GAMEPAD
+
+// Define only one of the following
+//#define PLAYER2_USB_KEYBOARD
+#define PLAYER2_USB_GAMEPAD
 
 // Genesis controller 1 Pico pin definitions
 #define GENESIS_CONTROLLER_1_PIN_1 9
@@ -23,38 +27,36 @@
 #define GENESIS_CONTROLLER_2_PIN_7 17
 #define GENESIS_CONTROLLER_2_PIN_9 16
 
-#define KEYBOARD_MAPPING \
+#define PLAYER1_KEYBOARD_MAPPING \
 { \
-  /* Player 1 */ \
-  { \
-    HID_KEY_RETURN,       /* START */ \
-    HID_KEY_W,            /* UP */ \
-    HID_KEY_S,            /* DOWN */ \
-    HID_KEY_A,            /* LEFT */ \
-    HID_KEY_D,            /* RIGHT */ \
-    HID_KEY_K,            /* A */ \
-    HID_KEY_L,            /* B */ \
-    HID_KEY_SEMICOLON,    /* C */ \
-    HID_KEY_I,            /* X */ \
-    HID_KEY_O,            /* Y */ \
-    HID_KEY_P,            /* Z */ \
-    HID_KEY_BACKSLASH     /* MODE */ \
-  }, \
-  /* Player 2 */ \
-  { \
-    HID_KEY_KEYPAD_ENTER, /* START */ \
-    HID_KEY_ARROW_UP,     /* UP */ \
-    HID_KEY_ARROW_DOWN,   /* DOWN */ \
-    HID_KEY_ARROW_LEFT,   /* LEFT */ \
-    HID_KEY_ARROW_RIGHT,  /* RIGHT */ \
-    HID_KEY_KEYPAD_1,     /* A */ \
-    HID_KEY_KEYPAD_2,     /* B */ \
-    HID_KEY_KEYPAD_3,     /* C */ \
-    HID_KEY_KEYPAD_4,     /* X */ \
-    HID_KEY_KEYPAD_5,     /* Y */ \
-    HID_KEY_KEYPAD_6,     /* Z */ \
-    HID_KEY_KEYPAD_ADD    /* MODE */ \
-  } \
+  HID_KEY_RETURN,       /* START */ \
+  HID_KEY_W,            /* UP */ \
+  HID_KEY_S,            /* DOWN */ \
+  HID_KEY_A,            /* LEFT */ \
+  HID_KEY_D,            /* RIGHT */ \
+  HID_KEY_K,            /* A */ \
+  HID_KEY_L,            /* B */ \
+  HID_KEY_SEMICOLON,    /* C */ \
+  HID_KEY_I,            /* X */ \
+  HID_KEY_O,            /* Y */ \
+  HID_KEY_P,            /* Z */ \
+  HID_KEY_BACKSLASH     /* MODE */ \
+}
+
+#define PLAYER2_KEYBOARD_MAPPING \
+{ \
+  HID_KEY_KEYPAD_ENTER, /* START */ \
+  HID_KEY_ARROW_UP,     /* UP */ \
+  HID_KEY_ARROW_DOWN,   /* DOWN */ \
+  HID_KEY_ARROW_LEFT,   /* LEFT */ \
+  HID_KEY_ARROW_RIGHT,  /* RIGHT */ \
+  HID_KEY_KEYPAD_1,     /* A */ \
+  HID_KEY_KEYPAD_2,     /* B */ \
+  HID_KEY_KEYPAD_3,     /* C */ \
+  HID_KEY_KEYPAD_4,     /* X */ \
+  HID_KEY_KEYPAD_5,     /* Y */ \
+  HID_KEY_KEYPAD_6,     /* Z */ \
+  HID_KEY_KEYPAD_ADD    /* MODE */ \
 }
 
 #define GAMEPAD_MAPPING \
@@ -72,5 +74,19 @@
   UsbGamepadGenesisControllerObserver::MAP_BUTTON5,        /* Z */ \
   UsbGamepadGenesisControllerObserver::MAP_BUTTON12        /* MODE */ \
 }
+
+
+// Some error checking (do not modify)
+#if (defined(PLAYER1_USB_KEYBOARD) && defined(PLAYER1_USB_GAMEPAD))
+  #error only define keyboard OR gamepad for player 1, not both
+#elif (!defined(PLAYER1_USB_KEYBOARD) && !defined(PLAYER1_USB_GAMEPAD))
+  #error no config defined for player 1
+#endif
+
+#if (defined(PLAYER2_USB_KEYBOARD) && defined(PLAYER2_USB_GAMEPAD))
+  #error only define keyboard OR gamepad for player 2, not both
+#elif (!defined(PLAYER2_USB_KEYBOARD) && !defined(PLAYER2_USB_GAMEPAD))
+  #error no config defined for player 2
+#endif
 
 #endif // __CONFIGURATION_H__

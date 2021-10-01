@@ -3,12 +3,6 @@
 
 #include "configuration.h"
 
-#if defined(USE_KEYBOARD) && defined(USE_GAMEPAD)
-#error Must only define USE_KEYBOARD or USE_GAMEPAD, not both
-#elif !defined(USE_KEYBOARD) && !defined(USE_GAMEPAD)
-#error Must define one of USE_KEYBOARD or USE_GAMEPAD
-#endif
-
 //! Report IDs for all available USB devices set in usb_descriptors.c
 enum usbReportId_e
 {

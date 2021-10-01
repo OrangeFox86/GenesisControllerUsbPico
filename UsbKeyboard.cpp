@@ -8,7 +8,7 @@
 #include "usb_descriptors.h"
 
 // Only use this code if keyboard descriptors are defined
-#ifdef USE_KEYBOARD
+#if (defined(PLAYER1_USB_KEYBOARD) || defined(PLAYER2_USB_KEYBOARD))
 
 UsbKeyboard::UsbKeyboard(uint8_t reportId) :
   reportId(reportId),
@@ -128,4 +128,4 @@ bool UsbKeyboard::isConnected()
   return mIsConnected;
 }
 
-#endif // USE_KEYBOARD
+#endif // (defined(PLAYER1_USB_KEYBOARD) || defined(PLAYER2_USB_KEYBOARD))
