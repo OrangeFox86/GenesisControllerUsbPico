@@ -1,14 +1,14 @@
-#ifndef __USB_CONTROLLER_DEVICE_H__
-#define __USB_CONTROLLER_DEVICE_H__
+#ifndef __I_USB_CONTROLLER_DEVICE_H__
+#define __I_USB_CONTROLLER_DEVICE_H__
 
 #include <stdint.h>
 
 //! Interface for defining a USB controller device
-class UsbControllerDevice
+class IUsbControllerDevice
 {
   public:
-    inline UsbControllerDevice() {}
-    inline virtual ~UsbControllerDevice() {}
+    inline IUsbControllerDevice() {}
+    inline virtual ~IUsbControllerDevice() {}
     //! @returns true iff there is at least 1 button pressed on the device
     virtual bool isButtonPressed() = 0;
     //! Release all currently pressed buttons
@@ -29,4 +29,4 @@ class UsbControllerDevice
     virtual bool isConnected() = 0;
 };
 
-#endif // __USB_CONTROLLER_DEVICE_H__
+#endif // __I_USB_CONTROLLER_DEVICE_H__

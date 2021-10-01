@@ -2,11 +2,11 @@
 #define __USB_KEYBOARD_H__
 
 #include <stdint.h>
-#include "UsbControllerDevice.h"
+#include "IUsbControllerDevice.h"
 
 //! This class is designed to work with the setup code in usb_descriptors.c
 //! @note This class does not allow modifier keys such as shift
-class UsbKeyboard : public UsbControllerDevice
+class UsbKeyboard : public IUsbControllerDevice
 {
   public:
     //! UsbKeyboard constructor

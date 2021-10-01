@@ -1,18 +1,13 @@
 #ifndef __USB_EXECUTION_H__
 #define __USB_EXECUTION_H__
 
-#include "UsbControllerDevice.h"
+#include "IUsbControllerDevice.h"
 #include "UsbKeyboard.h"
 #include "UsbGamepad.h"
 #include <stdint.h>
 #include "configuration.h"
 
-#ifdef USE_GAMEPAD
-UsbGamepad& getDevice(uint8_t controllerIndex);
-#endif
-#ifdef USE_KEYBOARD
-UsbKeyboard& getDevice(uint8_t controllerIndex);
-#endif
+void set_usb_devices(IUsbControllerDevice** devices, uint8_t n);
 
 void usb_init();
 void usb_task();

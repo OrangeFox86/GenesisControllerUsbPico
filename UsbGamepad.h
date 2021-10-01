@@ -2,10 +2,10 @@
 #define __USB_GAMEPAD_H__
 
 #include <stdint.h>
-#include "UsbControllerDevice.h"
+#include "IUsbControllerDevice.h"
 
 //! This class is designed to work with the setup code in usb_descriptors.c
-class UsbGamepad : public UsbControllerDevice
+class UsbGamepad : public IUsbControllerDevice
 {
   public:
   enum DpadButtons

@@ -1,6 +1,6 @@
 #include "usb_execution.h"
 
-#include "UsbControllerDevice.h"
+#include "IUsbControllerDevice.h"
 #include "UsbKeyboard.h"
 #include "UsbGamepad.h"
 #include <stdlib.h>
@@ -11,24 +11,15 @@
 #include "tusb.h"
 #include "usb_descriptors.h"
 
-// I'm having issues declaring these outside of static variables in functions, so here they are
+IUsbControllerDevice** pAllUsbDevices = nullptr;
 
-#ifdef USE_GAMEPAD
-UsbGamepad& getDevice(uint8_t controllerIndex)
+uint8_t numUsbDevices = 0;
+
+void set_usb_devices(IUsbControllerDevice** devices, uint8_t n)
 {
-  static UsbGamepad controllers[NUMBER_OF_DEVICES] =
-    { UsbGamepad(REPORT_ID_DEVICE1), UsbGamepad(REPORT_ID_DEVICE2) };
-  return controllers[controllerIndex % NUMBER_OF_DEVICES];
+  pAllUsbDevices = devices;
+  numUsbDevices = n;
 }
-#endif
-#ifdef USE_KEYBOARD
-UsbKeyboard& getDevice(uint8_t controllerIndex)
-{
-  static UsbKeyboard controllers[NUMBER_OF_DEVICES] =
-    { UsbKeyboard(REPORT_ID_DEVICE1), UsbKeyboard(REPORT_ID_DEVICE2) };
-  return controllers[controllerIndex % NUMBER_OF_DEVICES];
-}
-#endif
 
 bool gIsConnected = false;
 
@@ -51,9 +42,10 @@ void led_task()
 {
   static bool ledOn = false;
   bool keyPressed = false;
-  for (uint32_t i = 0; i < NUMBER_OF_DEVICES; ++i)
+  IUsbControllerDevice** pdevs = pAllUsbDevices;
+  for (uint32_t i = numUsbDevices; i > 0; --i, ++pdevs)
   {
-    if (getDevice(i).isButtonPressed())
+    if ((*pdevs)->isButtonPressed())
     {
       keyPressed = true;
     }
@@ -97,9 +89,10 @@ void usb_task()
 // Invoked when device is mounted
 void tud_mount_cb(void)
 {
-  for (uint32_t i = 0; i < NUMBER_OF_DEVICES; ++i)
+  IUsbControllerDevice** pdevs = pAllUsbDevices;
+  for (uint32_t i = numUsbDevices; i > 0; --i, ++pdevs)
   {
-    getDevice(i).updateConnected(true);
+    (*pdevs)->updateConnected(true);
   }
   gIsConnected = true;
 }
@@ -107,9 +100,10 @@ void tud_mount_cb(void)
 // Invoked when device is unmounted
 void tud_umount_cb(void)
 {
-  for (uint32_t i = 0; i < NUMBER_OF_DEVICES; ++i)
+  IUsbControllerDevice** pdevs = pAllUsbDevices;
+  for (uint32_t i = numUsbDevices; i > 0; --i, ++pdevs)
   {
-    getDevice(i).updateConnected(false);
+    (*pdevs)->updateConnected(false);
   }
   gIsConnected = false;
 }
@@ -120,9 +114,10 @@ void tud_umount_cb(void)
 void tud_suspend_cb(bool remote_wakeup_en)
 {
   (void) remote_wakeup_en;
-  for (uint32_t i = 0; i < NUMBER_OF_DEVICES; ++i)
+  IUsbControllerDevice** pdevs = pAllUsbDevices;
+  for (uint32_t i = numUsbDevices; i > 0; --i, ++pdevs)
   {
-    getDevice(i).updateConnected(false);
+    (*pdevs)->updateConnected(false);
   }
   gIsConnected = false;
 }
@@ -130,9 +125,10 @@ void tud_suspend_cb(bool remote_wakeup_en)
 // Invoked when usb bus is resumed
 void tud_resume_cb(void)
 {
-  for (uint32_t i = 0; i < NUMBER_OF_DEVICES; ++i)
+  IUsbControllerDevice** pdevs = pAllUsbDevices;
+  for (uint32_t i = numUsbDevices; i > 0; --i, ++pdevs)
   {
-    getDevice(i).updateConnected(true);
+    (*pdevs)->updateConnected(true);
   }
   gIsConnected = true;
 }
@@ -156,7 +152,7 @@ uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id, hid_report_t
   else
   {
     // Build the report for the given report ID
-    getDevice(idx).getReport(buffer, reqlen);
+    pAllUsbDevices[idx]->getReport(buffer, reqlen);
     // Return the size of the report
     return sizeof(hid_keyboard_report_t);
   }
