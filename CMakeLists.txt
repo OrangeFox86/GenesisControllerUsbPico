@@ -4,6 +4,7 @@ project(GenesisControllerPico)
 pico_sdk_init()
 add_executable(GenesisControllerPico
   main.cpp
+  UsbControllerDevice.cpp
   UsbKeyboard.cpp
   UsbGamepad.cpp
   usb_descriptors.c

@@ -7,9 +7,6 @@
 #include "tusb.h"
 #include "usb_descriptors.h"
 
-// Only use this code if keyboard descriptors are defined
-#if (defined(PLAYER1_USB_KEYBOARD) || defined(PLAYER2_USB_KEYBOARD))
-
 UsbKeyboard::UsbKeyboard(uint8_t interfaceId, uint8_t reportId) :
   interfaceId(interfaceId),
   reportId(reportId),
@@ -89,11 +86,9 @@ void UsbKeyboard::updateAllReleased()
 
 bool UsbKeyboard::send(bool force)
 {
-  if (!mIsConnected) return false;
-  uint8_t modifier = 0; // This class doesn't allow modifier keys
   if (keycodesUpdated || force)
   {
-    bool sent = tud_hid_n_keyboard_report(interfaceId, reportId, modifier, currentKeycodes);
+    bool sent = sendReport(interfaceId, reportId);
     if (sent)
     {
       keycodesUpdated = false;
@@ -104,6 +99,11 @@ bool UsbKeyboard::send(bool force)
   {
     return true;
   }
+}
+
+uint8_t UsbKeyboard::getReportSize()
+{
+  return sizeof(hid_keyboard_report_t);
 }
 
 void UsbKeyboard::getReport(uint8_t *buffer, uint16_t reqlen)
@@ -117,5 +117,3 @@ void UsbKeyboard::getReport(uint8_t *buffer, uint16_t reqlen)
   uint16_t setLen = (sizeof(report) <= reqlen) ? sizeof(report) : reqlen;
   memcpy(buffer, &report, setLen);
 }
-
-#endif // (defined(PLAYER1_USB_KEYBOARD) || defined(PLAYER2_USB_KEYBOARD))

@@ -2,11 +2,11 @@
 #define __USB_KEYBOARD_H__
 
 #include <stdint.h>
-#include "IUsbControllerDevice.h"
+#include "UsbControllerDevice.h"
 
 //! This class is designed to work with the setup code in usb_descriptors.c
 //! @note This class does not allow modifier keys such as shift
-class UsbKeyboard : public IUsbControllerDevice
+class UsbKeyboard : public UsbControllerDevice
 {
   public:
     //! UsbKeyboard constructor
@@ -27,14 +27,13 @@ class UsbKeyboard : public IUsbControllerDevice
     //!                   update
     //! @returns true if data has been successfully sent or if keys didn't need to be updated
     bool send(bool force = false);
+    //! @returns the size of the report for this device
+    virtual uint8_t getReportSize();
     //! Gets the report for the currently pressed keys
     //! @param[out] buffer  Where the report is written
     //! @param[in] reqlen  The length of buffer
     void getReport(uint8_t *buffer, uint16_t reqlen);
 
-  public:
-    //! The number of static controllers created
-    static const uint8_t NUMBER_OF_KEYBOARDS = 2;
   private:
     const uint8_t interfaceId;
     //! The report ID to use when sending keys to host

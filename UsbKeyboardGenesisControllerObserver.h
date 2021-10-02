@@ -29,9 +29,6 @@ class UsbKeyboardGenesisControllerObserver : public IGenesisControllerObserver
     //! Called periodically to send the key states
     //! @returns true if keys sent or false if there was an eror
     virtual bool send();
-  protected:
-    //! Releases all keys on the USB keyboard
-    void releaseAllKeys();
   private:
     //! The USB keyboard I update
     UsbKeyboard& usbKeyboard;

@@ -2,10 +2,10 @@
 #define __USB_GAMEPAD_H__
 
 #include <stdint.h>
-#include "IUsbControllerDevice.h"
+#include "UsbControllerDevice.h"
 
 //! This class is designed to work with the setup code in usb_descriptors.c
-class UsbGamepad : public IUsbControllerDevice
+class UsbGamepad : public UsbControllerDevice
 {
   public:
   enum DpadButtons
@@ -63,6 +63,8 @@ class UsbGamepad : public IUsbControllerDevice
     //!                   update
     //! @returns true if data has been successfully sent or if keys didn't need to be updated
     bool send(bool force = false) final;
+    //! @returns the size of the report for this device
+    virtual uint8_t getReportSize();
     //! Gets the report for the currently pressed keys
     //! @param[out] buffer  Where the report is written
     //! @param[in] reqlen  The length of buffer

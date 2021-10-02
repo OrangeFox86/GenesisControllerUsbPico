@@ -66,7 +66,7 @@ UsbGamepadGenesisControllerObserver player2Observer(player2UsbDevice, player2But
 
 // Consolidation of above objects
 
-IUsbControllerDevice* pDevices[NUMBER_OF_DEVICES] =
+UsbControllerDevice* pDevices[NUMBER_OF_DEVICES] =
 {
   &player1UsbDevice,
 #if (NUMBER_OF_DEVICES > 1)

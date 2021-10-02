@@ -9,6 +9,10 @@
 //#define PLAYER2_USB_KEYBOARD
 #define PLAYER2_USB_GAMEPAD
 
+// When true: Forces USB to always be connected
+// When false: USB will only connect when Genesis controller is detected.
+#define USB_ALWAYS_CONNECTED false
+
 // Genesis controller 1 Pico pin definitions
 #define GENESIS_CONTROLLER_1_PIN_1 9
 #define GENESIS_CONTROLLER_1_PIN_2 10

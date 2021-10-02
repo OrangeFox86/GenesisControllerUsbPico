@@ -7,9 +7,6 @@
 #include "tusb.h"
 #include "usb_descriptors.h"
 
-// Only use this code if Controller descriptors are defined
-#if (defined(PLAYER1_USB_GAMEPAD) || defined(PLAYER2_USB_GAMEPAD))
-
 UsbGamepad::UsbGamepad(uint8_t interfaceId, uint8_t reportId) :
   interfaceId(interfaceId),
   reportId(reportId),
@@ -206,19 +203,9 @@ uint8_t UsbGamepad::getHatValue()
 
 bool UsbGamepad::send(bool force)
 {
-  if (!mIsUsbConnected) return false;
-  uint8_t modifier = 0; // This class doesn't allow modifier keys
   if (buttonsUpdated || force)
   {
-    bool sent = tud_hid_n_gamepad_report(interfaceId, reportId,
-                                       currentLeftAnalog[0],
-                                       currentLeftAnalog[1],
-                                       currentLeftAnalog[2],
-                                       currentRightAnalog[2],
-                                       currentRightAnalog[0],
-                                       currentRightAnalog[1],
-                                       getHatValue(),
-                                       currentButtons);
+    bool sent = sendReport(interfaceId, reportId);
     if (sent)
     {
       buttonsUpdated = false;
@@ -229,6 +216,11 @@ bool UsbGamepad::send(bool force)
   {
     return true;
   }
+}
+
+uint8_t UsbGamepad::getReportSize()
+{
+  return sizeof(hid_gamepad_report_t);
 }
 
 void UsbGamepad::getReport(uint8_t *buffer, uint16_t reqlen)
@@ -247,5 +239,3 @@ void UsbGamepad::getReport(uint8_t *buffer, uint16_t reqlen)
   uint16_t setLen = (sizeof(report) <= reqlen) ? sizeof(report) : reqlen;
   memcpy(buffer, &report, setLen);
 }
-
-#endif // (defined(PLAYER1_USB_GAMEPAD) || defined(PLAYER2_USB_GAMEPAD))

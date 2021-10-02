@@ -23,19 +23,14 @@ bool UsbKeyboardGenesisControllerObserver::keyStateChanged(uint8_t id, Key key, 
   }
 }
 
-void UsbKeyboardGenesisControllerObserver::releaseAllKeys()
-{
-  usbKeyboard.updateAllReleased();
-}
-
 void UsbKeyboardGenesisControllerObserver::controllerConnected(uint8_t id)
 {
-  releaseAllKeys();
+  usbKeyboard.updateControllerConnected(true);
 }
 
 void UsbKeyboardGenesisControllerObserver::controllerDisconnected(uint8_t id)
 {
-  releaseAllKeys();
+  usbKeyboard.updateControllerConnected(false);
 }
 
 bool UsbKeyboardGenesisControllerObserver::send()
