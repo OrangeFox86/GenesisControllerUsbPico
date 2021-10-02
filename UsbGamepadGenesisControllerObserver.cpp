@@ -118,25 +118,23 @@ bool UsbGamepadGenesisControllerObserver::keyStateChanged(uint8_t id, Key key, b
     case MAP_BUTTON15:
       usbController.setButton(button - MAP_BUTTON0, down);
       break;
+    case MAP_NONE:
+      // Do nothing and return true
+      break;
     default:
       return false;
   }
   return true;
 }
 
-void UsbGamepadGenesisControllerObserver::releaseAllKeys()
-{
-  usbController.updateAllReleased();
-}
-
 void UsbGamepadGenesisControllerObserver::controllerConnected(uint8_t id)
 {
-  releaseAllKeys();
+  usbController.updateControllerConnected(true);
 }
 
 void UsbGamepadGenesisControllerObserver::controllerDisconnected(uint8_t id)
 {
-  releaseAllKeys();
+  usbController.updateControllerConnected(false);
 }
 
 bool UsbGamepadGenesisControllerObserver::send()

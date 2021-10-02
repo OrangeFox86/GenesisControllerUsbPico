@@ -10,7 +10,8 @@ class UsbGamepadGenesisControllerObserver : public IGenesisControllerObserver
     //! Enumerates all available options to map a button to a USB gamepad
     enum ButtonMap
     {
-      MAP_LANALOG_UP = 0,
+      MAP_NONE = 0,
+      MAP_LANALOG_UP,
       MAP_LANALOG_DOWN,
       MAP_LANALOG_LEFT,
       MAP_LANALOG_RIGHT,
@@ -65,9 +66,6 @@ class UsbGamepadGenesisControllerObserver : public IGenesisControllerObserver
     //! Called periodically to send the key states
     //! @returns true if keys sent or false if there was an eror
     virtual bool send();
-  protected:
-    //! Releases all keys on the USB controller
-    void releaseAllKeys();
   private:
     //! The USB controller I update
     UsbGamepad& usbController;

@@ -45,11 +45,6 @@ class UsbGamepad : public IUsbControllerDevice
     //! @param[out] buffer  Where the report is written
     //! @param[in] reqlen  The length of buffer
     void getReport(uint8_t *buffer, uint16_t reqlen) final;
-    //! Called only from callbacks to update connected state
-    //! @param[in] connected  true iff connected
-    void updateConnected(bool connected) final;
-    //! @returns the current connected state
-    bool isConnected() final;
 
   protected:
     uint8_t getHatValue();
@@ -68,8 +63,6 @@ class UsbGamepad : public IUsbControllerDevice
     uint16_t currentButtons;
     //! True when something has been updated since the last successful send
     bool buttonsUpdated;
-    //! True when this USB device is connected to a host
-    bool mIsConnected;
 };
 
 #endif // __USB_CONTROLLER_H__

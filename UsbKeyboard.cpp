@@ -15,8 +15,7 @@ UsbKeyboard::UsbKeyboard(uint8_t interfaceId, uint8_t reportId) :
   reportId(reportId),
   currentKeycodes(),
   keycodesUpdated(false),
-  keyPressed(false),
-  mIsConnected(false)
+  keyPressed(false)
 {}
 
 bool UsbKeyboard::isButtonPressed()
@@ -117,16 +116,6 @@ void UsbKeyboard::getReport(uint8_t *buffer, uint16_t reqlen)
   // Copy report into buffer
   uint16_t setLen = (sizeof(report) <= reqlen) ? sizeof(report) : reqlen;
   memcpy(buffer, &report, setLen);
-}
-
-void UsbKeyboard::updateConnected(bool connected)
-{
-  mIsConnected = connected;
-}
-
-bool UsbKeyboard::isConnected()
-{
-  return mIsConnected;
 }
 
 #endif // (defined(PLAYER1_USB_KEYBOARD) || defined(PLAYER2_USB_KEYBOARD))

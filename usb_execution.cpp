@@ -9,7 +9,10 @@
 
 #include "bsp/board.h"
 #include "tusb.h"
+#include "device/dcd.h"
 #include "usb_descriptors.h"
+
+bool usbEnabled = false;
 
 IUsbControllerDevice** pAllUsbDevices = nullptr;
 
@@ -65,6 +68,24 @@ void usb_init()
 
 void usb_task()
 {
+  bool someoneConnected = false;
+  IUsbControllerDevice** pdevs = pAllUsbDevices;
+  for (uint32_t i = numUsbDevices; i > 0 && !someoneConnected; --i, ++pdevs)
+  {
+    someoneConnected = (*pdevs)->isControllerConnected();
+  }
+  if (someoneConnected != usbEnabled)
+  {
+    if (someoneConnected)
+    {
+      dcd_connect(0);
+    }
+    else
+    {
+      dcd_disconnect(0);
+    }
+    usbEnabled = someoneConnected;
+  }
   tud_task(); // tinyusb device task
   led_task();
 }
@@ -79,7 +100,7 @@ void tud_mount_cb(void)
   IUsbControllerDevice** pdevs = pAllUsbDevices;
   for (uint32_t i = numUsbDevices; i > 0; --i, ++pdevs)
   {
-    (*pdevs)->updateConnected(true);
+    (*pdevs)->updateUsbConnected(true);
   }
   gIsConnected = true;
 }
@@ -90,7 +111,7 @@ void tud_umount_cb(void)
   IUsbControllerDevice** pdevs = pAllUsbDevices;
   for (uint32_t i = numUsbDevices; i > 0; --i, ++pdevs)
   {
-    (*pdevs)->updateConnected(false);
+    (*pdevs)->updateUsbConnected(false);
   }
   gIsConnected = false;
 }
@@ -104,7 +125,7 @@ void tud_suspend_cb(bool remote_wakeup_en)
   IUsbControllerDevice** pdevs = pAllUsbDevices;
   for (uint32_t i = numUsbDevices; i > 0; --i, ++pdevs)
   {
-    (*pdevs)->updateConnected(false);
+    (*pdevs)->updateUsbConnected(false);
   }
   gIsConnected = false;
 }
@@ -115,7 +136,7 @@ void tud_resume_cb(void)
   IUsbControllerDevice** pdevs = pAllUsbDevices;
   for (uint32_t i = numUsbDevices; i > 0; --i, ++pdevs)
   {
-    (*pdevs)->updateConnected(true);
+    (*pdevs)->updateUsbConnected(true);
   }
   gIsConnected = true;
 }

@@ -7,7 +7,7 @@
 class IUsbControllerDevice
 {
   public:
-    inline IUsbControllerDevice() {}
+    inline IUsbControllerDevice() : mIsUsbConnected(false), mIsControllerConnected(false) {}
     inline virtual ~IUsbControllerDevice() {}
     //! @returns true iff there is at least 1 button pressed on the device
     virtual bool isButtonPressed() = 0;
@@ -22,11 +22,37 @@ class IUsbControllerDevice
     //! @param[out] buffer  Where the report is written
     //! @param[in] reqlen  The length of buffer
     virtual void getReport(uint8_t *buffer, uint16_t reqlen) = 0;
-    //! Called only from callbacks to update connected state
-    //! @param[in] connected  true iff connected
-    virtual void updateConnected(bool connected) = 0;
-    //! @returns the current connected state
-    virtual bool isConnected() = 0;
+    //! Called only from callbacks to update USB connected state
+    //! @param[in] connected  true iff USB connected
+    virtual void updateUsbConnected(bool connected)
+    {
+      mIsUsbConnected = connected;
+    }
+    //! @returns the current USB connected state
+    virtual bool isUsbConnected()
+    {
+      return mIsUsbConnected;
+    }
+    //! Called only from callbacks to update controller connected state
+    //! @param[in] connected  true iff controller connected
+    virtual void updateControllerConnected(bool connected)
+    {
+      if (connected != mIsControllerConnected)
+      {
+        updateAllReleased();
+      }
+      mIsControllerConnected = connected;
+    }
+    //! @returns the current controller connected state
+    virtual bool isControllerConnected()
+    {
+      return mIsControllerConnected;
+    }
+  protected:
+    //! True when this USB device is connected to a host
+    bool mIsUsbConnected;
+    //! True when this controller is connected
+    bool mIsControllerConnected;
 };
 
 #endif // __I_USB_CONTROLLER_DEVICE_H__

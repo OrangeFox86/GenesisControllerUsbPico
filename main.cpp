@@ -14,6 +14,7 @@
 #include "usb_descriptors.h"
 #include "usb_execution.h"
 #include "configuration.h"
+#include "device/dcd.h"
 
 // Some error checking
 #if (defined(PLAYER1_USB_KEYBOARD) && defined(PLAYER1_USB_GAMEPAD))
@@ -105,6 +106,7 @@ int main(void)
   set_usb_devices(pDevices, sizeof(pDevices) / sizeof(pDevices[0]));
 
   usb_init();
+  dcd_disconnect(0);
 
   GenesisController* pController = gControllers;
   for (uint32_t i = sizeof(gControllers) / sizeof(gControllers[0]); i > 0; --i, ++pController)

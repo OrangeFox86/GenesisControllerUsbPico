@@ -31,11 +31,6 @@ class UsbKeyboard : public IUsbControllerDevice
     //! @param[out] buffer  Where the report is written
     //! @param[in] reqlen  The length of buffer
     void getReport(uint8_t *buffer, uint16_t reqlen);
-    //! Called only from callbacks to update connected state
-    //! @param[in] connected  true iff connected
-    void updateConnected(bool connected);
-    //! @returns the current connected state
-    bool isConnected();
 
   public:
     //! The number of static controllers created
@@ -50,8 +45,6 @@ class UsbKeyboard : public IUsbControllerDevice
     bool keycodesUpdated;
     //! True when at least 1 key is pressed
     bool keyPressed;
-    //! True when this USB device is connected to a host
-    bool mIsConnected;
 };
 
 #endif // __USB_KEYBOARD_H__

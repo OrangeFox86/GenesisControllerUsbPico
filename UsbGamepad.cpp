@@ -15,8 +15,7 @@ UsbGamepad::UsbGamepad(uint8_t interfaceId, uint8_t reportId) :
   reportId(reportId),
   currentDpad(),
   currentButtons(0),
-  buttonsUpdated(false),
-  mIsConnected(false)
+  buttonsUpdated(false)
 {}
 
 bool UsbGamepad::isButtonPressed()
@@ -207,7 +206,7 @@ uint8_t UsbGamepad::getHatValue()
 
 bool UsbGamepad::send(bool force)
 {
-  if (!mIsConnected) return false;
+  if (!mIsUsbConnected) return false;
   uint8_t modifier = 0; // This class doesn't allow modifier keys
   if (buttonsUpdated || force)
   {
@@ -247,16 +246,6 @@ void UsbGamepad::getReport(uint8_t *buffer, uint16_t reqlen)
   // Copy report into buffer
   uint16_t setLen = (sizeof(report) <= reqlen) ? sizeof(report) : reqlen;
   memcpy(buffer, &report, setLen);
-}
-
-void UsbGamepad::updateConnected(bool connected)
-{
-  mIsConnected = connected;
-}
-
-bool UsbGamepad::isConnected()
-{
-  return mIsConnected;
 }
 
 #endif // (defined(PLAYER1_USB_GAMEPAD) || defined(PLAYER2_USB_GAMEPAD))

@@ -14,7 +14,7 @@ add_executable(GenesisControllerPico
   UsbGamepadGenesisControllerObserver.cpp
 )
 pico_add_extra_outputs(GenesisControllerPico)
-target_link_libraries(GenesisControllerPico PRIVATE pico_stdlib tinyusb_device tinyusb_board pico_multicore)
+target_link_libraries(GenesisControllerPico PRIVATE pico_stdlib tinyusb_device tinyusb_board tinyusb_device_base pico_multicore)
 
 target_include_directories(GenesisControllerPico PRIVATE ${CMAKE_CURRENT_LIST_DIR})
 

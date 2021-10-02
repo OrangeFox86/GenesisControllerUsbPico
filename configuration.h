@@ -59,20 +59,43 @@
   HID_KEY_KEYPAD_ADD    /* MODE */ \
 }
 
+#if 1
+// Configuration specifically for Retropie - If all else fails, this will work with sdl2 driver in
+// "fallback configuration" if it can't find a configuration for some reason. If you want XYZ and
+// mode buttons to work, make sure you have the setting enabled to use 6 button controller in
+// genesis settings (which is usually set to 3 button by default).
 #define GAMEPAD_MAPPING \
 { \
-  UsbGamepadGenesisControllerObserver::MAP_BUTTON11,       /* START */ \
-  UsbGamepadGenesisControllerObserver::MAP_DPAD_UP,        /* UP */ \
-  UsbGamepadGenesisControllerObserver::MAP_DPAD_DOWN,      /* DOWN */ \
-  UsbGamepadGenesisControllerObserver::MAP_DPAD_LEFT,      /* LEFT */ \
-  UsbGamepadGenesisControllerObserver::MAP_DPAD_RIGHT,     /* RIGHT */ \
-  UsbGamepadGenesisControllerObserver::MAP_BUTTON0,        /* A */ \
-  UsbGamepadGenesisControllerObserver::MAP_BUTTON1,        /* B */ \
-  UsbGamepadGenesisControllerObserver::MAP_BUTTON2,        /* C */ \
-  UsbGamepadGenesisControllerObserver::MAP_BUTTON3,        /* X */ \
-  UsbGamepadGenesisControllerObserver::MAP_BUTTON4,        /* Y */ \
-  UsbGamepadGenesisControllerObserver::MAP_BUTTON5,        /* Z */ \
-  UsbGamepadGenesisControllerObserver::MAP_BUTTON12        /* MODE */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON6,      /* START */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON11,     /* UP */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON12,     /* DOWN */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON13,     /* LEFT */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON14,     /* RIGHT */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON2,      /* A */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON0,      /* B */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON1,      /* C */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON9,      /* X */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON3,      /* Y */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON10,     /* Z */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON4       /* MODE */ \
 }
+#else
+// This is the configuration as recommended by the Tiny USB library
+#define GAMEPAD_MAPPING \
+{ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON11,     /* START */ \
+  UsbGamepadGenesisControllerObserver::MAP_DPAD_UP,      /* UP */ \
+  UsbGamepadGenesisControllerObserver::MAP_DPAD_DOWN,    /* DOWN */ \
+  UsbGamepadGenesisControllerObserver::MAP_DPAD_LEFT,    /* LEFT */ \
+  UsbGamepadGenesisControllerObserver::MAP_DPAD_RIGHT,   /* RIGHT */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON0,      /* A */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON1,      /* B */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON2,      /* C */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON3,      /* X */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON4,      /* Y */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON5,      /* Z */ \
+  UsbGamepadGenesisControllerObserver::MAP_BUTTON12      /* MODE */ \
+}
+#endif
 
 #endif // __CONFIGURATION_H__
