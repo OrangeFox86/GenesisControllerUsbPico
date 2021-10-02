@@ -3,13 +3,18 @@
 
 #include "configuration.h"
 
-//! Report IDs for all available USB devices set in usb_descriptors.c
-enum usbReportId_e
-{
-  REPORT_ID_DEVICE1 = 1,
-  REPORT_ID_DEVICE2
-};
+#if (!defined(PLAYER2_USB_KEYBOARD) && !defined(PLAYER2_USB_GAMEPAD))
+  #define NUMBER_OF_DEVICES 1
+#else
+  #define NUMBER_OF_DEVICES 2
+#endif
 
-#define NUMBER_OF_DEVICES 2
+enum {
+    ITF_NUM_HID1,
+#if (NUMBER_OF_DEVICES > 1)
+    ITF_NUM_HID2,
+#endif
+    ITF_NUM_TOTAL
+};
 
 #endif // __USB_DESCRITORS_H__

@@ -10,7 +10,8 @@
 // Only use this code if Controller descriptors are defined
 #if (defined(PLAYER1_USB_GAMEPAD) || defined(PLAYER2_USB_GAMEPAD))
 
-UsbGamepad::UsbGamepad(uint8_t reportId) :
+UsbGamepad::UsbGamepad(uint8_t interfaceId, uint8_t reportId) :
+  interfaceId(interfaceId),
   reportId(reportId),
   currentDpad(),
   currentButtons(0),
@@ -210,7 +211,7 @@ bool UsbGamepad::send(bool force)
   uint8_t modifier = 0; // This class doesn't allow modifier keys
   if (buttonsUpdated || force)
   {
-    bool sent = tud_hid_gamepad_report(reportId,
+    bool sent = tud_hid_n_gamepad_report(interfaceId, reportId,
                                        currentLeftAnalog[0],
                                        currentLeftAnalog[1],
                                        currentLeftAnalog[2],

@@ -11,7 +11,7 @@ class UsbKeyboard : public IUsbControllerDevice
   public:
     //! UsbKeyboard constructor
     //! @param[in] reportId  The report ID to use for this USB keyboard
-    UsbKeyboard(uint8_t reportId = 0);
+    UsbKeyboard(uint8_t interfaceId, uint8_t reportId = 0);
     //! @returns true iff any key is currently "pressed"
     bool isButtonPressed();
     //! Set a key to be pressed
@@ -41,6 +41,7 @@ class UsbKeyboard : public IUsbControllerDevice
     //! The number of static controllers created
     static const uint8_t NUMBER_OF_KEYBOARDS = 2;
   private:
+    const uint8_t interfaceId;
     //! The report ID to use when sending keys to host
     const uint8_t reportId;
     //! List of currently pressed keys

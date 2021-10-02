@@ -5,7 +5,7 @@
 //#define PLAYER1_USB_KEYBOARD
 #define PLAYER1_USB_GAMEPAD
 
-// Define only one of the following
+// Define only one or neither of the following
 //#define PLAYER2_USB_KEYBOARD
 #define PLAYER2_USB_GAMEPAD
 
@@ -74,19 +74,5 @@
   UsbGamepadGenesisControllerObserver::MAP_BUTTON5,        /* Z */ \
   UsbGamepadGenesisControllerObserver::MAP_BUTTON12        /* MODE */ \
 }
-
-
-// Some error checking (do not modify)
-#if (defined(PLAYER1_USB_KEYBOARD) && defined(PLAYER1_USB_GAMEPAD))
-  #error only define keyboard OR gamepad for player 1, not both
-#elif (!defined(PLAYER1_USB_KEYBOARD) && !defined(PLAYER1_USB_GAMEPAD))
-  #error no config defined for player 1
-#endif
-
-#if (defined(PLAYER2_USB_KEYBOARD) && defined(PLAYER2_USB_GAMEPAD))
-  #error only define keyboard OR gamepad for player 2, not both
-#elif (!defined(PLAYER2_USB_KEYBOARD) && !defined(PLAYER2_USB_GAMEPAD))
-  #error no config defined for player 2
-#endif
 
 #endif // __CONFIGURATION_H__

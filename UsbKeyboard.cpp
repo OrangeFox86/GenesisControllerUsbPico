@@ -10,7 +10,8 @@
 // Only use this code if keyboard descriptors are defined
 #if (defined(PLAYER1_USB_KEYBOARD) || defined(PLAYER2_USB_KEYBOARD))
 
-UsbKeyboard::UsbKeyboard(uint8_t reportId) :
+UsbKeyboard::UsbKeyboard(uint8_t interfaceId, uint8_t reportId) :
+  interfaceId(interfaceId),
   reportId(reportId),
   currentKeycodes(),
   keycodesUpdated(false),
@@ -93,7 +94,7 @@ bool UsbKeyboard::send(bool force)
   uint8_t modifier = 0; // This class doesn't allow modifier keys
   if (keycodesUpdated || force)
   {
-    bool sent = tud_hid_keyboard_report(reportId, modifier, currentKeycodes);
+    bool sent = tud_hid_n_keyboard_report(interfaceId, reportId, modifier, currentKeycodes);
     if (sent)
     {
       keycodesUpdated = false;

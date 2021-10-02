@@ -25,19 +25,6 @@ bool gIsConnected = false;
 
 const int16_t INVALID_INDEX = -1;
 
-inline int16_t report_id_to_index( uint8_t report_id )
-{
-  if (report_id < REPORT_ID_DEVICE1 ||
-      report_id >= NUMBER_OF_DEVICES + REPORT_ID_DEVICE1)
-  {
-    return INVALID_INDEX;
-  }
-  else
-  {
-    return report_id - REPORT_ID_DEVICE1;
-  }
-}
-
 void led_task()
 {
   static bool ledOn = false;
@@ -142,17 +129,16 @@ void tud_resume_cb(void)
 // Return zero will cause the stack to STALL request
 uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_t report_type, uint8_t *buffer, uint16_t reqlen)
 {
-  (void) instance;
+  (void) report_id;
   (void) report_type;
-  int16_t idx = report_id_to_index( report_id );
-  if (idx == INVALID_INDEX)
+  if (instance < numUsbDevices)
   {
     return 0;
   }
   else
   {
     // Build the report for the given report ID
-    pAllUsbDevices[idx]->getReport(buffer, reqlen);
+    pAllUsbDevices[instance]->getReport(buffer, reqlen);
     // Return the size of the report
     return sizeof(hid_keyboard_report_t);
   }

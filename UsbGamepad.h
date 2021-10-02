@@ -20,7 +20,7 @@ class UsbGamepad : public IUsbControllerDevice
   public:
     //! UsbKeyboard constructor
     //! @param[in] reportId  The report ID to use for this USB keyboard
-    UsbGamepad(uint8_t reportId = 0);
+    UsbGamepad(uint8_t interfaceId, uint8_t reportId = 0);
     //! @returns true iff any button is currently "pressed"
     bool isButtonPressed() final;
 
@@ -55,6 +55,7 @@ class UsbGamepad : public IUsbControllerDevice
     uint8_t getHatValue();
 
   private:
+    const uint8_t interfaceId;
     //! The report ID to use when sending keys to host
     const uint8_t reportId;
     //! Current left analog states (x,y,z)

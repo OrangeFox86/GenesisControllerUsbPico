@@ -15,43 +15,63 @@
 #include "usb_execution.h"
 #include "configuration.h"
 
-// Definitions for player 1
-#ifdef PLAYER1_USB_KEYBOARD
+// Some error checking
+#if (defined(PLAYER1_USB_KEYBOARD) && defined(PLAYER1_USB_GAMEPAD))
+  #error only define keyboard OR gamepad for player 1, not both
+#elif (!defined(PLAYER1_USB_KEYBOARD) && !defined(PLAYER1_USB_GAMEPAD))
+  #error no config defined for player 1
+#endif
 
-UsbKeyboard player1UsbDevice(REPORT_ID_DEVICE1);
+#if (defined(PLAYER2_USB_KEYBOARD) && defined(PLAYER2_USB_GAMEPAD))
+  #error only define keyboard OR gamepad for player 2, not both
+#endif
+
+// ****************************
+// * Definitions for player 1 *
+// ****************************
+#if defined(PLAYER1_USB_KEYBOARD)
+
+UsbKeyboard player1UsbDevice(ITF_NUM_HID1, 0);
 uint8_t player1KeyMap[IGenesisControllerObserver::KEY_COUNT] = PLAYER1_KEYBOARD_MAPPING;
 // The observers send the keys pressed on the controllers to USB keyboards.
 // Connecting each controller to its own keyboard allows each controller to independently send up to
 // 6 keys.
 UsbKeyboardGenesisControllerObserver player1Observer(player1UsbDevice, player1KeyMap);
 
-#endif
-#ifdef PLAYER1_USB_GAMEPAD
+#elif defined(PLAYER1_USB_GAMEPAD)
 
-UsbGamepad player1UsbDevice(REPORT_ID_DEVICE1);
+UsbGamepad player1UsbDevice(ITF_NUM_HID1, 0);
 UsbGamepadGenesisControllerObserver::ButtonMap player1ButtonMap[IGenesisControllerObserver::KEY_COUNT] = GAMEPAD_MAPPING;
 UsbGamepadGenesisControllerObserver player1Observer(player1UsbDevice, player1ButtonMap);
 
 #endif
 
+// ****************************
+// * Definitions for player 2 *
+// ****************************
+#if defined(PLAYER2_USB_KEYBOARD)
 
-// Definitions for player 2
-#ifdef PLAYER2_USB_KEYBOARD
-
-UsbKeyboard player2UsbDevice(REPORT_ID_DEVICE2);
+UsbKeyboard player2UsbDevice(ITF_NUM_HID2, 0);
 uint8_t player2KeyMap[IGenesisControllerObserver::KEY_COUNT] = PLAYER2_KEYBOARD_MAPPING;
 UsbKeyboardGenesisControllerObserver player2Observer(player2UsbDevice, player2KeyMap);
 
-#endif
-#ifdef PLAYER2_USB_GAMEPAD
+#elif defined(PLAYER2_USB_GAMEPAD)
 
-UsbGamepad player2UsbDevice(REPORT_ID_DEVICE2);
+UsbGamepad player2UsbDevice(ITF_NUM_HID2, 0);
 UsbGamepadGenesisControllerObserver::ButtonMap player2ButtonMap[IGenesisControllerObserver::KEY_COUNT] = GAMEPAD_MAPPING;
 UsbGamepadGenesisControllerObserver player2Observer(player2UsbDevice, player2ButtonMap);
 
 #endif
 
-IUsbControllerDevice* pDevices[NUMBER_OF_DEVICES] = {&player1UsbDevice, &player2UsbDevice};
+// Consolidation of above objects
+
+IUsbControllerDevice* pDevices[NUMBER_OF_DEVICES] =
+{
+  &player1UsbDevice,
+#if (NUMBER_OF_DEVICES > 1)
+  &player2UsbDevice
+#endif
+};
 
 GenesisController gControllers[NUMBER_OF_DEVICES] =
 {
@@ -64,6 +84,7 @@ GenesisController gControllers[NUMBER_OF_DEVICES] =
                     GENESIS_CONTROLLER_1_PIN_7,
                     GENESIS_CONTROLLER_1_PIN_9,
                     &player1Observer),
+#if (NUMBER_OF_DEVICES > 1)
   GenesisController(1,
                     GENESIS_CONTROLLER_2_PIN_1,
                     GENESIS_CONTROLLER_2_PIN_2,
@@ -73,6 +94,7 @@ GenesisController gControllers[NUMBER_OF_DEVICES] =
                     GENESIS_CONTROLLER_2_PIN_7,
                     GENESIS_CONTROLLER_2_PIN_9,
                     &player2Observer)
+#endif
 };
 
 /*------------- MAIN -------------*/
