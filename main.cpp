@@ -106,7 +106,6 @@ int main(void)
   set_usb_devices(pDevices, sizeof(pDevices) / sizeof(pDevices[0]));
 
   usb_init();
-  dcd_disconnect(0);
 
   GenesisController* pController = gControllers;
   for (uint32_t i = sizeof(gControllers) / sizeof(gControllers[0]); i > 0; --i, ++pController)

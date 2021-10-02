@@ -4,6 +4,7 @@
 #include "IGenesisControllerObserver.h"
 #include "UsbGamepad.h"
 
+//! Yes, I know this name is ridiculous, but at least it's descriptive!
 class UsbGamepadGenesisControllerObserver : public IGenesisControllerObserver
 {
   public:

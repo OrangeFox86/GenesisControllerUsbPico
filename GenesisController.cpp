@@ -45,6 +45,8 @@ void GenesisController::nextSignal(uint8_t count, uint32_t inputs)
 {
   if (controllerState == STATE_CONNECT_INIT || controllerState == STATE_CONNECTED)
   {
+    // LOW at count 0 and even number counts
+    // HIGH on odd number counts
     setSelect((count & 1) != 0);
   }
   else
@@ -52,6 +54,8 @@ void GenesisController::nextSignal(uint8_t count, uint32_t inputs)
     // Keep select HIGH until controller is sensed
     setSelect(true);
   }
+  // Saved input is for the previously set select state
+  // Inputs for count 0 means the state while idle HIGH
   savedInputs[count] = inputs;
   if (count == NUM_COUNTS - 1)
   {

@@ -1,12 +1,18 @@
-The code here is meant for the Raspberry Pi Pico microcontroller. It allows for 2 Sega Genesis controllers to be plugged in and interface with any USB host device.
+The code here is meant for the Raspberry Pi Pico microcontroller. It allows for 2 Sega Genesis
+controllers to be plugged in and interface with any USB host device.
 
-Things left to do:
-- Refactoring & cleanup
+Refer to configuration.h for settings that may be modified to configure this however you'd like.
+Players 1 and 2 may be set as a keyboard or gamepad devices (gamepad by default). Mapped keys may
+also be configured there. Refer to schematic.png for the recommended electronics setup.
+
+The USB device won't connect until at least 1 controller is connected. This is by design as I am
+using this in a retropie system - I'd like emulators to select other USB or bluetooth controllers if
+I don't have genesis controllers plugged into the system.
 
 Youtube video:
 https://www.youtube.com/watch?v=Fbt-3-cg1RE&t=95s
 
-3D printed case on thingiverse:
+3D printed case on thingiverse (50mm x 70mm dev board and DB9 connectors required):
 https://www.thingiverse.com/thing:4761232
 
 Great resources on the Sega Genesis controller:

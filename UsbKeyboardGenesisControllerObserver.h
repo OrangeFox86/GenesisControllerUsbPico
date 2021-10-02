@@ -4,6 +4,7 @@
 #include "IGenesisControllerObserver.h"
 #include "UsbKeyboard.h"
 
+//! Yes, I know this name is ridiculous, but at least it's descriptive!
 class UsbKeyboardGenesisControllerObserver : public IGenesisControllerObserver
 {
   public:

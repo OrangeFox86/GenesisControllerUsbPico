@@ -10,7 +10,7 @@
 #endif
 
 enum {
-    ITF_NUM_HID1,
+    ITF_NUM_HID1 = 0,
 #if (NUMBER_OF_DEVICES > 1)
     ITF_NUM_HID2,
 #endif

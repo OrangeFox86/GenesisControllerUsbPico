@@ -63,7 +63,9 @@ void led_task()
 
 void usb_init()
 {
-    tusb_init();
+  tusb_init();
+  // Initialize with USB in disconnected state, connect later once controller detected
+  dcd_disconnect(0);
 }
 
 void usb_task()

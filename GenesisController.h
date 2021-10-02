@@ -30,13 +30,13 @@ class GenesisController
   public:
     //! GenesisController constructor
     //! @param[in] id  The controller ID for this controller
-    //! @param[in] pin1  GPIO index for Genesis pin 1
-    //! @param[in] pin2  GPIO index for Genesis pin 2
-    //! @param[in] pin3  GPIO index for Genesis pin 3
-    //! @param[in] pin4  GPIO index for Genesis pin 4
-    //! @param[in] pin6  GPIO index for Genesis pin 6
-    //! @param[in] pin7  GPIO index for Genesis pin 7 (select)
-    //! @param[in] pin9  GPIO index for Genesis pin 9
+    //! @param[in] pin1  GPIO index for Genesis pin 1 (in)
+    //! @param[in] pin2  GPIO index for Genesis pin 2 (in)
+    //! @param[in] pin3  GPIO index for Genesis pin 3 (in)
+    //! @param[in] pin4  GPIO index for Genesis pin 4 (in)
+    //! @param[in] pin6  GPIO index for Genesis pin 6 (in)
+    //! @param[in] pin7  GPIO index for Genesis pin 7 (select out)
+    //! @param[in] pin9  GPIO index for Genesis pin 9 (in)
     //! @param[in] pObserver  The observer to update whenever keys are pressed and released
     GenesisController(uint8_t id,
                       uint8_t pin1,
