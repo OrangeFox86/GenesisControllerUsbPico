@@ -26,6 +26,20 @@
 #include "tusb.h"
 //#include <hid.h>
 #include "usb_descriptors.h"
+#include "pico/unique_id.h"
+#include <string.h>
+
+static bool forcePlayer1Only = false;
+
+void set_usb_descriptor_player1_only(bool set)
+{
+    forcePlayer1Only = set;
+}
+
+bool is_usb_descriptor_player1_only()
+{
+    return forcePlayer1Only;
+}
 
 //--------------------------------------------------------------------+
 // Device Descriptors
@@ -123,12 +137,31 @@ uint8_t const desc_configuration[] =
 #endif
 };
 
+#define  CONFIG_PLAYER1_ONLY_TOTAL_LEN  (TUD_CONFIG_DESC_LEN + TUD_HID_DESC_LEN)
+
+uint8_t const desc_player1_only_configuration[] =
+{
+    // Config number, interface count, string index, total length, attribute, power in mA
+    TUD_CONFIG_DESCRIPTOR(1, 1, 0, CONFIG_PLAYER1_ONLY_TOTAL_LEN, TUSB_DESC_CONFIG_ATT_REMOTE_WAKEUP, 100),
+
+    // Interface number, string index, protocol, report descriptor len, EP In address, size & polling interval
+    TUD_HID_DESCRIPTOR(ITF_NUM_HID1, 4, HID_ITF_PROTOCOL_NONE, sizeof(desc_hid_report1),
+                                0x80 | EPNUM_HID1, 1 + REPORT_SIZE, 10),
+};
+
 // Invoked when received GET CONFIGURATION DESCRIPTOR
 // Application return pointer to descriptor
 // Descriptor contents must exist long enough for transfer to complete
 uint8_t const *tud_descriptor_configuration_cb(uint8_t index) {
     (void) index; // for multiple configurations
-    return desc_configuration;
+    if (forcePlayer1Only)
+    {
+        return desc_player1_only_configuration;
+    }
+    else
+    {
+        return desc_configuration;
+    }
 }
 
 //--------------------------------------------------------------------+
@@ -154,6 +187,7 @@ uint16_t const *tud_descriptor_string_cb(uint8_t index, uint16_t langid) {
     (void) langid;
 
     uint8_t chr_count;
+    char buffer[32] = {0};
 
     if (index == 0) {
         memcpy(&_desc_str[1], string_desc_arr[0], 2);
@@ -165,7 +199,27 @@ uint16_t const *tud_descriptor_string_cb(uint8_t index, uint16_t langid) {
 
         const char *str = string_desc_arr[index];
 
-        if (str == NULL) return NULL;
+        if (str == NULL)
+        {
+            if (index == 3)
+            {
+                // Special case: try to get pico serial number
+                pico_get_unique_board_id_string(buffer, sizeof(buffer));
+                if (buffer[0] != '\0')
+                {
+                    str = buffer;
+                }
+                else
+                {
+                    // Something failed, have host assign serial
+                    return NULL;
+                }
+            }
+            else
+            {
+                return NULL;
+            }
+        }
 
         // Cap at max char
         chr_count = strlen(str);

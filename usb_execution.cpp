@@ -74,23 +74,40 @@ void usb_init()
 void usb_task()
 {
 #if (!USB_ALWAYS_CONNECTED)
-  bool someoneConnected = false;
-  UsbControllerDevice** pdevs = pAllUsbDevices;
-  for (uint32_t i = numUsbDevices; i > 0 && !someoneConnected; --i, ++pdevs)
+  bool player1Connected = false;
+  bool player2Connected = false;
+  if (numUsbDevices > 0)
   {
-    someoneConnected = (*pdevs)->isControllerConnected();
+    player1Connected = pAllUsbDevices[0]->isControllerConnected();
   }
-  if (someoneConnected != usbEnabled)
+  if (numUsbDevices > 1)
   {
-    if (someoneConnected)
+    player2Connected = pAllUsbDevices[1]->isControllerConnected();
+  }
+  // Enable USB iff player 1 is connected
+  if (player1Connected != usbEnabled)
+  {
+    if (player1Connected)
     {
+      set_usb_descriptor_player1_only(!player2Connected);
       dcd_connect(0);
     }
     else
     {
       dcd_disconnect(0);
     }
-    usbEnabled = someoneConnected;
+    usbEnabled = player1Connected;
+  }
+  else if (usbEnabled && is_usb_descriptor_player1_only() == player2Connected)
+  {
+    // Need to switch on or off player 2 over USB
+    dcd_disconnect(0);
+    sleep_ms(50);
+    tud_task(); // tinyusb device task
+    led_task();
+    sleep_ms(100);
+    set_usb_descriptor_player1_only(!player2Connected);
+    dcd_connect(0);
   }
 #endif
   tud_task(); // tinyusb device task

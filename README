@@ -9,6 +9,10 @@ The USB device won't connect until at least 1 controller is connected. This is b
 using this in a retropie system - I'd like emulators to select other USB or bluetooth controllers if
 I don't have genesis controllers plugged into the system.
 
+TO BUILD:
+First get all submodules by executing: git submodule update --recursive --init
+Then compile in vscode. See pico SDK getting started manual for more help.
+
 Youtube video:
 https://www.youtube.com/watch?v=Fbt-3-cg1RE&t=95s
 
