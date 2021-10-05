@@ -17,15 +17,19 @@ When USB_ALWAYS_CONNECTED is true, all controllers are always configured and con
 host is present.
 
 When USB_ALWAYS_CONNECTED is set to false, USB will stay disconnected until a controller for player
-1 is detected and will remain connected until player 1 is removed. The USB descriptor will automatically 
-update for 1 or 2 players as player 2 is removed or connected. When
-USB descriptor needs to be updated, USB will disconnect for a short while in order to force the update. When
-player 1 is removed, the USB interface will disconnect after the delay of DISCONNECT_DELAY_S. This
-was all done as a workaround for retropie purposes to reduce confusion and achieve the following.
-- When no controllers are connected, retropie will choose other USB or Bluetooth controllers.
+1 is detected, and then will remain connected until player 1 is removed. The USB descriptor will
+automatically update for 1 or 2 players as player 2 is removed or connected. When the USB descriptor
+needs to be updated, USB will disconnect for a short while in order to force the update with host.
+When player 1 is removed or player 2 is removed while player 1 is connected, the USB interface will
+disconnect after the delay of DISCONNECT_DELAY_S. This was all done as a workaround for retropie 
+purposes to reduce confusion and achieve the following.
+- When no controllers are connected, this device will completely detach from USB, forcing retropie
+to choose other connected USB or Bluetooth controllers.
 - Retropie doesn't do a good job of predictably enumerating 2 controllers under the same USB config. 
-When only player 1 is connected, retropie has no other choice but to use that for player 1. If 
-player 2 plugs in, there is still a possibility of the two controllers enumerating incorrectly.
+When there is only a controller connected for player 1, only 1 player will be configured over USB.
+If player 2 plugs in, there is still a possibility of the two controllers enumerating incorrectly.
+The disconnect delay allows for the user to manually swap controllers without causing 
+disconnect/reconnect events.
 
 # Build
 

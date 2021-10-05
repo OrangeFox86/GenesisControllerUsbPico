@@ -88,9 +88,16 @@ void usb_init()
 #endif
 }
 
-void usb_task()
+void start_disconnecting_countdown()
 {
-#if (!USB_ALWAYS_CONNECTED)
+  update_us_since_boot(&usbDisconnectTime, time_us_64() + (1000000UL * DISCONNECT_DELAY_S));
+  usbDisconnecting = true;
+}
+
+void usb_connection_state_machine()
+{
+  static bool lastPlayer1Connected = false;
+  static bool lastPlayer2Connected = false;
   bool player1Connected = false;
   bool player2Connected = false;
   if (numUsbDevices > 0)
@@ -101,54 +108,89 @@ void usb_task()
   {
     player2Connected = pAllUsbDevices[1]->isControllerConnected();
   }
-  // Enable USB iff player 1 is connected
-  if (player1Connected != usbEnabled)
+
+  // Handle disconnecting state (wait complete is always true if disconnect delay is 0)
+  bool disconnectWaitComplete = (DISCONNECT_DELAY_S <= 0.0);
+  if (usbDisconnecting && !disconnectWaitComplete)
   {
-    if (player1Connected)
+    absolute_time_t currentTime;
+    update_us_since_boot(&currentTime, time_us_64());
+    if ((player1Connected && (player2Connected || is_usb_descriptor_player1_only()))
+        || to_us_since_boot(currentTime) >= to_us_since_boot(usbDisconnectTime))
     {
+      // Back to normal or time elapsed
+      disconnectWaitComplete = true;
       usbDisconnecting = false;
-      set_usb_descriptor_player1_only(!player2Connected);
-      dcd_connect(0);
-      usbEnabled = true;
     }
-    else
+    else if ((player1Connected && !lastPlayer1Connected)
+             || (player2Connected && !lastPlayer2Connected && !is_usb_descriptor_player1_only()))
     {
-      if (!usbDisconnecting)
+      // Player 1 or 2 reconnected; restart countdown
+      start_disconnecting_countdown();
+    }
+  }
+
+  // Handle normal state
+  if (!usbDisconnecting || disconnectWaitComplete)
+  {
+    // Enable USB iff player 1 is connected
+    if (player1Connected != usbEnabled)
+    {
+      if (player1Connected)
       {
-        // Start countdown
-        update_us_since_boot(&usbDisconnectTime, time_us_64() + (1000000UL * DISCONNECT_DELAY_S));
-        usbDisconnecting = true;
+        // Just connected player 1 controller - enable USB
+        set_usb_descriptor_player1_only(!player2Connected);
+        dcd_connect(0);
+        usbEnabled = true;
       }
       else
       {
-        absolute_time_t currentTime;
-        update_us_since_boot(&currentTime, time_us_64());
-        if (to_us_since_boot(currentTime) >= to_us_since_boot(usbDisconnectTime))
+        if (!disconnectWaitComplete)
+        {
+          // Just disconnected - wait the necessary amount of time before acting
+          start_disconnecting_countdown();
+        }
+        else
         {
           // Countdown elapsed
-          usbDisconnecting = false;
           dcd_disconnect(0);
           usbEnabled = false;
         }
       }
     }
-  }
-  else
-  {
-    usbDisconnecting = false;
-    if (usbEnabled && is_usb_descriptor_player1_only() == player2Connected)
+    else
     {
-      // Need to switch on or off player 2 over USB
-      // Disconnecting then reconnecting is the only way I know how to refresh the USB config
-      dcd_disconnect(0);
-      sleep_ms(50);
-      tud_task(); // tinyusb device task
-      led_task();
-      set_usb_descriptor_player1_only(!player2Connected);
-      sleep_ms(100);
-      dcd_connect(0);
+      if (usbEnabled && is_usb_descriptor_player1_only() == player2Connected)
+      {
+        if (!player2Connected && !disconnectWaitComplete)
+        {
+          // Player 2 just disconnected - wait the necessary amount of time before acting
+          start_disconnecting_countdown();
+        }
+        else
+        {
+          // Player 2 was added or was disconnected with countdown elapsed
+          // Need to switch on or off player 2 over USB
+          // Disconnecting then reconnecting is the only way I know how to refresh the USB config
+          dcd_disconnect(0);
+          sleep_ms(50);
+          tud_task(); // tinyusb device task
+          led_task();
+          set_usb_descriptor_player1_only(!player2Connected);
+          sleep_ms(100);
+          dcd_connect(0);
+        }
+      }
     }
   }
+  lastPlayer1Connected = player1Connected;
+  lastPlayer2Connected = player2Connected;
+}
+
+void usb_task()
+{
+#if (!USB_ALWAYS_CONNECTED)
+  usb_connection_state_machine();
 #endif
   tud_task(); // tinyusb device task
   led_task();
