@@ -19,6 +19,9 @@ UsbControllerDevice** pAllUsbDevices = nullptr;
 
 uint8_t numUsbDevices = 0;
 
+bool usbDisconnecting = false;
+absolute_time_t usbDisconnectTime;
+
 void set_usb_devices(UsbControllerDevice** devices, uint8_t n)
 {
   pAllUsbDevices = devices;
@@ -32,32 +35,46 @@ const int16_t INVALID_INDEX = -1;
 void led_task()
 {
   static bool ledOn = false;
-  bool keyPressed = false;
-  UsbControllerDevice** pdevs = pAllUsbDevices;
-  for (uint32_t i = numUsbDevices; i > 0; --i, ++pdevs)
+  static uint32_t startMs = 0;
+  if (usbDisconnecting)
   {
-    if ((*pdevs)->isButtonPressed())
-    {
-      keyPressed = true;
-    }
-  }
-  if (gIsConnected)
-  {
-    // When connected, LED is ON only when no key is pressed
-    ledOn = !keyPressed;
-  }
-  else
-  {
-    // When not connected, LED blinks when key is pressed
-    static uint32_t startMs = 0;
-    static const uint32_t BLINK_TIME_MS = 100;
+    // Currently counting down to disconnect; flash LED
+    static const uint32_t BLINK_TIME_MS = 500;
     uint32_t t = board_millis() - startMs;
     if (t >= BLINK_TIME_MS)
     {
       startMs += BLINK_TIME_MS;
       ledOn = !ledOn;
     }
-    ledOn = ledOn && keyPressed;
+  }
+  else
+  {
+    bool keyPressed = false;
+    UsbControllerDevice** pdevs = pAllUsbDevices;
+    for (uint32_t i = numUsbDevices; i > 0; --i, ++pdevs)
+    {
+      if ((*pdevs)->isButtonPressed())
+      {
+        keyPressed = true;
+      }
+    }
+    if (gIsConnected)
+    {
+      // When connected, LED is ON only when no key is pressed
+      ledOn = !keyPressed;
+    }
+    else
+    {
+      // When not connected, LED blinks when key is pressed
+      static const uint32_t BLINK_TIME_MS = 100;
+      uint32_t t = board_millis() - startMs;
+      if (t >= BLINK_TIME_MS)
+      {
+        startMs += BLINK_TIME_MS;
+        ledOn = !ledOn;
+      }
+      ledOn = ledOn && keyPressed;
+    }
   }
   board_led_write(ledOn);
 }
@@ -89,25 +106,48 @@ void usb_task()
   {
     if (player1Connected)
     {
+      usbDisconnecting = false;
       set_usb_descriptor_player1_only(!player2Connected);
       dcd_connect(0);
+      usbEnabled = true;
     }
     else
     {
-      dcd_disconnect(0);
+      if (!usbDisconnecting)
+      {
+        // Start countdown
+        update_us_since_boot(&usbDisconnectTime, time_us_64() + (1000000UL * DISCONNECT_DELAY_S));
+        usbDisconnecting = true;
+      }
+      else
+      {
+        absolute_time_t currentTime;
+        update_us_since_boot(&currentTime, time_us_64());
+        if (to_us_since_boot(currentTime) >= to_us_since_boot(usbDisconnectTime))
+        {
+          // Countdown elapsed
+          usbDisconnecting = false;
+          dcd_disconnect(0);
+          usbEnabled = false;
+        }
+      }
     }
-    usbEnabled = player1Connected;
   }
-  else if (usbEnabled && is_usb_descriptor_player1_only() == player2Connected)
+  else
   {
-    // Need to switch on or off player 2 over USB
-    dcd_disconnect(0);
-    sleep_ms(50);
-    tud_task(); // tinyusb device task
-    led_task();
-    sleep_ms(100);
-    set_usb_descriptor_player1_only(!player2Connected);
-    dcd_connect(0);
+    usbDisconnecting = false;
+    if (usbEnabled && is_usb_descriptor_player1_only() == player2Connected)
+    {
+      // Need to switch on or off player 2 over USB
+      // Disconnecting then reconnecting is the only way I know how to refresh the USB config
+      dcd_disconnect(0);
+      sleep_ms(50);
+      tud_task(); // tinyusb device task
+      led_task();
+      set_usb_descriptor_player1_only(!player2Connected);
+      sleep_ms(100);
+      dcd_connect(0);
+    }
   }
 #endif
   tud_task(); // tinyusb device task
@@ -124,7 +164,10 @@ void tud_mount_cb(void)
   UsbControllerDevice** pdevs = pAllUsbDevices;
   for (uint32_t i = numUsbDevices; i > 0; --i, ++pdevs)
   {
-    (*pdevs)->updateUsbConnected(true);
+    if (!is_usb_descriptor_player1_only() || i == numUsbDevices)
+    {
+      (*pdevs)->updateUsbConnected(true);
+    }
   }
   gIsConnected = true;
 }
@@ -160,7 +203,10 @@ void tud_resume_cb(void)
   UsbControllerDevice** pdevs = pAllUsbDevices;
   for (uint32_t i = numUsbDevices; i > 0; --i, ++pdevs)
   {
-    (*pdevs)->updateUsbConnected(true);
+    if (!is_usb_descriptor_player1_only() || i == numUsbDevices)
+    {
+      (*pdevs)->updateUsbConnected(true);
+    }
   }
   gIsConnected = true;
 }

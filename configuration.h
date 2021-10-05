@@ -10,8 +10,10 @@
 #define PLAYER2_USB_GAMEPAD
 
 // When true: Forces USB to always be connected
-// When false: USB will only connect when Genesis controller is detected.
+// When false: USB will only connect when player 1 controller is detected.
 #define USB_ALWAYS_CONNECTED false
+// Delay in seconds between no controllers detected and when USB is disconnected.
+#define DISCONNECT_DELAY_S 10.0
 
 // Genesis controller 1 Pico pin definitions
 #define GENESIS_CONTROLLER_1_PIN_1 9

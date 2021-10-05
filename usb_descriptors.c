@@ -174,7 +174,7 @@ char const *string_desc_arr[] =
     (const char[]) {0x09, 0x04}, // 0: is supported language is English (0x0409)
     "DIY"  ,                     // 1: Manufacturer
     "Genesis Controller USB",    // 2: Product
-    NULL,                        // 3: Serial (none - send NULL, let host assign serial)
+    NULL,                        // 3: Serial (special case; get pico serial)
     "Player 1",                  // 4: Device 1
     "Player 2"                   // 5: Device 2
 };

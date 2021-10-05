@@ -1,6 +1,13 @@
 cmake_minimum_required(VERSION 3.12)
-set(PICO_SDK_PATH "${CMAKE_SOURCE_DIR}/lib/pico-sdk/")
+
+# Have pico_sdk_import.cmake use the local SDK if it was pulled down; otherwise, use path at
+# PICO_SDK_PATH environment variable as specified within pico_sdk_import.cmake
+if (EXISTS "${CMAKE_SOURCE_DIR}/lib/pico-sdk/CMakeLists.txt")
+  set(PICO_SDK_PATH "${CMAKE_SOURCE_DIR}/lib/pico-sdk/")
+  message("Using local pico SDK at ('${PICO_SDK_PATH}')")
+endif ()
 include(pico_sdk_import.cmake)
+
 project(GenesisControllerPico)
 pico_sdk_init()
 add_executable(GenesisControllerPico
