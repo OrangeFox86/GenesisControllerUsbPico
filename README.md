@@ -54,7 +54,7 @@ Install vscode: `sudo apt install code`
 
 Execute vscode: `cd <project_dir>; code .`
 
-Within vscode, install the extensions `C/C++`, `CMake`, and `CMake Tools`.
+Within vscode, install the extensions `CMake` and `CMake Tools`.
 
 ## Compiling the Project
 
