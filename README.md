@@ -21,14 +21,14 @@ When USB_ALWAYS_CONNECTED is set to false, USB will stay disconnected until a co
 automatically update for 1 or 2 players as player 2 is removed or connected. When the USB descriptor
 needs to be updated, USB will disconnect for a short while in order to force the update with host.
 When player 1 is removed or player 2 is removed while player 1 is connected, the USB interface will
-disconnect after the delay of DISCONNECT_DELAY_S. This was all done as a workaround for retropie 
+disconnect after the delay of DISCONNECT_DELAY_S. This was all done as a workaround for retropie
 purposes to reduce confusion and achieve the following.
 - When no controllers are connected, this device will completely detach from USB, forcing retropie
 to choose other connected USB or Bluetooth controllers.
-- Retropie doesn't do a good job of predictably enumerating 2 controllers under the same USB config. 
+- Retropie doesn't do a good job of predictably enumerating 2 controllers under the same USB config.
 When there is only a controller connected for player 1, only 1 player will be configured over USB.
 If player 2 plugs in, there is still a possibility of the two controllers enumerating incorrectly.
-The disconnect delay allows for the user to manually swap controllers without causing 
+The disconnect delay allows for the user to manually swap controllers without causing
 disconnect/reconnect events.
 
 # Build
@@ -45,7 +45,8 @@ To use the local copy of the SDK, simply execute `git submodule update --recursi
 
 ### CMAKE and Compiler
 
-Ensure cmake and compiler for pico is installed: `sudo apt install cmake gcc-arm-none-eabi libnewlib-arm-none-eabi build-essential`
+Ensure cmake and compiler for pico is installed:
+`sudo apt install cmake gcc-arm-none-eabi libnewlib-arm-none-eabi build-essential`
 
 ### VSCode
 
@@ -59,7 +60,9 @@ Within vscode, install the extensions `C/C++`, `CMake`, and `CMake Tools`.
 
 Open the project in code: `cd <project_dir>; code .`
 
-Open the CMake extension in vscode and build GenesisControllerPico. Use gcc-arm-none as your compiler. If that doesn't show up in the list that pops up, select to search for compatible compilers, and then try again.
+Open the CMake extension in vscode and build GenesisControllerPico. Use gcc-arm-none as your
+compiler. If that doesn't show up in the list that pops up, select to search for compatible
+compilers, and then try again.
 
 # External Links
 

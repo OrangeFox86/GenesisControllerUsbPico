@@ -17,20 +17,22 @@
 #include "device/dcd.h"
 
 // Some error checking
-#if (defined(PLAYER1_USB_KEYBOARD) && defined(PLAYER1_USB_GAMEPAD))
-  #error only define keyboard OR gamepad for player 1, not both
-#elif (!defined(PLAYER1_USB_KEYBOARD) && !defined(PLAYER1_USB_GAMEPAD))
-  #error no config defined for player 1
+#if (!defined(PLAYER_1_USB_TYPE) \
+     || (PLAYER_1_USB_TYPE != USB_TYPE_KEYBOARD && PLAYER_1_USB_TYPE != USB_TYPE_GAMEPAD))
+  #error PLAYER_1_USB_TYPE must be defined as USB_TYPE_KEYBOARD or USB_TYPE_GAMEPAD
 #endif
 
-#if (defined(PLAYER2_USB_KEYBOARD) && defined(PLAYER2_USB_GAMEPAD))
-  #error only define keyboard OR gamepad for player 2, not both
+#if (!defined(PLAYER_2_USB_TYPE) \
+     || (PLAYER_2_USB_TYPE != USB_TYPE_KEYBOARD \
+         && PLAYER_2_USB_TYPE != USB_TYPE_GAMEPAD \
+         && PLAYER_2_USB_TYPE != USB_TYPE_NONE))
+  #error PLAYER_2_USB_TYPE must be defined as USB_TYPE_KEYBOARD, USB_TYPE_GAMEPAD, or USB_TYPE_NONE
 #endif
 
 // ****************************
 // * Definitions for player 1 *
 // ****************************
-#if defined(PLAYER1_USB_KEYBOARD)
+#if (PLAYER_1_USB_TYPE == USB_TYPE_KEYBOARD)
 
 UsbKeyboard player1UsbDevice(ITF_NUM_HID1, 0);
 uint8_t player1KeyMap[IGenesisControllerObserver::KEY_COUNT] = PLAYER1_KEYBOARD_MAPPING;
@@ -39,7 +41,7 @@ uint8_t player1KeyMap[IGenesisControllerObserver::KEY_COUNT] = PLAYER1_KEYBOARD_
 // 6 keys.
 UsbKeyboardGenesisControllerObserver player1Observer(player1UsbDevice, player1KeyMap);
 
-#elif defined(PLAYER1_USB_GAMEPAD)
+#elif (PLAYER_1_USB_TYPE == USB_TYPE_GAMEPAD)
 
 UsbGamepad player1UsbDevice(ITF_NUM_HID1, 0);
 UsbGamepadGenesisControllerObserver::ButtonMap player1ButtonMap[IGenesisControllerObserver::KEY_COUNT] = GAMEPAD_MAPPING;
@@ -50,13 +52,13 @@ UsbGamepadGenesisControllerObserver player1Observer(player1UsbDevice, player1But
 // ****************************
 // * Definitions for player 2 *
 // ****************************
-#if defined(PLAYER2_USB_KEYBOARD)
+#if (PLAYER_2_USB_TYPE == USB_TYPE_KEYBOARD)
 
 UsbKeyboard player2UsbDevice(ITF_NUM_HID2, 0);
 uint8_t player2KeyMap[IGenesisControllerObserver::KEY_COUNT] = PLAYER2_KEYBOARD_MAPPING;
 UsbKeyboardGenesisControllerObserver player2Observer(player2UsbDevice, player2KeyMap);
 
-#elif defined(PLAYER2_USB_GAMEPAD)
+#elif (PLAYER_2_USB_TYPE == USB_TYPE_GAMEPAD)
 
 UsbGamepad player2UsbDevice(ITF_NUM_HID2, 0);
 UsbGamepadGenesisControllerObserver::ButtonMap player2ButtonMap[IGenesisControllerObserver::KEY_COUNT] = GAMEPAD_MAPPING;

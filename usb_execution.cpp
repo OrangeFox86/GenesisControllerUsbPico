@@ -90,10 +90,20 @@ void usb_init()
 
 void start_disconnecting_countdown()
 {
-  update_us_since_boot(&usbDisconnectTime, time_us_64() + (1000000UL * DISCONNECT_DELAY_S));
+  double delaySeconds = 0;
+  if (is_usb_descriptor_player1_only())
+  {
+    delaySeconds = SINGLE_PLAYER_DISCONNECT_DELAY_S;
+  }
+  else
+  {
+    delaySeconds = DISCONNECT_DELAY_S;
+  }
+  update_us_since_boot(&usbDisconnectTime, time_us_64() + (1000000UL * delaySeconds));
   usbDisconnecting = true;
 }
 
+// This function is a bit of a mess, but it works
 void usb_connection_state_machine()
 {
   static bool lastPlayer1Connected = false;
@@ -109,8 +119,8 @@ void usb_connection_state_machine()
     player2Connected = pAllUsbDevices[1]->isControllerConnected();
   }
 
-  // Handle disconnecting state (wait complete is always true if disconnect delay is 0)
-  bool disconnectWaitComplete = (DISCONNECT_DELAY_S <= 0.0);
+  // Handle disconnecting state
+  bool disconnectWaitComplete = false;
   if (usbDisconnecting && !disconnectWaitComplete)
   {
     absolute_time_t currentTime;
@@ -128,6 +138,16 @@ void usb_connection_state_machine()
       // Player 1 or 2 reconnected; restart countdown
       start_disconnecting_countdown();
     }
+  }
+  else if (is_usb_descriptor_player1_only())
+  {
+    // Wait complete is immediately true if disconnect delay is 0
+    disconnectWaitComplete = (SINGLE_PLAYER_DISCONNECT_DELAY_S <= 0.0);
+  }
+  else
+  {
+    // Wait complete is immediately true if disconnect delay is 0
+    disconnectWaitComplete = (DISCONNECT_DELAY_S <= 0.0);
   }
 
   // Handle normal state

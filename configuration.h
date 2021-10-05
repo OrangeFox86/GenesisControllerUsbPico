@@ -1,19 +1,22 @@
 #ifndef __CONFIGURATION_H__
 #define __CONFIGURATION_H__
 
-// Define only one of the following
-//#define PLAYER1_USB_KEYBOARD
-#define PLAYER1_USB_GAMEPAD
+#include "configuration_constants.h"
 
-// Define only one or neither of the following
-//#define PLAYER2_USB_KEYBOARD
-#define PLAYER2_USB_GAMEPAD
+// Can be either USB_TYPE_KEYBOARD or USB_TYPE_GAMEPAD
+#define PLAYER_1_USB_TYPE     USB_TYPE_GAMEPAD
 
-// When true: Forces USB to always be connected
-// When false: USB will only connect when player 1 controller is detected.
+// Can be USB_TYPE_KEYBOARD, USB_TYPE_GAMEPAD, or USB_TYPE_NONE to disable player 2
+#define PLAYER_2_USB_TYPE     USB_TYPE_GAMEPAD
+
+// When true: Forces USB to always be connected for all players
+// When false: USB will only connect when player 1 controller is detected and will dynamically
+//             update USB descriptor when player 2 is connected/disconnected.
 #define USB_ALWAYS_CONNECTED false
-// Delay in seconds between no controllers detected and when USB is disconnected.
+// Delay in seconds between controller disconnected and when USB is disconnected or updates.
 #define DISCONNECT_DELAY_S 10.0
+// Special case delay when only player 1 was connected and disconnects.
+#define SINGLE_PLAYER_DISCONNECT_DELAY_S 1.0
 
 // Genesis controller 1 Pico pin definitions
 #define GENESIS_CONTROLLER_1_PIN_1 9

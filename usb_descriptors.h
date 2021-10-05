@@ -4,7 +4,7 @@
 #include "configuration.h"
 #include <stdbool.h>
 
-#if (!defined(PLAYER2_USB_KEYBOARD) && !defined(PLAYER2_USB_GAMEPAD))
+#if (PLAYER_2_USB_TYPE == USB_TYPE_NONE)
   #define NUMBER_OF_DEVICES 1
 #else
   #define NUMBER_OF_DEVICES 2

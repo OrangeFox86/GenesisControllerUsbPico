@@ -1,0 +1,8 @@
+#ifndef __CONFIGURATION_CONSTANTS_H__
+#define __CONFIGURATION_CONSTANTS_H__
+
+#define USB_TYPE_NONE       0
+#define USB_TYPE_KEYBOARD   1
+#define USB_TYPE_GAMEPAD    2
+
+#endif // __CONFIGURATION_CONSTANTS_H__

@@ -77,18 +77,18 @@ uint8_t const *tud_descriptor_device_cb(void) {
 
 uint8_t const desc_hid_report1[] =
 {
-#if defined(PLAYER1_USB_KEYBOARD)
+#if (PLAYER_1_USB_TYPE == USB_TYPE_KEYBOARD)
     TUD_HID_REPORT_DESC_KEYBOARD()
-#elif defined(PLAYER1_USB_GAMEPAD)
+#elif (PLAYER_1_USB_TYPE == USB_TYPE_GAMEPAD)
     TUD_HID_REPORT_DESC_GAMEPAD()
 #endif
 };
 
 uint8_t const desc_hid_report2[] =
 {
-#if defined(PLAYER2_USB_KEYBOARD)
+#if (PLAYER_2_USB_TYPE == USB_TYPE_KEYBOARD)
     TUD_HID_REPORT_DESC_KEYBOARD()
-#elif defined(PLAYER2_USB_GAMEPAD)
+#elif (PLAYER_2_USB_TYPE == USB_TYPE_GAMEPAD)
     TUD_HID_REPORT_DESC_GAMEPAD()
 #endif
 };
