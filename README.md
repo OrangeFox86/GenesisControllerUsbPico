@@ -17,20 +17,45 @@ When USB_ALWAYS_CONNECTED is true, all controllers are always configured and con
 host is present.
 
 When USB_ALWAYS_CONNECTED is set to false, USB will stay disconnected until a controller for player
-1 is detected. If only Player 1 is detected, USB will be configured for only 1 controller. When
-configuration needs to be updated, USB will be disconnected for a short while force the update. When
+1 is detected and will remain connected until player 1 is removed. The USB descriptor will automatically 
+update for 1 or 2 players as player 2 is removed or connected. When
+USB descriptor needs to be updated, USB will disconnect for a short while in order to force the update. When
 player 1 is removed, the USB interface will disconnect after the delay of DISCONNECT_DELAY_S. This
 was all done as a workaround for retropie purposes to reduce confusion and achieve the following.
 - When no controllers are connected, retropie will choose other USB or Bluetooth controllers.
-- Retropie doesn't do a good job of predictably indexing 2 controllers under the same USB config.
+- Retropie doesn't do a good job of predictably enumerating 2 controllers under the same USB config. 
+When only player 1 is connected, retropie has no other choice but to use that for player 1. If 
+player 2 plugs in, there is still a possibility of the two controllers enumerating incorrectly.
 
 # Build
+
+## Prerequisites
+
+### The SDK
 
 The pico SDK is linked for completeness so that the version that this is compiled and tested with is
 documented. You may use your own downloaded version of the SDK without any modifications as long as
 your PICO_SDK_PATH environment variable is set.
 
-To use the local copy of the SDK, simply execute `git submodule update --recursive --init`.
+To use the local copy of the SDK, simply execute `git submodule update --recursive --init`
+
+### CMAKE and Compiler
+
+Ensure cmake and compiler for pico is installed: `sudo apt install cmake gcc-arm-none-eabi libnewlib-arm-none-eabi build-essential`
+
+### VSCode
+
+Install vscode: `sudo apt install code`
+
+Execute vscode: `cd <project_dir>; code .`
+
+Within vscode, install the extensions `C/C++`, `CMake`, and `CMake Tools`.
+
+## Compiling the Project
+
+Open the project in code: `cd <project_dir>; code .`
+
+Open the CMake extension in vscode and build GenesisControllerPico. Use gcc-arm-none as your compiler. If that doesn't show up in the list that pops up, select to search for compatible compilers, and then try again.
 
 # External Links
 
