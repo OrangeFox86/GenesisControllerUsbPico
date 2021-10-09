@@ -33,6 +33,8 @@ disconnect/reconnect events.
 
 # Build
 
+These instructions assume you're building on a Raspberry Pi.
+
 ## Prerequisites
 
 ### The SDK
