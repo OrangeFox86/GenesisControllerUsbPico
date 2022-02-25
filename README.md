@@ -10,6 +10,9 @@ controllers to be plugged in and interface with any USB host device.
 
 ![Schematic](Schematic.png?raw=true)
 
+A standard male DB9 connector may be used for the controller ports.
+![DB9 Pinout](db9_pinout.png?raw=true)
+
 # Configuration
 
 Refer to configuration.h for settings that may be modified to configure this however you'd like.
