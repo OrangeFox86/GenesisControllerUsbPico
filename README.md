@@ -6,6 +6,7 @@ controllers to be plugged in and interface with any USB host device.
 # Hardware
 
 Refer to schematic.png for the recommended electronics setup.
+https://github.com/Tails86/GenesisControllerUsbPico/blob/master/Schematic.png
 
 # Configuration
 
