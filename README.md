@@ -5,7 +5,6 @@ controllers to be plugged in and interface with any USB host device.
 
 # Hardware
 
-Refer to schematic.png for the recommended electronics setup.
 ![Schematic](Schematic.png?raw=true)
 
 # Configuration
