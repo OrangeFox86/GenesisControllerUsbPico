@@ -3,6 +3,8 @@
 The code here is meant for the Raspberry Pi Pico microcontroller. It allows for 2 Sega Genesis
 controllers to be plugged in and interface with any USB host device.
 
+![Final Product](Case%203D%20Objects/image2.jpg?raw=true)
+
 # Hardware
 
 ![Schematic](Schematic.png?raw=true)
