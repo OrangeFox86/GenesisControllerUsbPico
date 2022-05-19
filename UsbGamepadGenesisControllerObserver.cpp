@@ -64,28 +64,16 @@ bool UsbGamepadGenesisControllerObserver::keyStateChanged(uint8_t id, Key key, b
         usbController.setAnalogThumbX(false, down ? 127 : 0);
       }
       break;
-    case MAP_LTRIGGER_UP:
-      if (usbController.getAnalogTrigger(true) >= 0)
-      {
-        usbController.setAnalogTrigger(true, down ? 127 : 0);
-      }
-      break;
-    case MAP_LTRIGGER_DOWN:
+    case MAP_LTRIGGER:
       if (usbController.getAnalogTrigger(true) <= 0)
       {
-        usbController.setAnalogTrigger(true, down ? -128 : 0);
+        usbController.setAnalogTrigger(true, down ? 127 : -128);
       }
       break;
-    case MAP_RTRIGGER_UP:
-      if (usbController.getAnalogTrigger(false) >= 0)
-      {
-        usbController.setAnalogTrigger(false, down ? 127 : 0);
-      }
-      break;
-    case MAP_RTRIGGER_DOWN:
+    case MAP_RTRIGGER:
       if (usbController.getAnalogTrigger(false) <= 0)
       {
-        usbController.setAnalogTrigger(false, down ? -128 : 0);
+        usbController.setAnalogTrigger(false, down ? 127 : -128);
       }
       break;
     case MAP_DPAD_UP:
