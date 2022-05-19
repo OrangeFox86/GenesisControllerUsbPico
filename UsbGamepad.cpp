@@ -12,15 +12,17 @@ UsbGamepad::UsbGamepad(uint8_t interfaceId, uint8_t reportId) :
   reportId(reportId),
   currentDpad(),
   currentButtons(0),
-  buttonsUpdated(false)
-{}
+  buttonsUpdated(true)
+{
+  updateAllReleased();
+}
 
 bool UsbGamepad::isButtonPressed()
 {
   return (currentDpad[DPAD_UP] || currentDpad[DPAD_DOWN] || currentDpad[DPAD_LEFT]
     || currentDpad[DPAD_RIGHT] || currentButtons != 0
-    || currentLeftAnalog[0] != 0 || currentLeftAnalog[1] != 0 || currentLeftAnalog[2] != 0
-    || currentRightAnalog[0] != 0 || currentRightAnalog[1] != 0 || currentRightAnalog[2] != 0);
+    || currentLeftAnalog[0] != 0 || currentLeftAnalog[1] != 0 || currentLeftAnalog[2] != -128
+    || currentRightAnalog[0] != 0 || currentRightAnalog[1] != 0 || currentRightAnalog[2] != -128);
 }
 
 //--------------------------------------------------------------------+
@@ -142,10 +144,10 @@ void UsbGamepad::updateAllReleased()
   {
     currentLeftAnalog[0] = 0;
     currentLeftAnalog[1] = 0;
-    currentLeftAnalog[2] = 0;
+    currentLeftAnalog[2] = -128;
     currentRightAnalog[0] = 0;
     currentRightAnalog[1] = 0;
-    currentRightAnalog[2] = 0;
+    currentRightAnalog[2] = -128;
     currentDpad[DPAD_UP] = false;
     currentDpad[DPAD_DOWN] = false;
     currentDpad[DPAD_LEFT] = false;
@@ -230,9 +232,9 @@ void UsbGamepad::getReport(uint8_t *buffer, uint16_t reqlen)
   report.x = currentLeftAnalog[0];
   report.y = currentLeftAnalog[1];
   report.z = currentLeftAnalog[2];
-  report.rz = currentRightAnalog[0];
-  report.rx = currentRightAnalog[1];
-  report.ry = currentRightAnalog[2];
+  report.rz = currentRightAnalog[2];
+  report.rx = currentRightAnalog[0];
+  report.ry = currentRightAnalog[1];
   report.hat = getHatValue();
   report.buttons = currentButtons;
   // Copy report into buffer
