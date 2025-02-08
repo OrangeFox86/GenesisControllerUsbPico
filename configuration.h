@@ -3,6 +3,12 @@
 
 #include "configuration_constants.h"
 
+// This assumes external pull-down resistor used when false or pull-up when true
+#define INVERT_CONTROLLER_INPUTS false
+
+// An NPN is used in normal schematic which inverts the output, so software should invert
+#define INVERT_CONTROLLER_OUTPUTS true
+
 // Can be either USB_TYPE_KEYBOARD or USB_TYPE_GAMEPAD
 #define PLAYER_1_USB_TYPE     USB_TYPE_GAMEPAD
 

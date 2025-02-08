@@ -10,6 +10,10 @@ controllers to be plugged in and interface with any USB host device.
 
 ![Schematic](Schematic.png?raw=true)
 
+NOTE: This schematic uses an NPN transistor which inverts the output, so `INVERT_CONTROLLER_OUTPUTS`
+in configuration.h is set to `true`. If you decide to use a logic level converter instead, set
+`INVERT_CONTROLLER_OUTPUTS` to `false` and recompile.
+
 A standard male DB9 connector may be used for the controller ports.
 ![DB9 Pinout](db9_pinout.png?raw=true)
 
