@@ -2,6 +2,7 @@
 #define __GENESIS_CONTROLLER_H__
 
 #include <stdint.h>
+#include "configuration.h"
 #include "IGenesisControllerObserver.h"
 
 class GenesisController
@@ -84,10 +85,9 @@ class GenesisController
     static const uint8_t NUM_COUNTS = 8;
   private:
     //! Set to true to invert inputs
-    //! @note This assumes external pull-down resistor used when false or pull-up when true
-    static const bool INVERT_INPUTS = false;
+    static const bool INVERT_INPUTS = INVERT_CONTROLLER_INPUTS;
     //! Set to true to invert outputs
-    static const bool INVERT_OUTPUTS = true; // An NPN is used which inverts the output
+    static const bool INVERT_OUTPUTS = INVERT_CONTROLLER_OUTPUTS;
     //! Number of connecting cycles to make before becomming connected
     static const uint8_t MAX_CONNECTING_COUNT = 25;
     //! The ID for this controller
